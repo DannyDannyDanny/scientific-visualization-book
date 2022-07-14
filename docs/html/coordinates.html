@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Coordinate systems &#8212; scientific-visualization 2022 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="coordinate-systems">
+<span id="chap-coordinates"></span><h1>Coordinate systems<a class="headerlink" href="#coordinate-systems" title="Permalink to this headline">¶</a></h1>
+<p>In any matplotlib figure, there is at least two different coordinate systems
+that co-exist anytime. One is related to the figure (FC) while the others are
+related to each of the individual plots (DC). Each of these coordinate systems
+exists in normalized (NxC) or native version (xC) as illustrated in figures
+<span class="xref std std-ref">fig-coordinates-cartesian</span> and <span class="xref std std-ref">fig-coordinates-polar</span>. To convert a
+coordinate from one system to the other, matplotlib provides a set of
+<cite>transform</cite> functions:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">),</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#  FC : Figure coordinates (pixels)</span>
+<span class="c1"># NFC : Normalized figure coordinates (0 → 1)</span>
+<span class="c1">#  DC : Data coordinates (data units)</span>
+<span class="c1"># NDC : Normalized data coordinates (0 → 1)</span>
+
+<span class="n">DC_to_FC</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="o">.</span><span class="n">transform</span>
+<span class="n">FC_to_DC</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="o">.</span><span class="n">inverted</span><span class="p">()</span><span class="o">.</span><span class="n">transform</span>
+
+<span class="n">NDC_to_FC</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="o">.</span><span class="n">transform</span>
+<span class="n">FC_to_NDC</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="o">.</span><span class="n">inverted</span><span class="p">()</span><span class="o">.</span><span class="n">transform</span>
+
+<span class="n">NFC_to_FC</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">transFigure</span><span class="o">.</span><span class="n">transform</span>
+<span class="n">FC_to_NFC</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">transFigure</span><span class="o">.</span><span class="n">inverted</span><span class="p">()</span><span class="o">.</span><span class="n">transform</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="coordinates/coordinates-cartesian.pdf"><img alt="coordinates/coordinates-cartesian.pdf" src="coordinates/coordinates-cartesian.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">The co-existing coordinate systems within a figure using Cartesian
+projection. <strong>FC</strong>: Figure Coordinates, <strong>NFC</strong> Normalized Figure Coordinates,
+<strong>DC</strong>: Data Coordinates, <strong>NDC</strong>: Normalized Data Coordinates.
+<span class="label">fig-coordinates-cartesian</span></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="coordinates/coordinates-polar.pdf"><img alt="coordinates/coordinates-polar.pdf" src="coordinates/coordinates-polar.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">The co-existing coordinate systems within a figure using Polar projection.
+<strong>FC</strong>: Figure Coordinates, <strong>NFC</strong> Normalized Figure Coordinates, <strong>DC</strong>:
+Data Coordinates, <strong>NDC</strong>: Normalized Data Coordinates.
+<span class="label">fig-coordinates-polar</span></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Let’s test these functions on some specific points (corners):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Top right corner in normalized figure coordinates</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">NFC_to_FC</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># (600,500)</span>
+
+<span class="c1"># Top right corner in normalized data coordinates</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">NDC_to_FC</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># (540,440)</span>
+
+<span class="c1"># Top right corner in data coordinates</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">DC_to_FC</span><span class="p">([</span><span class="mi">360</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span> <span class="c1"># (540,440)</span>
+</pre></div>
+</div>
+<p>Since we also have the inverse functions, we can create our own transforms. For
+example, from native data coordinates (DC) to normalized data coordinates (NDC):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Native data to normalized data coordinates</span>
+<span class="n">DC_to_NDC</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">FC_to_NDC</span><span class="p">(</span><span class="n">DC_to_FC</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># Bottom left corner in data coordinates</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">DC_to_NDC</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># (0.0, 0.0)</span>
+
+<span class="c1"># Center in data coordinates</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">DC_to_NDC</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>  <span class="c1"># (0.5, 0.5)</span>
+
+<span class="c1"># Top right corner in data coordinates</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">DC_to_NDC</span><span class="p">([</span><span class="mi">360</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># (1.0, 1.0)</span>
+</pre></div>
+</div>
+<p>When using Cartesian projection, the correspondence is quite clear between the
+normalized and native data coordinates. With other kind of projection, things
+work just the same even though it might appear less obvious. For example, let
+us consider a polar projection where we want to draw the outer axes border. In
+normalized data coordinates, we know the coordinates of the four corners,
+namely <cite>(0,0)</cite>, <cite>(1,0)</cite>, <cite>(1,1)</cite> and <cite>(0,1)</cite>. We can then transform these
+normalized data coordinates back to native data coordinates and draw the
+border. There is however a supplementary difficulty because those coordinates
+are beyond the axes limit and we’ll need to tell matplotlib to not care about
+the limit using the <cite>clip_on</cite> arguments.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;polar&#39;</span><span class="p">)</span>
+
+<span class="n">FC_to_DC</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="o">.</span><span class="n">inverted</span><span class="p">()</span><span class="o">.</span><span class="n">transform</span>
+<span class="n">NDC_to_FC</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="o">.</span><span class="n">transform</span>
+<span class="n">NDC_to_DC</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">FC_to_DC</span><span class="p">(</span><span class="n">NDC_to_FC</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">NDC_to_DC</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">10</span>
+         <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">P</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">P</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+           <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The result is shown on figure <span class="xref std std-ref">fig-transforms-polar</span>.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="coordinates/transforms-polar.pdf"><img alt="coordinates/transforms-polar.pdf" src="coordinates/transforms-polar.pdf" style="width: 75%;" /></a>
+<figcaption>
+<p><span class="caption-text">Axes boundaries in polar projection using a transform from normalized data
+coordinates to data coordinates (<span class="source">coordinates/transform-polar.py</span>).
+<span class="label">fig-transforms-polar</span></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>However, most of the time, you won’t need to use these transform functions
+explicitly but rather implicitly. For example, consider the case where you
+want to add some text over a specific plot. For this, you need to use the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.text.html">text</a>
+function and specify what is to be written (of course) and the coordinates
+where you want to display the text. The question (for matplotlib) is how to
+consider these coordinates? Are they expressed in data coordinates? normalized
+data coordinates? normalized figure coordinates? The default is to consider
+they are expressed in data coordinates. Consequently, if you want to us a
+different system, you’ll need to explicitly specify a <cite>transform</cite> when calling
+the function. Let’s say for example we want to add a letter on the bottom left
+corner. We can write:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The letter will be placed at 10% from the left spine and 10% from the bottom
+spine. If the two spines have the same physical size (in pixels), the letter
+will be equidistant from the right and bottom spines. But, if they have
+different size, this won’t be true anymore and the results will not be very
+satisfying (see panel A of figure <span class="xref std std-ref">fig-transforms-letter</span>). What we want
+to do instead is to specify a transform that is a combination of the normalized
+data coordinates (0,0) plus an offset expressed in figure native units
+(pixels). To do that, we need to build our own transform function to compute
+the offset:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.transforms</span> <span class="kn">import</span> <span class="n">ScaledTranslation</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">10</span><span class="o">/</span><span class="n">fig</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span> <span class="mi">10</span><span class="o">/</span><span class="n">fig</span><span class="o">.</span><span class="n">dpi</span>
+<span class="n">offset</span> <span class="o">=</span> <span class="n">ScaledTranslation</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">fig</span><span class="o">.</span><span class="n">dpi_scale_trans</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The result is illustrated on panel B of figure <span class="xref std std-ref">fig-transforms-letter</span>.
+The text is now properly positioned and will stay at the right position
+independently of figure aspect ratio or data limits.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="coordinates/transforms-letter.pdf"><img alt="coordinates/transforms-letter.pdf" src="coordinates/transforms-letter.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Using transforms to position precisely a text over a plot. Top panel uses
+normalized data coordinates (0.1,0.1), bottom panel uses normalized data
+coordinates (0.0,0.0) plus an offset (10,10) expressed in figure
+coordinates (<span class="source">coordinates/transform-letter.py</span>). <span class="label">fig-transforms-letter</span></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Things can become even more complicated when you need a different transform on
+the X and Y axis. Let us consider for example the case where you want to add
+some text below the X tick labels. The X position of the tick labels is
+expressed in data coordinates, but how do we put something under as illustrated
+on figure <span class="xref std std-ref">fig-transforms-blend</span>?</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="coordinates/transforms-blend.pdf"><img alt="coordinates/transforms-blend.pdf" src="coordinates/transforms-blend.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Precise placement (arrows below X axis tick labels) using blended transform (<span class="source">coordinates/transforms-blend.py</span>).
+<span class="label">fig-transforms-blend</span></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The natural unit for text is point and we thus want to position our arrow using
+a Y offset expressed in points. To do that, we need to use a blend transform:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">point</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">72</span>
+<span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="n">fontsize</span><span class="o">*</span><span class="n">point</span>
+<span class="n">offset</span> <span class="o">=</span> <span class="n">ScaledTranslation</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">fig</span><span class="o">.</span><span class="n">dpi_scale_trans</span><span class="p">)</span>
+<span class="n">transform</span> <span class="o">=</span> <span class="n">blended_transform_factory</span><span class="p">(</span>
+                 <span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="p">,</span> <span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="o">+</span><span class="n">offset</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can also use transformations to a totally different usage as shown
+on figure <span class="xref std std-ref">figure-collage</span>. To obtain such figure, I rewrote the
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html">imshow</a>
+function to apply translation, scaling and rotation and I call the
+function 200 times with random values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">imshow</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">extent</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                               <span class="o">-</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="n">zorder</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Affine2D</span><span class="p">()</span><span class="o">.</span><span class="n">rotate_deg</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">*</span><span class="n">position</span><span class="p">)</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">set_transform</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="coordinates/collage.png"><img alt="coordinates/collage.png" src="coordinates/collage.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Collage
+<span class="label">figure-collage</span>
+(sources: <span class="source">coordinates/collage.py</span>).</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Transformations are quite powerful tools even though you won’t manipulate them
+too often in your daily life. But there are a few cases where you’ll be
+happy to know about them. You can read further on transforms and coordinates
+with the <a class="reference external" href="https://matplotlib.org/tutorials/advanced/transforms_tutorial.html">Transformation tutorial</a> on the matplotlib website.</p>
+<section id="real-case-usage">
+<h2>Real case usage<a class="headerlink" href="#real-case-usage" title="Permalink to this headline">¶</a></h2>
+<p>Let’s now study a real case of transforms as shown on figure
+<span class="xref std std-ref">fig-transforms-hist</span>. This is a simple scatter plot showing some Gaussian
+data, with two principal axis. I added a histogram that is orthogonal to the
+first principal component axis to show the distribution on the main axis.
+This figure might appear simple (a scatter plot and an oriented histogram) but
+the reality is quite different and rendering such a figure is far from
+obvious. The main difficulty is to have the histogram at the right position,
+size and orientation knowing that position must be set in data coordinates,
+size must be given in figure normalized coordinates and orientation in
+degrees. To complicate things, we want to express the elevation of the text
+above the histogram bars in data points. <a href="#id10"><span class="problematic" id="id11">|newline|</span></a></p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="coordinates/transforms-hist.pdf"><img alt="coordinates/transforms-hist.pdf" src="coordinates/transforms-hist.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Rotated histogram aligned with second main PCA axis
+(<span class="source">coordinates/transforms-hist.py</span>). <span class="label">fig-transforms-hist</span></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>You can have a look at the sources for the complete story but let’s concentrate
+on the main difficulty, that is adding a rotated floating axis. Let us start with
+a simple figure:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.transforms</span> <span class="kn">import</span> <span class="n">Affine2D</span>
+<span class="kn">import</span> <span class="nn">mpl_toolkits.axisartist.floating_axes</span> <span class="k">as</span> <span class="nn">floating</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                  <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Let’s imagine we want to have a floating axis whose center is (5,5) in data
+coordinates, size is (5,3) in data coordinates and orientation is -30 degrees:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">30</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">rotation</span> <span class="o">=</span> <span class="n">Affine2D</span><span class="p">()</span><span class="o">.</span><span class="n">rotate_deg</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">center</span> <span class="o">+</span> <span class="n">rotation</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the code above, we defined the four points delimiting the extent of our new
+axis and we took advantage of matplotlib affine transforms to do the actual
+rotation. At this point, we have thus four points describing the border of the
+axis in data coordinates and we need to transform them in figure normalized
+coordinates because the floating axis requires normalized figure coordinates.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">DC_to_FC</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">transData</span><span class="o">.</span><span class="n">transform</span>
+<span class="n">FC_to_NFC</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">transFigure</span><span class="o">.</span><span class="n">inverted</span><span class="p">()</span><span class="o">.</span><span class="n">transform</span>
+<span class="n">DC_to_NFC</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">FC_to_NFC</span><span class="p">(</span><span class="n">DC_to_FC</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We have one supplementary difficulty because the position of a floating axis
+needs to be defined in terms of the non-rotated bounding box:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span> <span class="o">=</span> <span class="n">DC_to_NFC</span><span class="p">((</span><span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()))</span>
+<span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">DC_to_NFC</span><span class="p">((</span><span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>We now have all the information to add our new axis:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">transform</span> <span class="o">=</span> <span class="n">Affine2D</span><span class="p">()</span><span class="o">.</span><span class="n">rotate_deg</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span>
+<span class="n">helper</span> <span class="o">=</span> <span class="n">floating</span><span class="o">.</span><span class="n">GridHelperCurveLinear</span><span class="p">(</span>
+              <span class="n">transform</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">floating</span><span class="o">.</span><span class="n">FloatingSubplot</span><span class="p">(</span>
+              <span class="n">fig</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="n">grid_helper</span><span class="o">=</span><span class="n">helper</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="o">-</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymax</span><span class="o">-</span><span class="n">xmin</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">ax2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result is shown on figure <span class="xref std std-ref">fig-transforms-floating-axis</span>.</p>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p><strong>Exercise 1</strong> When you specify the size of markers in a scatter plot, this
+size is expressed in points. Try to make a scatter plot whose size is expressed
+in data points such as to obtain figure <span class="xref std std-ref">fig-transforms-exercise-1</span>.</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="coordinates/transforms-exercise-1.pdf"><img alt="coordinates/transforms-exercise-1.pdf" src="coordinates/transforms-exercise-1.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">A scatter plot whose marker size is expressed in data coordinates instead of points
+(<span class="source">coordinates/transforms-exercise-1.py</span>).
+<span class="label">fig-transforms-exercise-1</span></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id9">
+<a class="reference internal image-reference" href="coordinates/transforms-floating-axis.pdf"><img alt="coordinates/transforms-floating-axis.pdf" src="coordinates/transforms-floating-axis.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">A floating and rotated floating axis with controlled position size and
+rotation (<span class="source">coordinates/transforms-floating-axis.py</span>).
+<span class="label">fig-transforms-floating-axis</span></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">scientific-visualization</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, rougier et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/coordinates.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Going 3D &#8212; scientific-visualization 2022 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="going-3d">
+<span id="chap-3d"></span><h1>Going 3D<a class="headerlink" href="#going-3d" title="Permalink to this headline">¶</a></h1>
+<p>Matplotlib has a really nice <a class="reference external" href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html">3D interface</a> with
+many capabilities (and some limitations) that is quite popular among
+users. Yet, 3D is still considered to be some kind of black magic for
+some users (or maybe for the majority of users). I would thus like to
+explain in this chapter that 3D rendering is really easy once you’ve
+understood a few concepts. To demonstrate that, we’ll render the bunny
+on figure above with 60 lines of Python and one matplotlib call. That
+is, without using the 3D axis.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="threed/bunny.pdf"><img alt="threed/bunny.pdf" src="threed/bunny.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Stanford bunny.
+(sources: <span class="source">threed/bunny.py</span>).
+<span class="label">figure-bunny</span></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<section id="loading-the-bunny">
+<h2>Loading the bunny<a class="headerlink" href="#loading-the-bunny" title="Permalink to this headline">¶</a></h2>
+<p>First things first, we need to load our model. We’ll use a simplified
+version of the <a class="reference external" href="https://en.wikipedia.org/wiki/Stanford_bunny">Stanford bunny</a>.  The file uses the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Wavefront_.obj_file">wavefront format</a> which is one of
+the simplest format, so let’s make a very simple (but error-prone)
+loader that will just do the job for this specific model. Else, you
+can use the <a class="reference external" href="https://pypi.org/project/meshio/">meshio library</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;bunny.obj&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+       <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span> <span class="k">continue</span>
+       <span class="n">values</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+       <span class="k">if</span> <span class="ow">not</span> <span class="n">values</span><span class="p">:</span> <span class="k">continue</span>
+       <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span>
+           <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]])</span>
+       <span class="k">elif</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
+           <span class="n">F</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]])</span>
+<span class="n">V</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">V</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">F</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p><cite>V</cite> is now a set of vertices (3D points if you prefer) and <cite>F</cite> is a set of
+faces (= triangles). Each triangle is described by 3 indices relatively to the
+vertices array. Now, let’s normalize the vertices such that the overall bunny
+fits the unit box:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="n">V</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">V</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now, we can have a first look at the model by getting only the x,y
+coordinates of the vertices and get rid of the z coordinate. To do
+this we can use the powerful <a class="reference external" href="https://matplotlib.org/3.1.1/api/collections_api.html#matplotlib.collections.PolyCollection">PolyCollection</a>
+object that allow to render efficiently a collection of non-regular
+polygons. Since, we want to render a bunch of triangles, this is a
+perfect match. So let’s first extract the triangles and get rid of the
+<cite>z</cite> coordinate:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="n">F</span><span class="p">][</span><span class="o">...</span><span class="p">,:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We can now render it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                  <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">collection</span> <span class="o">=</span> <span class="n">PolyCollection</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                            <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Result is shown on figure <span class="xref std std-ref">figure-bunny-1</span>.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="threed/bunny-1.pdf"><img alt="threed/bunny-1.pdf" src="threed/bunny-1.pdf" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-text">Stanford bunny without any transformation.
+(sources: <span class="source">threed/bunny-1.py</span>).
+<span class="label">figure-bunny-1</span></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="perspective-projection">
+<h2>Perspective Projection<a class="headerlink" href="#perspective-projection" title="Permalink to this headline">¶</a></h2>
+<p>The rendering we’ve just made is actually an <a class="reference external" href="https://en.wikipedia.org/wiki/Orthographic_projection">orthographic projection</a> while the
+previous bunny uses a <a class="reference external" href="https://en.wikipedia.org/wiki/3D_projection#Perspective_projection">perspective projection</a>:</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="threed/projection.pdf"><img alt="threed/projection.pdf" src="threed/projection.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Orthographic and perspective projections.
+<span class="label">figure-projections</span></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>In both cases, the proper way of defining a projection is first to
+define a viewing volume, that is, the volume in the 3d space we want
+to render on the scree. To do that, we need to consider 6 clipping
+planes (left, right, top, bottom, far, near) that enclose the viewing
+volume (frustum) relatively to the camera. If we define a camera
+position and a viewing direction, each plane can be described by a
+single scalar. Once we have this viewing volume, we can project onto
+the screen using either the orthographic or the perspective
+projection.</p>
+<p>Fortunately for us, these projections are quite well known and can be
+expressed using 4x4 matrices:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">frustum</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">znear</span><span class="p">,</span> <span class="n">zfar</span><span class="p">):</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">+</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">znear</span> <span class="o">/</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">+</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">znear</span> <span class="o">/</span> <span class="p">(</span><span class="n">top</span> <span class="o">-</span> <span class="n">bottom</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">zfar</span> <span class="o">+</span> <span class="n">znear</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">zfar</span> <span class="o">-</span> <span class="n">znear</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">right</span> <span class="o">+</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">top</span> <span class="o">+</span> <span class="n">bottom</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">top</span> <span class="o">-</span> <span class="n">bottom</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">znear</span> <span class="o">*</span> <span class="n">zfar</span> <span class="o">/</span> <span class="p">(</span><span class="n">zfar</span> <span class="o">-</span> <span class="n">znear</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+    <span class="k">return</span> <span class="n">M</span>
+
+<span class="k">def</span> <span class="nf">perspective</span><span class="p">(</span><span class="n">fovy</span><span class="p">,</span> <span class="n">aspect</span><span class="p">,</span> <span class="n">znear</span><span class="p">,</span> <span class="n">zfar</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">radians</span><span class="p">(</span><span class="n">fovy</span><span class="p">))</span> <span class="o">*</span> <span class="n">znear</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">aspect</span>
+    <span class="k">return</span> <span class="n">frustum</span><span class="p">(</span><span class="o">-</span><span class="n">w</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">znear</span><span class="p">,</span> <span class="n">zfar</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For the perspective projection, we also need to specify the aperture
+angle that (more or less) sets the size of the near plane relatively
+to the far plane. Consequently, for high apertures, you’ll get a lot
+of “deformations”.</p>
+<p>However, if you look at the two functions above, you’ll realize they
+return 4x4 matrices while our coordinates are 3d. How to use these
+matrices then ? The answer is <a class="reference external" href="https://en.wikipedia.org/wiki/Homogeneous_coordinates">homogeneous coordinates</a>. To make a
+long story short, homogeneous coordinates are best to deal with
+transformation and projections in 3D. In our case, because we’re
+dealing with vertices (and not vectors), we only need to add 1 as the
+fourth coordinates (w) to all our vertices. Then we can apply the
+perspective transformation using the dot product.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">V</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">))]</span> <span class="o">@</span> <span class="n">perspective</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+<p>Last step, we need to re-normalize the homogeneous coordinates. This
+means we divide each transformed vertices with the last component (w)
+such as to always have w=1 for each vertices.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">/=</span> <span class="n">V</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can check the result on figure <span class="xref std std-ref">figure-bunny-2</span> that looks totally wrong.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="threed/bunny-2.pdf"><img alt="threed/bunny-2.pdf" src="threed/bunny-2.pdf" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-text">Wrong rendering when camera is inside.
+(sources: <span class="source">threed/bunny-2.py</span>).
+<span class="label">figure-bunny-2</span></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>It looks wrong because the camera is actually inside the bunny. To
+have a proper rendering, we need to move the bunny away from the
+camera or to move the camera away from the bunny. Let’s do the
+later. The camera is currently positioned at (0,0,0) and looking up in
+the z direction (because of the frustum transformation). We thus need
+to move the camera away a little bit in the z negative direction and
+before the perspective transformation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">V</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">3.5</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">V</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">))]</span> <span class="o">@</span> <span class="n">perspective</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">V</span> <span class="o">/=</span> <span class="n">V</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The corrected output is shown on figure <span class="xref std std-ref">figure-bunny-3</span>.</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="threed/bunny-3.pdf"><img alt="threed/bunny-3.pdf" src="threed/bunny-3.pdf" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-text">Corrected rendering with camera away.
+(sources: <span class="source">threed/bunny-3.py</span>).
+<span class="label">figure-bunny-3</span></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="model-view-projection-mvp">
+<h2>Model, view, projection (MVP)<a class="headerlink" href="#model-view-projection-mvp" title="Permalink to this headline">¶</a></h2>
+<p>It might be not obvious, but the last rendering is actually a perspective
+transformation. To make it more obvious, we’ll rotate the bunny around. To do
+that, we need some rotation matrices (4x4) and we can as well define the
+translation matrix in the meantime:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">xrotate</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">theta</span> <span class="o">/</span> <span class="mi">180</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>  <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">yrotate</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">theta</span> <span class="o">/</span> <span class="mi">180</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                      <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                      <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                      <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We’ll now decompose the transformations we want to apply in term of model
+(local transformations), view (global transformations) and projection such that
+we can compute a global MVP matrix that will do everything at once:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">xrotate</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">@</span> <span class="n">yrotate</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">view</span>  <span class="o">=</span> <span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">3.5</span><span class="p">)</span>
+<span class="n">proj</span>  <span class="o">=</span> <span class="n">perspective</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">MVP</span>   <span class="o">=</span> <span class="n">proj</span>  <span class="o">@</span> <span class="n">view</span>  <span class="o">@</span> <span class="n">model</span>
+</pre></div>
+</div>
+<p>and we now write:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">V</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">))]</span> <span class="o">@</span> <span class="n">MVP</span><span class="o">.</span><span class="n">T</span>
+<span class="n">V</span> <span class="o">/=</span> <span class="n">V</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You should obtain results shown on figure <span class="xref std std-ref">figure-bunny-4</span>.</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="threed/bunny-4.pdf"><img alt="threed/bunny-4.pdf" src="threed/bunny-4.pdf" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-text">Rotated and translated bunny.
+(sources: <span class="source">threed/bunny-4.py</span>).
+<span class="label">figure-bunny-4</span></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Let’s now play a bit with the aperture such that you can see the
+difference (see figure <span class="xref std std-ref">figure-bunny-5</span>).  Note that we also need
+to adapt the distance to the camera in order for the bunnies to have
+the same apparent size</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="threed/bunny-5.pdf"><img alt="threed/bunny-5.pdf" src="threed/bunny-5.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Different apertures
+(sources: <span class="source">threed/bunny-5.py</span>).
+<span class="label">figure-bunny-5</span></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="depth-sorting">
+<h2>Depth sorting<a class="headerlink" href="#depth-sorting" title="Permalink to this headline">¶</a></h2>
+<p>Let’s try now to fill the triangles and see what happens (figure
+<span class="xref std std-ref">figure-bunny-6</span>).</p>
+<figure class="align-default" id="id9">
+<a class="reference internal image-reference" href="threed/bunny-6.pdf"><img alt="threed/bunny-6.pdf" src="threed/bunny-6.pdf" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-text">Rendering without depth sorting.
+(sources: <span class="source">threed/bunny-6.py</span>).
+<span class="label">figure-bunny-6</span></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>As you can see, the result is totally wrong. The problem is that the
+PolyCollection draws the triangles in the order they are given
+while we would like to have them from back to front. This means we
+need to sort them according to their depth. The good news is that we
+already computed this information when we applied the MVP
+transformation. It is stored in the new z coordinates. However, these
+z values are vertices based while we need to sort the triangles. We’ll
+thus take the mean z value as being representative of the depth of a
+triangle. If triangles are relatively small and do not intersect, this
+works beautifully:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span>  <span class="n">V</span><span class="p">[:,:,:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="o">-</span><span class="n">V</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">I</span><span class="p">,:]</span>
+</pre></div>
+</div>
+<p>And now everything is rendered correctly as shown on figure
+<span class="xref std std-ref">figure-bunny-7</span>.</p>
+<figure class="align-default" id="id10">
+<a class="reference internal image-reference" href="threed/bunny-7.pdf"><img alt="threed/bunny-7.pdf" src="threed/bunny-7.pdf" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-text">Rendering with depth sorting.
+(sources: <span class="source">threed/bunny-7.py</span>).
+<span class="label">figure-bunny-7</span></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Let’s add some colors using the depth buffer. We’ll color each triangle
+according to it depth. The beauty of the PolyCollection object is that you can
+specify the color of each of the triangle using a numpy array, so let’s just do
+that:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">Z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">Z</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">zmax</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;magma&quot;</span><span class="p">)(</span><span class="n">Z</span><span class="p">)</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+<span class="n">T</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">I</span><span class="p">,:],</span> <span class="n">C</span><span class="p">[</span><span class="n">I</span><span class="p">,:]</span>
+</pre></div>
+</div>
+<p>And our final display is show on figure <span class="xref std std-ref">figure-bunny-8</span>.</p>
+<figure class="align-default" id="id11">
+<a class="reference internal image-reference" href="threed/bunny-8.pdf"><img alt="threed/bunny-8.pdf" src="threed/bunny-8.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Rendering with depth colors.
+(sources: <span class="source">threed/bunny-8.py</span>).
+<span class="label">figure-bunny-8</span></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The final script (<span class="source">threed/bunny-8.py</span>) is 57 lines but
+hardly readable. However, it shows that 3D rendering can be done quite
+easily with matplotlib and a few transformations.</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>Using the definition of the orthographic projection, try to reproduce
+the figure <span class="xref std std-ref">figure-bunnies</span> that mix perspective (top left) and
+orthographic projections. Each bunny is contained in one axes.</p>
+<figure class="align-default" id="id12">
+<a class="reference internal image-reference" href="threed/bunnies.pdf"><img alt="threed/bunnies.pdf" src="threed/bunnies.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Stanford bunnies
+(sources: <span class="source">threed/bunnies.py</span>).
+<span class="label">figure-bunnies</span></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">scientific-visualization</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, rougier et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/threed.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

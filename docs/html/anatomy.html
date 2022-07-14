@@ -1,0 +1,557 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Anatomy of a figure &#8212; scientific-visualization 2022 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="anatomy-of-a-figure">
+<span id="chap-anatomy"></span><h1>Anatomy of a figure<a class="headerlink" href="#anatomy-of-a-figure" title="Permalink to this headline">¶</a></h1>
+<p>A matplotlib figure is composed of a hierarchy of elements that, when put
+together, forms the actual figure as shown on figure <span class="xref std std-ref">fig-anatomy</span>. Most
+of the time, those elements are not created explicitly by the user but derived
+from the processing of the various plot commands. Let us consider for example
+the most simple matplotlib script we can write:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In order to display the result, matplotlib needs to create most of the elements
+shown on figure <span class="xref std std-ref">fig-anatomy</span>. The exact list depends on your default
+settings (see chapter <a href="#id14"><span class="problematic" id="id15">chap-defaults_</span></a>), but the bare minimum is the creation of
+a <a class="reference external" href="https://matplotlib.org/api/figure_api.html">Figure</a> that is the top level container for all the plot elements, an <a class="reference external" href="https://matplotlib.org/api/axes_api.html">Axes</a>
+that contains most of the figure elements and of course your actual plot, a
+line in this case. The possibility to not specify everything might be
+convenient but in the meantime, it limits your choices because missing elements
+are created automatically, using default values. For example, in the previous
+example, you have no control of the initial figure size since it has been
+chosen implicitly during creation. If you want to change the figure size or
+the axes aspect, you need to be more explicit:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="anatomy/anatomy.pdf"><img alt="anatomy/anatomy.pdf" src="anatomy/anatomy.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">A matplotlib figure is composed of a hierarchy of several elements that,
+when put together, forms the actual figure (sources: <span class="source">anatomy/anatomy.py</span>).
+<span class="label">fig-anatomy</span></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>In many cases, this can be further compacted using the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html">subplots</a> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span>
+                       <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;aspect&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="elements">
+<h2>Elements<a class="headerlink" href="#elements" title="Permalink to this headline">¶</a></h2>
+<p>You may have noticed in the previous example that the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html">plot</a> command is attached
+to <cite>ax</cite> instead of <cite>plt</cite>. The use of <cite>plt.plot</cite> is actually a way to tell
+matplotlib that we want to plot on the current axes, that is, the last axes
+that has been created, implicitly or explicitly. No need to remind that
+<em>explicit is better than implicit</em> as explained in The Zen of Python, by
+Tim Peters (<cite>import this</cite>). When you have choice, it is thus preferable to
+specify exactly what you want to do. Consequently, it is important to know what
+are the different elements of a figure.</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://matplotlib.org/api/figure_api.html">Figure</a>:</dt><dd><p>The most important element of a figure is the figure itself. It is created
+when you call the <cite>figure</cite> method and we’ve already seen you can specify its
+size but you can also specify a background color (<cite>facecolor</cite>) as well as a
+title (<cite>suptitle</cite>). It is important to know that the background color won’t
+be used when you save the figure because the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html">savefig</a> function has also a
+<cite>facecolor</cite> argument (that is white by default) that will override your
+figure background color. If you don’t want any background you can specify
+<cite>transparent=True</cite> when you save the figure.</p>
+</dd>
+<dt><a class="reference external" href="https://matplotlib.org/api/axes_api.html">Axes</a>:</dt><dd><p>This is the second most important element that corresponds to the actual area
+where your data will be rendered. It is also called a subplot. You can have
+one to many axes per figure and each is usually surrounded by four edges
+(left, top, right and bottom) that are called <strong>spines</strong>. Each of these
+spines can be decorated with major and minor <strong>ticks</strong> (that can point inward
+or outward), <strong>tick labels</strong> and a <strong>label</strong>. By default, matplotlib
+decorates only the left and bottom spines.</p>
+</dd>
+<dt><a class="reference external" href="https://matplotlib.org/api/axis_api.html">Axis</a>:</dt><dd><p>The decorated spines are called axis. The horizontal one is the <strong>xaxis</strong> and
+the vertical one is the <strong>yaxis</strong>. Each of them are made of a spine, major and
+minor ticks, major and minor ticks labels and an axis label.</p>
+</dd>
+<dt><a class="reference external" href="https://matplotlib.org/api/spines_api.html">Spines</a>:</dt><dd><p>Spines are the lines connecting the <strong>axis</strong> tick marks and noting the
+boundaries of the data area. They can be placed at arbitrary positions and
+may be visible or invisible.</p>
+</dd>
+<dt><a class="reference external" href="https://matplotlib.org/tutorials/intermediate/artists.html">Artist</a>:</dt><dd><p>Everything on the figure, including Figure, Axes, and Axis objects, is an
+artist. This includes Text objects, Line2D objects, collection objects, Patch
+objects. When the figure is rendered, all of the artists are drawn to the
+canvas. A given artist can only be in one Axes.</p>
+</dd>
+</dl>
+</section>
+<section id="graphic-primitives">
+<h2>Graphic primitives<a class="headerlink" href="#graphic-primitives" title="Permalink to this headline">¶</a></h2>
+<p>A plot, independently of its nature, is made of patches, lines and
+texts. Patches can be very small (e.g. markers) or very large (e.g. bars) and
+have a range of shapes (circles, rectangles, polygons, etc.). Lines can be very
+small and thin (e.g. ticks) or very thick (e.g. hatches). Text can use any font
+available on your system and can also use a latex engine to render maths.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="anatomy/bold-ticklabel.pdf"><img alt="anatomy/bold-ticklabel.pdf" src="anatomy/bold-ticklabel.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">All the graphic primitives (i.e. artists) can be accessed and modified. In
+the figure above, we modified the boldness of the X axis tick labels
+(sources: <span class="source">anatomy/bold-ticklabel.py</span>).</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Each of these graphic primitives have also a lot of other properties such as
+color (facecolor and edgecolor), transparency (from 0 to 1), patterns
+(e.g. dashes), styles (e.g. cap styles), special effects (e.g. shadows or
+outline), antialiased (True or False), etc. Most of the time, you do not
+manipulate these primitives directly. Instead, you call methods that build a
+rendering using a collection of such primitives. For example, when you add a
+new <cite>Axes</cite> to a figure, matplotlib will build a collection of line segments for
+the spines and the ticks and will also add a collection of labels for the tick
+labels and the axis labels. Even though this is totally transparent for you,
+you can still access those elements individually if necessary. For example, to
+make the X axis tick to be bold, we would write:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">get_ticklabels</span><span class="p">():</span>
+    <span class="n">label</span><span class="o">.</span><span class="n">set_fontweight</span><span class="p">(</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>One important property of any primitive is the <cite>zorder</cite> property that indicates
+the virtual depth of the primitives as shown on figure <span class="xref std std-ref">fig-zorder</span>. This
+zorder value is used to sort the primitives from the lowest to highest before
+rendering them. This allows to control what is behind what. Most artists
+possess a default zorder value such that things are rendered properly. For
+example, the spines, the ticks and the tick label are generally <em>behind</em>
+your actual plot.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="anatomy/zorder.pdf"><img alt="anatomy/zorder.pdf" src="anatomy/zorder.pdf" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-text">Default rendering order of different elements and graphic primitives. The
+rendering order is from bottom to top. Note that some methods will override
+these default to position themselves properly (sources: <span class="source">anatomy/zorder.py</span>).
+<span class="label">fig-zorder</span></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="backends">
+<h2>Backends<a class="headerlink" href="#backends" title="Permalink to this headline">¶</a></h2>
+<p>A backend is the combination of a renderer that is responsible for the actual
+drawing and an optional user interface that allows to interact with a
+figure. Until now, we’ve been using the default renderer and interface
+resulting in a window being shown when the <cite>plt.show()</cite> method was called. To
+know what is your default backend, you can type:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">get_backend</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>In my case, the default backend is <cite>MacOSX</cite> but yours may be different. If you
+want to test for an alternative backend, you can type:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;xxx&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you replace <cite>xxx</cite> with a renderer from table <span class="xref std std-ref">table-renderers</span> below,
+you’ll end up with a non-interactive figure, i.e. a figure that cannot be shown
+on screen but only saved on disk.</p>
+<table class="docutils align-left" id="id5">
+<caption><span class="caption-text">Available matplotlib renderers.
+        <span class="label">table-renderers</span></span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 25%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Renderer</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Filetype</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Agg</p></td>
+<td><p>raster</p></td>
+<td><p>Portable Network Graphic (PNG)</p></td>
+</tr>
+<tr class="row-odd"><td><p>PS</p></td>
+<td><p>vector</p></td>
+<td><p>Postscript (PS)</p></td>
+</tr>
+<tr class="row-even"><td><p>PDF</p></td>
+<td><p>vector</p></td>
+<td><p>Portable Document Format (PDF)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SVG</p></td>
+<td><p>vector</p></td>
+<td><p>Scalable Vector Graphics (SVG)</p></td>
+</tr>
+<tr class="row-even"><td><p>Cairo</p></td>
+<td><p>raster / vector</p></td>
+<td><p>PNG / PDF / SVG</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-left" id="id6">
+<caption><span class="caption-text">Available matplotlib interfaces.
+<span class="label">table-interfaces</span></span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 21%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Interface</p></th>
+<th class="head"><p>Renderer</p></th>
+<th class="head"><p>Dependencies</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GTK3</p></td>
+<td><p>Agg or Cairo</p></td>
+<td><p><a class="reference external" href="https://pygobject.readthedocs.io/en/latest/">PyGObject</a> &amp; <a class="reference external" href="https://pycairo.readthedocs.io/en/latest/">Pycairo</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Qt4</p></td>
+<td><p>Agg</p></td>
+<td><p><a class="reference external" href="https://www.riverbankcomputing.com/software/pyqt/intro">PyQt4</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Qt5</p></td>
+<td><p>Agg</p></td>
+<td><p><a class="reference external" href="https://www.riverbankcomputing.com/software/pyqt/intro">PyQt5</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Tk</p></td>
+<td><p>Agg</p></td>
+<td><p><a class="reference external" href="https://wiki.python.org/moin/TkInter">TkInter</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Wx</p></td>
+<td><p>Agg</p></td>
+<td><p><a class="reference external" href="https://www.wxpython.org/">wxPython</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>MacOSX</p></td>
+<td><p>—</p></td>
+<td><p>OSX (obviously)</p></td>
+</tr>
+<tr class="row-even"><td><p>Web</p></td>
+<td><p>Agg</p></td>
+<td><p>Browser</p></td>
+</tr>
+</tbody>
+</table>
+<p>The canonical renderer is Agg which uses the <a class="reference external" href="https://antigrain.com">Anti-Grain Geometry C++ library</a> to make a raster image of the figure (see figure
+<span class="xref std std-ref">fig-raster-vector</span> to see the difference between raster and vector). Note
+that even if you choose a raster renderer, you can still save the figure in a
+vector format and vice-versa.</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="anatomy/raster-vector.pdf"><img alt="anatomy/raster-vector.pdf" src="anatomy/raster-vector.pdf" style="width: 75%;" /></a>
+<figcaption>
+<p><span class="caption-text">Zooming effect for raster graphics and vector graphics (sources:
+<span class="source">anatomy/raster-vector.py</span>). <span class="label">fig-raster-vector</span></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>If you want to have some interaction with your figure, you have to combine one
+of the available interfaces (see table <span class="xref std std-ref">table-interfaces</span>) with a
+renderer (e.g. <cite>GTK3Cairo</cite> that stands for GTK3 interface with Cairo
+renderer).</p>
+<p>For example, to have a rendering in a browser, you can write:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;webagg&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Warning.</strong> The <cite>use</cite> function must be called before importing <cite>pyplot</cite>.</p>
+</div>
+<p>Once you’ve chosen an interactive backend, you can decide to produce a figure
+in interactive mode (figure is updated after each matplotlib command):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>            <span class="c1"># Interactive mode on</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>    <span class="c1"># Plot is shown</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X Axis&quot;</span><span class="p">)</span> <span class="c1"># Label is updated</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ioff</span><span class="p">()</span>           <span class="c1"># Interactive mode off</span>
+</pre></div>
+</div>
+<p>If you want to know more on backends, you can have a look at the <a class="reference external" href="https://matplotlib.org/stable/users/explain/backends.html">matplotlib
+user guide</a>
+on the matplotlib website.</p>
+<p>An interesting backend under OSX and <a class="reference external" href="https://iterm2.com/">iterm2</a>
+terminal is the <a class="reference external" href="https://github.com/wookayin/python-imgcat">imgcat</a>
+backend that allows to render a figure directly inside the terminal,
+emulating a kind of jupyter notebook as shown on figure
+<span class="xref std std-ref">figure-imgcat</span></p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="anatomy/imgcat.png"><img alt="anatomy/imgcat.png" src="anatomy/imgcat.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Matplotlib imgcat backend
+<span class="label">figure-imgcat</span>
+(sources: <span class="source">anatomy/imgcat.py</span>).</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;module://imgcat&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For other terminals, you might need to use the <a class="reference external" href="https://github.com/koppa/matplotlib-sixel">sixel</a> backend that may work with xterm (not tested).</p>
+</section>
+<section id="dimensions-resolution">
+<h2>Dimensions &amp; resolution<a class="headerlink" href="#dimensions-resolution" title="Permalink to this headline">¶</a></h2>
+<p>In the first example of this chapter, we specified a figure size of <cite>(6,6)</cite>
+that corresponds to a size of 6 inches (width) by 6 inches (height) using a
+default dpi (dots per inch) of 100. When displayed on a screen, dots
+corresponds to pixels and we can immediately deduce that the figure size
+(i.e. window size without the toolbar) will be exactly 600×600 pixels.  Same is
+true if you save the figure in a bitmap format such as png (Portable Network
+Graphics):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;output.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we use the <cite>identify</cite> command from the <a class="reference external" href="https://imagemagick.org">ImageMagick</a> graphical suite to
+enquiry about the produced image, we get:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ identify -verbose output.png
+Image: output.png
+  Format: PNG <span class="o">(</span>Portable Network Graphics<span class="o">)</span>
+  Mime type: image/png
+  Class: DirectClass
+  Geometry: 600x600+0+0
+  Resolution: <span class="m">39</span>.37x39.37
+  Print size: <span class="m">15</span>.24x15.24
+  Units: PixelsPerCentimeter
+  Colorspace: sRGB
+  ...
+</pre></div>
+</div>
+<p>This confirms that the image geometry is 600×600 while the resolution is 39.37
+ppc (pixels per centimeter) which corresponds to 39.37*2.54 ≈ 100 dpi (dots per
+inch). If you were to include this image inside a document while keeping the
+same dpi, you would need to set the size of the image to 15.24cm by 15.24cm. If
+you reduce the size of the image in your document, let’s say by a factor of 3,
+this will mechanically increase the figure dpi to 300 in this specific
+case. For a scientific article, publishers will generally request figures dpi
+to be between 300 and 600. To get things right, it is thus good to know what
+will be the physical dimension of your figure once inserted into your document.</p>
+<figure class="align-default" id="id9">
+<a class="reference internal image-reference" href="anatomy/figure-dpi.png"><img alt="anatomy/figure-dpi.png" src="anatomy/figure-dpi.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">A text rendered in matplotlib and saved using different dpi (50,100,300 &amp;
+600)  (sources: <span class="source">anatomy/figure-dpi.py</span>). <span class="label">figure-dpi</span></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>For a more concrete example, let us consider this book whose format is A5
+(148×210 millimeters). Right and left margins are 20 millimeters each and
+images are usually displayed using the full text width. This means the physical
+width of an image is exactly 108 millimeters, or approximately 4.25 inches. If
+we were to use the recommended 600 dpi, we would end up with a width of 2550
+pixels which might be beyond screen resolution and thus not very convenient.
+Instead, we can use the default matplotlib dpi (100) when we display the figure
+on the screen and only when we save it, we use a different and higher dpi:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">figure</span><span class="p">(</span><span class="n">dpi</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.25</span><span class="p">,</span><span class="mf">.2</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Text rendered at 10pt using </span><span class="si">%d</span><span class="s2"> dpi&quot;</span> <span class="o">%</span> <span class="n">dpi</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+            <span class="n">fontname</span><span class="o">=</span><span class="s2">&quot;Source Serif Pro&quot;</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;light&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;figure-dpi-</span><span class="si">%03d</span><span class="s2">.png&quot;</span> <span class="o">%</span> <span class="n">dpi</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
+
+<span class="n">figure</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">figure</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">figure</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span> <span class="n">figure</span><span class="p">(</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Figure <span class="xref std std-ref">figure-dpi</span> shows the output for the different dpi. Only the 600
+dpi output is acceptable. Note that when it is possible, it is preferable to
+save the result in PDF (Portable Document Format) because it is a vector format
+that will adapt flawlessly to any resolution. However, even if you save your
+figure in a vector format, you still need to indicate a dpi for figure elements
+that cannot be vectorized (e.g .images).</p>
+<p>Finally, you may have noticed that the font size on figure <span class="xref std std-ref">figure-dpi</span>
+appears to be the same as the font size of the text you’re currently
+reading. This is not by accident since this Latex document uses a font size of
+10 points and the matplotlib figure also uses a font size of 10 points. But
+what is a point exactly? In Latex, a point (pt) corresponds to 1/72.27 inches
+while in matplotlib it corresponds to 1/72 inches.</p>
+<p>To help you visualize the exact dimension of your figure, it is
+possible to add a ruler to a figure such that it displays current
+figure dimension as shown on figure <span class="xref std std-ref">figure-ruler</span>. If you
+manually resize the figure, you’ll see that the actual dimension of
+the figure changes while if you only change the dpi, the size will
+remain the same. Usage is really simple:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ruler</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ruler</span> <span class="o">=</span> <span class="n">ruler</span><span class="o">.</span><span class="n">Ruler</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id10">
+<a class="reference internal image-reference" href="anatomy/ruler.pdf"><img alt="anatomy/ruler.pdf" src="anatomy/ruler.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Interactive ruler <span class="label">figure-ruler</span>
+(<span class="source">anatomy/ruler.py</span>).</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>It’s now time to try to make some simple exercises gathering all the concepts
+we’ve seen so far (including finding the relevant documentation).</p>
+<p><strong>Exercise 1</strong> Try to produce a figure with a given (and exact) pixel size
+(e.g. 512x512 pixels). How would you specify the size and save the figure?</p>
+<figure class="align-default" id="id11">
+<a class="reference internal image-reference" href="anatomy/pixel-font.png"><img alt="anatomy/pixel-font.png" src="anatomy/pixel-font.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Pixel font text using exact image size <span class="label">figure-pixel-font</span>
+(<span class="source">anatomy/pixel-font.py</span>).</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p><strong>Exercise 2</strong>
+The goal is to make the figure <span class="xref std std-ref">figure-inch-cm</span> that shows a dual axis, one
+in inches and one in centimeters. The difficulty is that we want the
+centimeters and inched to be physically correct when printed. This requires
+some simple computations for finding the right size and some trials and errors
+to make the actual figure. Don’t pay too much attention to all the details, the
+essential part is to get the size right.</p>
+<figure class="align-default" id="id12">
+<a class="reference internal image-reference" href="anatomy/inch-cm.pdf"><img alt="anatomy/inch-cm.pdf" src="anatomy/inch-cm.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Inches/centimeter conversion <span class="label">figure-inch-cm</span>
+(<strong>solution</strong>: <span class="source">anatomy/inch-cm.py</span>).</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p><strong>Exercise 3</strong></p>
+<p>Here we’ll try to reproduce the figure <span class="xref std std-ref">figure-zorder-plots</span>. If you look
+at the figure, you’ll realize that each curve is partially covering other
+curves and it is thus important to set a proper zorder for each curve such that
+the rendering will be independent of drawing order. For the actual curves, you can start from the following code:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">curve</span><span class="p">():</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">widths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">50.0</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">widths</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">widths</span><span class="o">/</span><span class="n">widths</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">scales</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">scales</span> <span class="o">/=</span> <span class="n">scales</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">center</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">scale</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">widths</span><span class="p">,</span> <span class="n">scales</span><span class="p">):</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">scale</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">center</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">center</span><span class="p">)</span><span class="o">*</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id13">
+<a class="reference internal image-reference" href="anatomy/zorder-plots.pdf"><img alt="anatomy/zorder-plots.pdf" src="anatomy/zorder-plots.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Multiple plots partially covering each other <span class="label">figure-zorder-plots</span>
+(<strong>solution</strong>: <span class="source">anatomy/zorder-plots.py</span>).</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">scientific-visualization</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, rougier et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/anatomy.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
