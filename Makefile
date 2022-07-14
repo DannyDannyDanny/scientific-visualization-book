@@ -5,7 +5,7 @@
 # from the environment for the first two.
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
-SOURCEDIR     = rst
+SOURCEDIR     = .
 BUILDDIR      = _build
 DOCSDIR		  = docs
 
@@ -25,4 +25,5 @@ gh_pages:
 	@cp -a "$(BUILDDIR)/html/." "$(DOCSDIR)"
 
 clear:
-	@rm -rf "$(DOCSDIR)"
+	@rm -rf "$(DOCSDIR)" 
+	@rm -rf "$(BUILDDIR)"
