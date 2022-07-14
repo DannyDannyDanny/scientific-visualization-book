@@ -8,10 +8,9 @@ Welcome to scientific-visualization's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
-   00-acknowledgements.rst
-   00-dedications.rst
+   rst/00-acknowledgements
+   rst/00-dedications
 
 
 

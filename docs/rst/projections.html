@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Scales &amp; projections &#8212; scientific-visualization 2022 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="scales-projections">
+<span id="chap-projection"></span><h1>Scales &amp; projections<a class="headerlink" href="#scales-projections" title="Permalink to this headline">¶</a></h1>
+<p>Beyond affine transforms, matplotlib also offers advanced transformations that
+allows to drastically change the representation of your data without ever
+modifying it. Those transformations correspond to a data preprocessing stage
+that allows you to adapt the rendering to the nature of your data. As explained
+in the matplotlib documentation, there are two main families of transforms:
+separable transformations, working on a single dimension, are called
+<span class="nameref">scales</span>, and non-separable transformations, that handle data in two
+or more dimensions at once are called <span class="nameref">projections</span>.</p>
+<section id="scales">
+<h2>Scales<a class="headerlink" href="#scales" title="Permalink to this headline">¶</a></h2>
+<p>Scales provide a mapping mechanism between the data and their representation
+in the figure along a given dimension. Matplotlib offers four different scales
+(<cite>linear</cite>, <cite>log</cite>, <cite>symlog</cite> and <cite>logit</cite>) and takes care, for each of them, of
+modifying the figure such as to adapt the ticks positions and labels (see
+figure <span class="xref std std-ref">figure-scales</span>). Note that a scale can be applied to x axis only
+(<cite>set_xscale</cite>), y axis only (<cite>set_yscale</cite>) or both.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="rst/scales-projections/scales-comparison.pdf"><img alt="rst/scales-projections/scales-comparison.pdf" src="rst/scales-projections/scales-comparison.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Comparison of the <a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.LinearScale">linear</a>, <a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.LogScale">log</a> and <a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.LogitScale">logit</a> scales.
+<span class="label">figure-scales</span> (sources: <span class="source">scales-projections/scales-comparison.py</span>).</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The default (and implicit) scale is <a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.LinearScale">linear</a> and it is thus generally not
+necessary to specify anything. You can check if a scale is linear by comparing
+the distance between three points in the figure coordinates (actually we should
+compare every points but you get the idea) and check whether their difference
+in data space is the same as in figure space modulo a given factor (see
+<span class="source">scales-projections/scales-check.py</span>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<span class="go">                     aspect=1, xlim=[0,100], ylim=[0,100])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P0</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="o">.</span><span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">P1</span><span class="p">)</span><span class="o">-</span><span class="n">transform</span><span class="p">(</span><span class="n">P0</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+<span class="go">4.185</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">P2</span><span class="p">)</span><span class="o">-</span><span class="n">transform</span><span class="p">(</span><span class="n">P1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+<span class="go">41.85</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">P3</span><span class="p">)</span><span class="o">-</span><span class="n">transform</span><span class="p">(</span><span class="n">P2</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+<span class="go">418.5</span>
+</pre></div>
+</div>
+<p>Logarithmic scale (<a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.LogScale">log</a>) is a nonlinear scale where, instead of increasing in equal
+increments, each interval is increased by a factor of the base of the logarithm
+(hence the name). Log scales are used for values that are strictly positive since
+the logarithm is undefined for negative and null values. If we apply the previous
+script to check the difference in data and figure space, you can now see the
+distances are the same:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<span class="go">                     aspect=1, xlim=[0.1,100], ylim=[0.1,100])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P0</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="o">.</span><span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">P1</span><span class="p">)</span><span class="o">-</span><span class="n">transform</span><span class="p">(</span><span class="n">P0</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+<span class="go">155.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">P2</span><span class="p">)</span><span class="o">-</span><span class="n">transform</span><span class="p">(</span><span class="n">P1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+<span class="go">155.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">P3</span><span class="p">)</span><span class="o">-</span><span class="n">transform</span><span class="p">(</span><span class="n">P2</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+<span class="go">155.0</span>
+</pre></div>
+</div>
+<p>If your data has negative values, you have to use a symmetric log scale (<a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.SymmetricalLogScale">symlog</a>)
+that is a composition of both a linear and a logarithmic scale. More precisely,
+values around 0 use a linear scale and values outside the vicinity of zero uses
+a logarithmic scale. You can of course specify the extent of the linear zone
+when you set the scale. The <a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.LogitScale">logit</a> scale is used for values in the range ]0,1[
+and uses a logarithmic scale on the “border” and a quasi-linear scale in the
+middle (around 0.5). If none of these scales suit your needs, you still have
+the option to define your own custom scale:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;function&#39;</span><span class="p">,</span> <span class="n">functions</span><span class="o">=</span><span class="p">(</span><span class="n">forward</span><span class="p">,</span> <span class="n">inverse</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In such case, you have to provide both the forward and inverse function that
+allows to transform your data. The inverse function is used when displaying
+coordinates under the mouse pointer.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="rst/scales-projections/scales-custom.pdf"><img alt="rst/scales-projections/scales-custom.pdf" src="rst/scales-projections/scales-custom.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Custom (user defined) scales.
+<span class="label">figure-scales-custom</span> (sources: <span class="source">scales-projections/scales-custom.py</span>).</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Finally, if you need a custom scale with complex transforms, you may need to
+write a proper scale object as it is explained on the <a class="reference external" href="https://matplotlib.org/gallery/scales/custom_scale.html">matplotlib documentation</a>.</p>
+</section>
+<section id="projections">
+<h2>Projections<a class="headerlink" href="#projections" title="Permalink to this headline">¶</a></h2>
+<p>Projections are a bit more complex than scales but in the meantime much more
+powerful. Projections allows you to apply arbitrary transformation to your data
+before rendering them in a figure. There is no real limit on the kind of
+transformation you can apply as long as you know how to transform your data into
+something that will be 2 dimensional (the figure space) and reciprocally. In
+other words, you need to define a forward and an inverse
+transformation. Matplotlib comes with only a few standard projections but offers
+all the machinery to create new domain-dependent projection such as for example
+cartographic projection. You might wonder why there are so few native
+projections. The answer is that it would be too time-consuming and too difficult
+for the developers to implement and maintain each and every projections that
+are domain specific. They chose instead to restrict projection to the most
+generic ones, namely <a class="reference external" href="https://matplotlib.org/api/projections_api.html#module-matplotlib.projections.polar">polar</a> and <a class="reference external" href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html">3d</a>.</p>
+<p>We’ve already seen the polar projection in the previous chapter. The most simple
+and straightforward way to use is to specify the projection when you create an
+axis:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;polar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This axis is now equipped with a polar projection. This means that any plotting
+command you apply is pre-processed such as to apply (automatically) the forward
+transformation on the data. In the case of a polar projection, the forward
+transformation must specify how to go from polar coordinates <span class="math notranslate nohighlight">\((\rho,
+\theta)\)</span> to Cartesian coordinates <span class="math notranslate nohighlight">\((x,y) = (\rho cos(\theta), \rho
+sin(\theta))\)</span>. When you declare a polar axis, you can specify limits of the axis
+as we’ve done previously but we have also some dedicated settings such as
+<cite>set_thetamin</cite>, <cite>set_thetamax</cite>, <cite>set_rmin</cite>, <cite>set_rmax</cite> and more specifically
+<cite>set_rorigin</cite>. This allows you to have fine control over what is actually shown as illustrated on the figure <span class="xref std std-ref">figure-projection-polar-config</span>.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="rst/scales-projections/projection-polar-config.pdf"><img alt="rst/scales-projections/projection-polar-config.pdf" src="rst/scales-projections/projection-polar-config.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Polar projection
+<span class="label">figure-projection-polar-config</span>
+(sources: <span class="source">scales-projections/projection-polar-config.py</span>).</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>If you now try to do some plots (e.g. plot, scatter, bar), you’ll see that
+everything is transformed but a few elements. More precisely, the shape of
+markers is not transformed (a disc marker will remains a disc visually), the
+text is not transformed (such that it remains readable) and the width of lines
+is kept constant. Let’s have a look at a more elaborate figure to see what it
+means more precisely. On figure <span class="xref std std-ref">figure-projection-polar-histogram</span>, I
+plotted a simple signal using mostly <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.fill_between.html">fill_between</a>
+command. The concentric grey/white colored rings are made using the
+<cite>fill_between</cite> command between two different <span class="math notranslate nohighlight">\(\rho\)</span> values while the
+histogram is made with various <span class="math notranslate nohighlight">\(\rho\)</span> values. If you now look more closely
+at the <span class="math notranslate nohighlight">\(\rho\)</span> axis with ticks ranging from 100 to 900, you can observe
+that the ticks have the same vertical size. It is indeed an <em>anomaly</em> I
+introduced deliberately for purely aesthetic reasons. If I had specified these
+ticks using a plot command, the length of each tick would correspond to a
+difference of angle (for the vertical size) and they would become taller and
+taller as we move away from the center. To have regulars ticks, we thus have to
+do some computations using the inverse transform (remember, a projection is a
+forward and an inverse transform). I won’t give all the details here but you can
+read the code (<span class="source">projection-polar-histogram.py</span>) to see how it is
+made. Note that the actual role of the inverse transformation is to link mouse
+coordinates (in Cartesian 2D coordinates) back to your data.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="rst/scales-projections/projection-polar-histogram.pdf"><img alt="rst/scales-projections/projection-polar-histogram.pdf" src="rst/scales-projections/projection-polar-histogram.pdf" style="width: 95%;" /></a>
+<figcaption>
+<p><span class="caption-text">Polar projection with better defaults.
+<span class="label">figure-projection-polar-histogram</span>
+(sources: <span class="source">scales-projections/projection-polar-histogram.py</span>).</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Conversely, there are some situations were we might be interested in having
+the text and the markers to be transformed as illustrated on figure
+<span class="xref std std-ref">figure-text-polar</span>.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="rst/scales-projections/text-polar.pdf"><img alt="rst/scales-projections/text-polar.pdf" src="rst/scales-projections/text-polar.pdf" style="width: 90%;" /></a>
+<figcaption>
+<p><span class="caption-text">Polar projection with transformation of text and markers.
+<span class="label">figure-text-polar</span>
+(sources: <span class="source">scales-projections/text-polar.py</span>).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>On this example, both the markers and the text have been transformed
+manually. For the markers, the trick is to use <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.patches.Ellipse.html">Ellipses</a> that are
+approximated as a sequence of small line segments, each of them being
+transformed. In the corresponding code, I only specify the center, and the size
+of the pseudo-marker and the pre-processing stage takes care of applying the
+polar projection to each individual parts composing the marker (ellipse),
+resulting in a slightly curved ellipse. For the text, the process is the same
+but it is a bit more complicated since we need first to convert the text into a
+path that can be transformed (we’ll see that in more detail in the next
+chapter).</p>
+<p>The second projection that matplotlib offers is the 3d projection, that is the
+projection from a 3D Cartesian space to a 2 Cartesian space. To start using 3D
+projection, you’ll need to use the <a class="reference external" href="https://matplotlib.org/api/toolkits/mplot3d.html">Axis3D</a> toolkit that is generally
+shipped with matplotlib:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With this 3D axis, you can use regular plotting commands with a big difference
+though: you need now to provide 3 coordinates (x,y,z) where you previously
+provided only two (x,y) as illustrated on figure
+<span class="xref std std-ref">figure-projection-3d-frame</span>. Note that this figure is quite different from
+the default 3D axis you may get from matplotlib. Here, I tweaked every setting
+I can think of to try to improve the default look and to show how things can be
+changed. Have a look at the corresponding code and try to modify some settings to
+see the actual effect. The <a class="reference external" href="https://matplotlib.org/mpl_toolkits/mplot3d/api.html">3D Axis API</a> is fairly well
+documented on the matplotlib website and I won’t explain each and every command.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Note</strong> The 3D axis projection is limited by the absence of a proper
+<a class="reference external" href="https://en.wikipedia.org/wiki/Z-buffering">depth-buffer</a>. This is not a
+bug (nor a feature) and this results in some glitches between the elements
+composing a figure.</p>
+</div>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="rst/scales-projections/projection-3d-frame.pdf"><img alt="rst/scales-projections/projection-3d-frame.pdf" src="rst/scales-projections/projection-3d-frame.pdf" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Three dimensional projection
+<span class="label">figure-projection-3d-frame</span>
+(sources: <span class="source">scales-projections/projection-3d-frame.py</span>).</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>For other type of projections, you’ll need to install third-party packages
+depending on the type of projection you intend to use:</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/">Cartopy</a></dt><dd><p>is a Python package
+designed for geospatial data processing in order to produce maps and other
+geospatial data analyses. Cartopy makes use of the powerful PROJ.4, NumPy and
+Shapely libraries and includes a programmatic interface built on top of
+Matplotlib for the creation of publication quality maps.</p>
+</dd>
+<dt><a class="reference external" href="https://geopandas.org/">GeoPandas</a></dt><dd><p>is an open source project to make working
+with geospatial data in python easier. GeoPandas extends the data types used by
+pandas to allow spatial operations on geometric types. Geometric operations
+are performed by Shapely. Geopandas further depends on fiona for file access
+and descartes and matplotlib for plotting.</p>
+</dd>
+<dt><a class="reference external" href="https://github.com/marcharper/python-ternary">Python-ternary</a></dt><dd><p>is a plotting library for use with matplotlib to make ternary plots in
+the two dimensional simplex projected onto a two dimensional plane. The
+library provides functions for plotting projected lines, curves
+(trajectories), scatter plots, and heatmaps. There are several examples and a
+short tutorial below.</p>
+</dd>
+<dt><a class="reference external" href="https://github.com/vMeijin/pySmithPlot">pySmithPlot</a></dt><dd><p>is a matplotlib extension providing a projection class for creating high
+quality Smith Charts with Python. The generated plots blend seamlessly into
+matplotlib’s style and support almost the full range of customization options.</p>
+</dd>
+<dt><a class="reference external" href="https://github.com/rougier/matplotlib-3d">Matplotlib-3D</a></dt><dd><p>is an experimental project that attempts to provide a better and more
+versatile 3d axis for Matplotlib.</p>
+</dd>
+</dl>
+<p>If you’re still not satisfied with existing projections, your last option is to
+create your own projection but this is quite an advanced operation even though
+the matplotlib documentation provides some <a class="reference external" href="https://matplotlib.org/devel/add_new_projection.html">examples</a></p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p><strong>Exercise 1</strong> Considering functions <span class="math notranslate nohighlight">\(f(x) = 10^x\)</span>, <span class="math notranslate nohighlight">\(f(x) = x\)</span> and
+<span class="math notranslate nohighlight">\(f(x) = log_{10}(x)\)</span>, try to reproduce figure <span class="xref std std-ref">figure-scales-log-log</span>.</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="rst/scales-projections/scales-log-log.pdf"><img alt="rst/scales-projections/scales-log-log.pdf" src="rst/scales-projections/scales-log-log.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Combining linear and logarithmic scales.
+<span class="label">figure-scales-log-log</span> (sources: <span class="source">scales-projections/scales-log-log.py</span>).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p><strong>Exercise 2</strong> The goal is to produce a figure showing <a class="reference external" href="https://en.wikipedia.org/wiki/Microphone#Polar_patterns">microphone
+polar patterns</a>
+(omnidirectional, subcardioid, cardioid, supercardioid, bidirectional
+and shotgun). The first five patterns are simple functions where
+radius evolves with angle, while the last pattern may require some
+work.</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="rst/scales-projections/polar-patterns.pdf"><img alt="rst/scales-projections/polar-patterns.pdf" src="rst/scales-projections/polar-patterns.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Microphone polar patterns
+<span class="label">figure-polar-patterns</span>
+(sources: <span class="source">scales-projections/polar-patterns.py</span>).</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">scientific-visualization</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, rougier et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/rst/projections.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

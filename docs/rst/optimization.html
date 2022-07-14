@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Architecture &amp; optimization &#8212; scientific-visualization 2022 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="architecture-optimization">
+<span id="chap-optimization"></span><h1>Architecture &amp; optimization<a class="headerlink" href="#architecture-optimization" title="Permalink to this headline">¶</a></h1>
+<p>Even though a deep understanding of the matplotlib architecture is not
+necessary to use it, it is nonetheless useful to know a bit of its
+architecture to optimize either speed, memory and even
+rendering.</p>
+<section id="transparency-levels">
+<h2>Transparency levels<a class="headerlink" href="#transparency-levels" title="Permalink to this headline">¶</a></h2>
+<p>We’ve already seen how to use transparency in a scatter plot to have
+a perception of data density. This works reasonably well if you don’t
+have too much data. But what is too much exactly? It would be hard to
+give a definitive limit because it depends on a number of parameters
+such as the size of your figure, the shape and size of your markers
+and the alpha level (i.e. transparency). For this latter, there is
+actually a limit in how much transparent a color can be and it is
+exactly 0.002 (= 1/500). This means that if you plot 500 black points
+with a transparency of 0.002, you obtain get a quasi black marker as
+shown on figure <span class="xref std std-ref">figure-transparency</span>.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="rst/optimization/transparency.pdf"><img alt="rst/optimization/transparency.pdf" src="rst/optimization/transparency.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Transparency levels
+<span class="label">figure-transparency</span>
+(sources: <span class="source">optimization/transparency.py</span>).</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>It is not exactly black for 500 points because it also depends on how
+alpha compositing is computed internally but it provides nonetheless a
+useful approximation. Knowing this limit exists, it explains why you
+get a solid color in dense areas when you have a lot of data. This is
+illustrated on figure <span class="xref std std-ref">figure-scatters</span> where the number of data
+is respectively 10,000, 100,000 and 1,000,000. For 10,000 and 100,000
+points we can adapt the transparency level to show where are the dense
+areas. In this case, this is simple normal distribution and we can
+observe the central are is darker. For one million points, we reached
+the limit of the transparency trick (alpha=0.002) and we now have a
+central dark spot that hide information.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="rst/optimization/scatters.png"><img alt="rst/optimization/scatters.png" src="rst/optimization/scatters.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Scatter, hist2d and hexbin
+<span class="label">figure-scatters</span>
+(sources: <span class="source">optimization/scatters.py</span>).</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>This means we need a new strategy to display the data. Fortunately,
+matplotlib provides <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist2d.html">hist2d</a>
+and <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hexbin.html">hexbin</a>
+that will both aggregate points into bins (with square or hex
+shape) that are eventually colored according to the number in the
+bins. This allows to visualize density for any number of data points
+and do not require to manipulate size and/or transparency of
+markers. You’re now ready to reproduce Todd W. Schneider’s astonishing
+visualization of NYC Taxi trips (<a class="reference external" href="https://toddwschneider.com/posts/analyzing-1-1-billion-nyc-taxi-and-uber-trips-with-a-vengeance/">Analyzing 1.1 Billion NYC Taxi and
+Uber Trips, with a Vengeance</a>).</p>
+<p>Alpha compositing induces other kind of problems with line plots,
+especially when a plot is self-covering itself as exemplified of a a
+high-frequency signal shown on figure <span class="xref std std-ref">figure-multisample</span>. The
+signal is a product of two sine waves of different frequency and
+reads:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="mi">0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.1</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When we plot this signal, we can see that the density of lines becomes
+higher and higher from left to right. Near the right side of the plot,
+the frequency is the highest and is actually higher than the screen
+resolution such that there is no empty spaces between successive
+waves. However, when we use a regular plot (first line of figure
+<span class="xref std std-ref">figure-multisample</span>) with some transparency, we do not see a
+change in color (while we could expect the plot to self-cover itself).
+The reason is that matplotlib rendering engine takes care of not
+overdrawing an area that belong to the same plot as shown on the figure
+below:</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="rst/optimization/self-cover.pdf"><img alt="rst/optimization/self-cover.pdf" src="rst/optimization/self-cover.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Self-covering example
+<span class="label">figure-self-cover</span>
+(sources: <span class="source">optimization/self-cover.py</span>).</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>This explains why we do not have color change in figure
+<span class="xref std std-ref">figure-multisample</span>. To counter this effect, we can render the
+same plot using a line collection made of individual segments. In
+such case, each segment is considered separately and will influence
+other segments. This corresponds to the second line on the figure and
+now we can observe a change in the color with darker colors on the
+right suggesting a higher frequency.</p>
+<p>We can also adopt a totally different strategy by multisampling the
+signal, which is a standard techniques in signal processing. Instead
+of plotting the signal, I created an empty image with enough
+resolution and for each point (pixel) of this image, I considered 8
+samples point randomly but closely distributed around the point to
+decide of its value. This is of course a slower compared to a regular
+plot but the rendering is more faithful to the signal as shown on the
+third line.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="rst/optimization/multisample.png"><img alt="rst/optimization/multisample.png" src="rst/optimization/multisample.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">High-frequency signal.
+<span class="label">figure-multisample</span>
+(sources: <span class="source">optimization/multisample.py</span>).</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="speed-up-rendering">
+<h2>Speed-up rendering<a class="headerlink" href="#speed-up-rendering" title="Permalink to this headline">¶</a></h2>
+<p>The overall speed of rendering a given figure depends on a number of
+matplotlib internal factors that are good to know. Even though the
+rendering speed is pretty decent in most cases, things can degrade
+very noticeably when you have a large number of objects and we’ve been
+already experienced such slowdown with the previous scatter plot
+examples. You may have noticed that there are two ways to render a
+scatter plot. Either you use the plot command with only markers or you
+use the dedicated scatter command. The two methods are similar and yet
+different. If you need a scatter plot where the size, shape and color
+of markers are the same, then you can use the plot command that is
+faster (by a factor of two approximately). For any other case, the
+scatter command is the one to use. We can try to measure the time to
+prepare a one million scatter plot using the following code:</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="rst/optimization/scatter-benchmark.png"><img alt="rst/optimization/scatter-benchmark.png" src="rst/optimization/scatter-benchmark.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Scatter benchmark
+<span class="label">figure-scatter-benchmark</span>
+(sources: <span class="source">optimization/scatter-benchmark.py</span>).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>By they way, you may have noticed the difference in size between plot
+(<cite>markersize=2</cite>) and scatter (<cite>s=2**2</cite>). The reason is that the size
+of marker in plot is measured in points while the size of markers in
+scatter is measured in squared points.</p>
+<p>In the case of line plots, the difference in rendering speed between
+one solution or is the other can be dramatic as illustrated on figure
+<span class="xref std std-ref">figure-line-benchmark</span>. In this example, I drew 1,000 line
+segments using 1,000 calls to the plot method (left), a single plot
+call (middle) with individual segment coordinates separated by <cite>None</cite>
+and a line collection (right). In this specific case, the choice of
+the rendering method makes a big difference such that for a large
+number of lines, your rendering can takes a few seconds or several
+minutes. Note that the fastest rendering (unified plot, middle) is not
+exactly equivalent to the others due to the absence of self-coverage
+as explained previously.</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="rst/optimization/line-benchmark.png"><img alt="rst/optimization/line-benchmark.png" src="rst/optimization/line-benchmark.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Line benchmark
+<span class="label">figure-line-benchmark</span>
+(sources: <span class="source">optimization/line-benchmark.py</span>).</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="file-sizes">
+<h2>File sizes<a class="headerlink" href="#file-sizes" title="Permalink to this headline">¶</a></h2>
+<p>Depending on the format you save a figure, the resulting file can be
+relatively small but it can also be huge, up to several megabytes and
+this does not relate to the complexity of your script but rather to
+the amount of details or the number of elements. Let’s consider for
+example the following script:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;vector.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The resulting file size is approximately 15 megabytes. The reason for
+such a large file being the pdf format to be a vector format. This
+means that the coordinates of each point needs to be encoded. In our
+example, we have a million points and two float coordinates per
+points. If we consider a float to be represented by 4 bytes, we
+already need 8,000,000 bytes to store coordinates. If we now add
+individual color (4 bytes, RGBA ) and size (1 float, 4 bytes) we can
+easily reached 16 megabytes.</p>
+<p>Let me now slightly modify the code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)),</span>
+            <span class="n">rasterized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;vector.pdf&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The new file size is approximately 50 kilobytes and the quality is
+roughly equivalent even if it is not a pure vector format anymore. In
+fact, the <cite>rasterized</cite> keyword means that maplotlib will create a
+rasterized (i.e. bitmap) representation of the scatter plot saving a
+lot of memory when saved on disk. Incidentally, it will also make the
+rendering of your figure much faster because your pdf viewer does not
+need to render individual elements.</p>
+<p>However, the combination of a vector format with rasterized elements is
+not always the best choice. For example, if you need to produce a huge
+figure (e.g. for a poster) with a very high definition, a pure vector
+format might be the best format provided you do not have too much
+elements. There’s no definitive recipes and the choice is mostly a
+matter of experience.</p>
+</section>
+<section id="multithread-rendering">
+<h2>Multithread rendering<a class="headerlink" href="#multithread-rendering" title="Permalink to this headline">¶</a></h2>
+<p>Multithread rendering is not natively supported by matplotlib but it
+is possible to do it anyway. The most obvious situation happens when
+you need to render several different plots. In such a case, there’s no
+real difficulty and it’s only matter of starting several threads
+concurrently. What is more interesting is to produce a single figure
+using multithread rendering. To do that, we need to split the figure
+into different and non overlapping parts such that each part can be
+rendered independently. Let’s consider, for example, a figure whose
+full extent is <cite>xlim=[0,9]</cite> and <cite>ylim=[0,9]</cite>. In such as case, we can
+define quit easily 9 non-overlapping parts:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5_000_000</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5_000_000</span><span class="p">)</span>
+
+<span class="n">extents</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+                         <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>For each of these parts, we can plot an offline figure using a <a class="reference external" href="https://matplotlib.org/stable/api/backend_agg_api.html#matplotlib.backends.backend_agg.FigureCanvasAgg">Figure
+Canvas</a>
+and save the result in an image:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">extent</span><span class="p">):</span>
+
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">extent</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">canvas</span> <span class="o">=</span> <span class="n">FigureCanvas</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                      <span class="n">xlim</span> <span class="o">=</span> <span class="p">[</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">],</span> <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span>
+                      <span class="n">ylim</span> <span class="o">=</span> <span class="p">[</span><span class="n">ymin</span><span class="p">,</span><span class="n">ymax</span><span class="p">],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">((</span><span class="n">X</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">xmin</span><span class="o">-</span><span class="n">epsilon</span><span class="p">))</span> <span class="o">&amp;</span>
+                    <span class="p">(</span><span class="n">X</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">xmax</span><span class="o">+</span><span class="n">epsilon</span><span class="p">))</span> <span class="o">&amp;</span>
+                    <span class="p">(</span><span class="n">Y</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">ymin</span><span class="o">-</span><span class="n">epsilon</span><span class="p">))</span> <span class="o">&amp;</span>
+                    <span class="p">(</span><span class="n">Y</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">ymax</span><span class="o">+</span><span class="n">epsilon</span><span class="p">)))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">I</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">I</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.0025</span><span class="p">)</span>
+    <span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">canvas</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">buffer_rgba</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Note that I took care of selecting X and Y that are inside the
+provided extent (modulo epsilon). This is quite important because we
+do not want to plot all the data in each subparts. Else, this would
+slow down things.</p>
+<p>We can now put back every parts together using several imshow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+
+<span class="n">extents</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+                         <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">()</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">extents</span><span class="p">)</span>
+<span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">extent</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">extents</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you look at the result on figure
+<span class="xref std std-ref">figure-multithread-rendering</span>, you can observe a flawless
+montage of the different pieces. If you set the epsilon value to zero,
+you’ll observe white spaces appearing between the different parts. The
+reason is that if you enforce very strict clipping, a marker whose
+center is outside extent will not be drawn while it may overlap because
+of its size.</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="rst/optimization/multithread.png"><img alt="rst/optimization/multithread.png" src="rst/optimization/multithread.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Multithread rendering
+<span class="label">figure-multithread-rendering</span>
+(sources: <span class="source">optimization/multithread.py</span>).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Such multithread rendering is not totally straightforward to implement
+because it depends on the possibility to split your in segregated
+elements. However, if you have a very complex plots that take several
+minutes to render, this is an option worth to be explored.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">scientific-visualization</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, rougier et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/rst/optimization.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; scientific-visualization 2022 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p id="chap-showcase">Showtime.</p>
+<p>
+</p>
+<p><strong>Filled contours with dropshadows</strong> is a nice effet that allows you
+to use a sequential colormap (here Viridis) while distinguishing
+positive and negative values. If you look closely at the figure, you
+can see that the drop shadow is external for positive values and
+internal for negative values. To achieve this result, the contours
+need to be rendered individually twice. In the first pass, I render a
+contour offscreen and read the resulting image into an array. I then
+use a Gaussian filter to blur it a bit and transform the image to make
+it full black but the alpha channel. I can then display the image
+using imshow and it will gracefully blend with elements already
+presents in the figure. I then add the same contour using the colormap
+and I iterate the process. The trick is to start from bottom to top
+such that dropshadows remain visible.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/contour-dropshadow.py</span></p>
+<p>
+</p>
+<p><strong>Domain coloring</strong> is a “technique for visualizing complex functions
+by assigning a color to each point of the complex plane. By assigning
+points on the complex plane to different colors and brightness, domain
+coloring allows for a four dimensional complex function to be easily
+represented and understood. This provides insight to the fluidity of
+complex functions and shows natural geometric extensions of real
+functions” <a class="reference external" href="https://en.wikipedia.org/wiki/Domain_coloring">[Wikipedia]</a>.  On the figure on
+the left, I represented the imaginary function <span class="math notranslate nohighlight">\(z +
+\nicefrac{1}{z}\)</span> in the domain <span class="math notranslate nohighlight">\([-2.5, 2.5]^2\)</span>. I used the angle
+of the (complex) result for setting the color and the absolute cosine
+of the norm for modulating it periodically.  I could have used a cyclic
+colormap such as <cite>twilight</cite> but I think the <cite>Spectral</cite> is visually
+more pleasant, even though it induces some discontinuities. To draw
+the grid, I used a contour plot using integer values in the real and
+imaginary domain.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/domain-coloring.py</span></p>
+<p>
+</p>
+<p><strong>Escher like projections</strong> can be obtained using the complex exponential
+function and some specific periods that can be computed quite
+easily. To do the figure on the left, I mostly followed explanations
+given by Craig S. Kaplan, professor at the University of Waterloo on
+his blog post <a class="reference external" href="https://isohedral.ca/escher-like-spiral-tilings/">Escher-like Spiral Tilings (2019)</a>. The only
+difficulty in making this figure is line thickness. If you compare this
+figure with the previous one, you may have noticed that in the
+previous figure, lines have a constant thickness while in this figure,
+thickness varies. To achieve such effect, we have to use a polygon
+made of several segment with varying thickness. This poses no real
+difficulty, only some geometrical computations.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/escher.py</span></p>
+<p>
+</p>
+<p><strong>Self-organizing map</strong> (SOM) “is a type of artificial neural network
+that is trained using unsupervised learning to produce a
+low-dimensional (typically two-dimensional), discretized
+representation of the input space of the training samples, called a
+map, and is therefore a method to do dimensionality reduction”
+<a class="reference external" href="https://en.wikipedia.org/wiki/Self-organizing_map">[Wikipedia]</a>. I
+developed with Georgios Detorakis a <a class="reference external" href="https://arxiv.org/pdf/2011.09534.pdf">randomized self-organizing map</a> based on blue noise
+distribution of neurons. The figure on the left shows the
+self-organisation of the map when fed with random RGB colors. The
+figure itself is made of a polygon collection where each polygon is
+painted with the color of the neuron. No real difficuly but I had to
+take care fo disabling antialias, else, thin lines appear
+between polygons.</p>
+<p><strong>Sources:</strong> <a class="reference external" href="https://github.com/rougier/VSOM">github.com/rougier/VSOM</a></p>
+<p>
+</p>
+<p><strong>Waterfall plot</strong> “is a three-dimensional plot in which multiple
+curves of data, typically spectra, are displayed
+simultaneously. Typically the curves are staggered both across the
+screen and vertically, with ‘nearer’ curves masking the ones
+behind. The result is a series of “mountain” shapes that appear to be
+side by side. The waterfall plot is often used to show how
+two-dimensional information changes over time or some other variable”
+<a class="reference external" href="https://en.wikipedia.org/wiki/Waterfall_plot">[Wikipedia]</a> To do
+the figure, I used a 3D axis and polygons (i.e. not filled plot). The
+reason to use polygon is to obtain the color gradient effect on each
+curve. The only way to do that (to the best of my knowledge), is to
+slice horizontally each curve in several stripes and to render the
+slice using a specific color. The difficulty is to compute those
+irregular slices and this is the reason I use the <a class="reference external" href="https://github.com/Toblerity/Shapely">Shapely library</a> that allows, among many other
+things, to compute the intersection between polygons.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/waterfall-3d.py</span></p>
+<p>
+</p>
+<p><strong>Streamlines</strong> are a “family of curves that are instantaneously
+tangent to the velocity vector of the flow. These show the direction
+in which a massless fluid element will travel at any point in time”
+<a class="reference external" href="https://en.wikipedia.org/wiki/Streamlines,_streaklines,_and_pathlines">[Wikipedia]</a>. The
+figure on the left shows such stream lines and is actually a still
+from an animation. Each streamline has been split into line segments
+and gathered in a line collection such that each segment has its own
+color. From there, it is easy to suggest stream direction using
+gradients. Note that I could have used a single line collection for
+all streamlines. Strangely enough, the only difficulty in this figure
+are the line round caps. For the reason explained <a class="reference external" href="https://stackoverflow.com/questions/11578760">here</a>, I had to create a
+specific graphic context such as to have round caps.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/windmap.py</span></p>
+<p>
+</p>
+<p>The <strong>Mandelbrot set</strong> “is the set of complex numbers <span class="math notranslate nohighlight">\(c\)</span> does not diverge when
+iterated from <span class="math notranslate nohighlight">\(z = 0\)</span>, i.e., for which the sequence
+<span class="math notranslate nohighlight">\(f_{c}(0)\)</span>, <span class="math notranslate nohighlight">\(f_{c}(f_{c}(0))\)</span>, etc., remains bounded in
+absolute value <a class="reference external" href="https://en.wikipedia.org/wiki/Mandelbrot_set">[Wikipedia]</a>.  To plot the figure
+on the left, I used a regular imshow with shading and normalized
+recounts that is explained on this post <a class="reference external" href="https://linas.org/art-gallery/escape/smooth.html">Smooth Shading for the
+Mandelbrot Exterior</a>. The script is
+also present in the matplotlib gallery which I contributed some years
+ago.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/mandelbrot.py</span></p>
+<p>
+</p>
+<p>This <strong>recursive Voronoi set</strong> has been quite painful to design
+because it requires some quite precise settings to obtain what I think
+is a beautiful result. These settings are the placement of random
+points with good visual properties and for that, I use the <a class="reference external" href="https://www.cct.lsu.edu/~fharhad/ganbatte/siggraph2007/CD2/content/sketches/0250.pdf">Fast
+Poisson Disk Sampling</a>
+by Robert Bridson which is simple and fast. I also use quite
+extensively the shapely library to clip he different polygons and I
+discovered in the meantime how to draw random points inside a
+polygon. Finally, I played with lines thickness, polygons color and
+transparency to achieve this result, involving 5 levels of
+recursion. On my computer, it takes around 1 minute to compute.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/recursive-voronoi.py</span></p>
+<p>
+</p>
+<p>A <strong>3D heightmap</strong> of Mount St Helens after it exploded. This has been
+made with my <a class="reference external" href="https://github.com/rougier/matplotlib-3d">experimental 3D axis</a>. Nothing really
+complicated here, just a bit slow because it needs to sort a bunch of
+triangles.</p>
+<p>
+</p>
+<p>This <strong>Voronoi mosaic</strong> is based on blue noise distribution where each
+Voronoi cell has been painted according to the color of the center of
+the Voronoi cell in the original image. This results in a cheap
+stained glass window effect.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/mosaic.py</span></p>
+<p>
+</p>
+<p>This <strong>shadowed text</strong> is harder to design than it seems. I started
+from a text path object and iterated over the segments composing the
+path in order to create sheared rectangles that constitute the shadow. To
+make the shadow disappear in the background, I created an image with a
+vertical gradient using semi-transparent color (fully transparent on
+top and fully opaque on the bottom). This results in a nice fading
+shadow effect.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/text-shadow.py</span></p>
+<p>
+</p>
+<p>This <strong>spiral text</strong> has been made using an <a class="reference external" href="https://en.wikipedia.org/wiki/Archimedean_spiral">Archimedean spiral</a> (<span class="math notranslate nohighlight">\(r =
+a + b\theta\)</span>) that guarantees a constant speed along a line that
+rotates with constant angular velocity. Said differently, successive
+turnings of the spiral have a constant separation distance. Starting
+from a very long text path representing some of the decimals of pi
+(using the <a class="reference external" href="https://github.com/fredrik-johansson/mpmath">mpmath</a>
+library), it’s then only a matter of transforming the vertices to
+follow the spiral.</p>
+<p><strong>Sources:</strong> <span class="source">showcases/text-spiral.py</span></p>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">scientific-visualization</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, rougier et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/rst/showcase.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

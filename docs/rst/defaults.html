@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Mastering the defaults &#8212; scientific-visualization 2022 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="mastering-the-defaults">
+<span id="chap-defaults"></span><h1>Mastering the defaults<a class="headerlink" href="#mastering-the-defaults" title="Permalink to this headline">¶</a></h1>
+<p>We’ve just explained (see rule 5 in chapter <a href="#id7"><span class="problematic" id="id8">chap-rules_</span></a>) that any visualization library or software comes with a set of default settings that identifies it. For example, figure <span class="xref std std-ref">figure-sine-cosine-variants</span> show the sine and cosine functions as rendered by Google calculator, Julia, Gnuplot and Matlab. Even for such simple functions, these displays are quite characteristic.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="rst/defaults/sine-cosine-variants.png"><img alt="rst/defaults/sine-cosine-variants.png" src="rst/defaults/sine-cosine-variants.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Sine and cosine functions as displayed by (A) Google calculator (B) Julia,
+(C) Gnuplot (D) Matlab. <span class="label">figure-sine-cosine-variants</span></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Let’s draw sine and cosine functions using Matplotlib defaults.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">C</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Figure <span class="xref std std-ref">figure-defaults-step-2</span> shows the result that is quite characteristic of Matplotlib.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="rst/defaults/defaults-step-1.pdf"><img alt="rst/defaults/defaults-step-1.pdf" src="rst/defaults/defaults-step-1.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Sine and cosine functions with implicit defaults
+(sources <span class="source">defaults/defaults-step-1.py</span>)
+<span class="label">figure-defaults-step-1</span></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<section id="explicit-settings">
+<h2>Explicit settings<a class="headerlink" href="#explicit-settings" title="Permalink to this headline">¶</a></h2>
+<p>Let’s now redo the figure but with the specification of all the different settings. This includes, figure size, line colors, widths and styles, ticks positions and labels, axes limits, etc.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">],</span>
+                 <span class="n">dpi</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">],</span>
+                 <span class="n">facecolor</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;figure.facecolor&#39;</span><span class="p">],</span>
+                 <span class="n">edgecolor</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;figure.edgecolor&#39;</span><span class="p">],</span>
+                 <span class="n">frameon</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;figure.frameon&#39;</span><span class="p">])</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span>
+              <span class="n">linewidth</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;lines.linewidth&#39;</span><span class="p">],</span>
+              <span class="n">linestyle</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;lines.linestyle&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span>
+              <span class="n">linewidth</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;lines.linewidth&#39;</span><span class="p">],</span>
+              <span class="n">linestyle</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;lines.linestyle&#39;</span><span class="p">])</span>
+
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">xmargin</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;axes.xmargin&#39;</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xmin</span> <span class="o">-</span> <span class="n">xmargin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">+</span> <span class="n">xmargin</span><span class="p">)</span>
+
+<span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">S</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span> <span class="nb">max</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">S</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">ymargin</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;axes.ymargin&#39;</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span> <span class="o">-</span> <span class="n">ymargin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">+</span> <span class="n">ymargin</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span>
+               <span class="n">direction</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;xtick.direction&#39;</span><span class="p">],</span>
+               <span class="n">length</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;xtick.major.size&#39;</span><span class="p">],</span>
+               <span class="n">width</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;xtick.major.width&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span>
+               <span class="n">direction</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;ytick.direction&#39;</span><span class="p">],</span>
+               <span class="n">length</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;ytick.major.size&#39;</span><span class="p">],</span>
+               <span class="n">width</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;ytick.major.width&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="rst/defaults/defaults-step-2.pdf"><img alt="rst/defaults/defaults-step-2.pdf" src="rst/defaults/defaults-step-2.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Sine and cosine functions using matplotlib explicit defaults
+(sources <span class="source">defaults/defaults-step-2.py</span>)
+<span class="label">figure-defaults-step-2</span></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The resulting figure <span class="xref std std-ref">figure-defaults-step-2</span> is an exact copy of  <span class="xref std std-ref">figure-defaults-step-1</span>. This comes as no surprise because I took care of reading the default values that are used implicitly by Matplotlib and set them explicitly. In fact, there are many more default choices that I did not materialize in this short example. For instance, the font family, slant, weight and size of tick labels can be configured in the defaults.</p>
+</section>
+<section id="user-settings">
+<h2>User settings<a class="headerlink" href="#user-settings" title="Permalink to this headline">¶</a></h2>
+<p>Note that we can also do the opposite and change the defaults before creating the figure. This way, matplotlib will use our custom defaults instead of standard ones. The result is shown on figure <span class="xref std std-ref">figure-defaults-step-3</span> where I changed a number of settings. Unfortunately, not every settings can be modified this way. For example, the position of markers (<cite>markevery</cite>) cannot yet be set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span><span class="mf">2.5</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;figure.edgecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#f9f9f9&quot;</span>
+
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;axes.linewidth&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;axes.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#f9f9f9&quot;</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;axes.ymargin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;axes.spines.bottom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;axes.spines.left&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;axes.spines.right&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;axes.spines.top&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;font.sans-serif&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fira Sans Condensed&quot;</span><span class="p">]</span>
+
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;axes.grid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;grid.color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;grid.linewidth&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">.1</span>
+
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;xtick.bottom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;xtick.top&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;xtick.direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;out&quot;</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;xtick.major.size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;xtick.major.width&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;xtick.minor.size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;xtick.minor.width&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">.5</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;xtick.minor.visible&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;ytick.left&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;ytick.right&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;ytick.direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;out&quot;</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;ytick.major.size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;ytick.major.width&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;ytick.minor.size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;ytick.minor.width&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">.5</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;ytick.minor.visible&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;lines.linewidth&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;lines.markersize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="rst/defaults/defaults-step-3.pdf"><img alt="rst/defaults/defaults-step-3.pdf" src="rst/defaults/defaults-step-3.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Sine and cosine functions using custom defaults
+(sources <span class="source">defaults/defaults-step-3.py</span>)
+<span class="label">figure-defaults-step-3</span></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="stylesheets">
+<h2>Stylesheets<a class="headerlink" href="#stylesheets" title="Permalink to this headline">¶</a></h2>
+<p>Changing default settings is thus an easy way to customize the style of your figure. But writing such style inside the figure script as we did until now is not very convenient and this is where <a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/customizing.html">style</a> comes into play. Styles are small text files describing (some) settings in the same way as they are defined in the main resource file <a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/customizing.html#the-matplotlibrc-file">matplotlibrc</a>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>figure.figsize: 6,2.5
+figure.edgecolor: black
+figure.facecolor: ffffff
+
+axes.linewidth: 1
+axes.facecolor: ffffff
+axes.ymargin: 0.1
+axes.spines.bottom: True
+axes.spines.left: True
+axes.spines.right: False
+axes.spines.top: False
+font.sans-serif: Fira Sans Condensed
+
+axes.grid: False
+grid.color: black
+grid.linewidth: .1
+
+xtick.bottom: True
+xtick.top: False
+xtick.direction: out
+xtick.major.size: 5
+xtick.major.width: 1
+xtick.minor.size: 3
+xtick.minor.width: .5
+xtick.minor.visible: True
+
+ytick.left: True
+ytick.right: False
+ytick.direction: out
+ytick.major.size: 5
+ytick.major.width: 1
+ytick.minor.size: 3
+ytick.minor.width: .5
+ytick.minor.visible: True
+
+lines.linewidth: 2
+lines.markersize: 5
+</pre></div>
+</div>
+<p>And we can now write:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;./mystyle.txt&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="beyond-stylesheets">
+<h2>Beyond stylesheets<a class="headerlink" href="#beyond-stylesheets" title="Permalink to this headline">¶</a></h2>
+<p>If stylesheet allows to set a fair number of parameters, there is still plenty of other things that can be changed to improve the style of a figure even though we cannot use the stylesheet to do so. One of the reason is that these settings are specific to a given figure and it wouldn’t make sense to set them in the stylesheet. In the sine and cosine case, we can for example specify explicitly the location and labels of xticks, taking advantage of the fact that we know that we’re dealing with trigonometry functions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;-1&quot;</span><span class="p">,</span> <span class="s2">&quot;+1&quot;</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s2">&quot;-π&quot;</span><span class="p">,</span> <span class="s2">&quot;-π/2&quot;</span><span class="p">,</span> <span class="s2">&quot;+π/2&quot;</span><span class="p">,</span> <span class="s2">&quot;+π&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>We can also move the spines such as to center them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>And add some arrows at axis ends:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;&gt;k&quot;</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yaxis_transform</span><span class="p">(),</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;^k&quot;</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis_transform</span><span class="p">(),</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can see the result on figure <span class="xref std std-ref">figure-defaults-step-5</span>. From this, you can start refining further the figure. But remember that if it’s ok to tweak parameters a bit, you can also lose a lot of time doing that (trust me).</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="rst/defaults/defaults-step-5.pdf"><img alt="rst/defaults/defaults-step-5.pdf" src="rst/defaults/defaults-step-5.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Sine and cosine functions using custom defaults and fine tuning.
+(sources <span class="source">defaults/defaults-step-5.py</span>)
+<span class="label">figure-defaults-step-5</span></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>Starting from the code below try to reproduce figure <span class="xref std std-ref">figure-defaults-exercise-1</span>
+by modifying only rc settings.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s2">&quot;-π&quot;</span><span class="p">,</span> <span class="s2">&quot;-π/2&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;+π/2&quot;</span><span class="p">,</span> <span class="s2">&quot;+π&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="rst/defaults/defaults-exercice-1.pdf"><img alt="rst/defaults/defaults-exercice-1.pdf" src="rst/defaults/defaults-exercice-1.pdf" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Alternative rendering of sine and cosine
+(solution <span class="source">defaults/defaults-exercice-1.py</span>)
+<span class="label">figure-defaults-exercise-1</span></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">scientific-visualization</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, rougier et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/rst/defaults.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
