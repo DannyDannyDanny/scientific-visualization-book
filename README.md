@@ -1,16 +1,16 @@
 ## Fork Roadmap
 
 * [X] backup `Makefile` to `Makefile.bak`
-* [x] run `sphinx-quickstart` to add `rst/index.rst`, `rst/conf.py`, `Makefile`
-* [x] run `sphinx-buld` / `make html` to build `/docs`
-* [ ] 
+* [X] run `sphinx-quickstart` to add `rst/index.rst`, `rst/conf.py`, `Makefile`
+* [X] run `sphinx-buld` / `make html` to build `/docs`
+* [X] set up [github pages](https://dannydannydanny.github.io/scientific-visualization-book/)
 * [ ] add all (relevant) sections in `/rst` to `rst/index.rst`
 * [ ] merge `Makefile` with original (`Makefile.bak`)
 
-> Below is the original README
+> Original README follows:
 
 ## Scientific Visualization: Python + Matplotlib
-**Nicolas P. Rougier, Bordeaux, November 2021.**  
+**Nicolas P. Rougier, Bordeaux, November 2021.**
 
 <img src="images/book.png" width="25%" alt="Front cover" align="left"/>
 
@@ -22,7 +22,7 @@ You can read the book **[PDF](https://hal.inria.fr/hal-03427242/document)** (95M
 [HAL](https://hal.archives-ouvertes.fr/) which is a French open
 archive for academics. Up to date version is also available on GitHub [here](pdf/book.pdf). Sources for the book (including code examples)
 are available at
-[github.com/rougier/scientific-visualization-book](https://github.com/rougier/scientific-visualization-book).  
+[github.com/rougier/scientific-visualization-book](https://github.com/rougier/scientific-visualization-book).
 
 ### Buy the book
 
@@ -34,19 +34,19 @@ future work on Python (and
 [github](https://github.com/sponsors/rougier) or
 [liberapay](https://en.liberapay.com/rougier/).
 
-<a href="https://www.paypal.com/paypalme/NicolasPRougier/5"><img src="https://img.shields.io/badge/-TIP_5$-yellow.svg?style=flat-square"/><a/> 
+<a href="https://www.paypal.com/paypalme/NicolasPRougier/5"><img src="https://img.shields.io/badge/-TIP_5$-yellow.svg?style=flat-square"/><a/>
  <a href="https://www.paypal.com/paypalme/NicolasPRougier/10"><img src="https://img.shields.io/badge/-TIP_10$-orange.svg?style=flat-square"/><a/>
- <a href="https://www.paypal.com/paypalme/NicolasPRougier/25"><img src="https://img.shields.io/badge/-TIP_25$-red.svg?style=flat-square"/><a/> 
- <a href="https://github.com/sponsors/rougier/sponsorships?sponsor=rougier&tier_id=6981&preview=false"><img src="https://img.shields.io/badge/-5$/Mo-yellow.svg?style=flat-square&logo=github"/><a/> <a href="https://github.com/sponsors/rougier/sponsorships?sponsor=rougier&tier_id=11147&preview=false"><img src="https://img.shields.io/badge/-10$/Mo-orange.svg?style=flat-square&logo=github"/><a/> 
-<a href="https://github.com/sponsors/rougier/sponsorships?sponsor=rougier&tier_id=108712&preview=false"><img src="https://img.shields.io/badge/-25$/Mo-red.svg?style=flat-square&logo=github"/><a/> 
-<a href="https://en.liberapay.com/rougier/donate"><img src="https://img.shields.io/badge/-PATRON/Week-green.svg?style=flat-square&logo=liberapay&logoColor=white"/><a/> 
+ <a href="https://www.paypal.com/paypalme/NicolasPRougier/25"><img src="https://img.shields.io/badge/-TIP_25$-red.svg?style=flat-square"/><a/>
+ <a href="https://github.com/sponsors/rougier/sponsorships?sponsor=rougier&tier_id=6981&preview=false"><img src="https://img.shields.io/badge/-5$/Mo-yellow.svg?style=flat-square&logo=github"/><a/> <a href="https://github.com/sponsors/rougier/sponsorships?sponsor=rougier&tier_id=11147&preview=false"><img src="https://img.shields.io/badge/-10$/Mo-orange.svg?style=flat-square&logo=github"/><a/>
+<a href="https://github.com/sponsors/rougier/sponsorships?sponsor=rougier&tier_id=108712&preview=false"><img src="https://img.shields.io/badge/-25$/Mo-red.svg?style=flat-square&logo=github"/><a/>
+<a href="https://en.liberapay.com/rougier/donate"><img src="https://img.shields.io/badge/-PATRON/Week-green.svg?style=flat-square&logo=liberapay&logoColor=white"/><a/>
 
 If you don't want to spend money, you can simply [nominate me](https://stars.github.com/nominate/) for the GitHub stars program if you find my work useful for the community.
 
 ### Build the book
 
-**Ubuntu**  
-- [Article](https://labdmitriy.github.io/blog/building-scientific-visualization-book/)  
+**Ubuntu**
+- [Article](https://labdmitriy.github.io/blog/building-scientific-visualization-book/)
 - [Script](scripts/build_book/ubuntu.sh)
 
 ### See also
@@ -60,11 +60,10 @@ If you don't want to spend money, you can simply [nominate me](https://stars.git
 ### Book gallery
 
 <img src="images/contour-dropshadow.png" width="31%"/> <img src="images/domain-coloring.png" width="31%"/> <img src="images/metropolis.png" width="31%"/>
-<img src="images/zorder-plots.png" width="31%"/> <img src="images/scales.png" width="31%"/> <img src="images/histogram-pca.png" width="31%"/> 
+<img src="images/zorder-plots.png" width="31%"/> <img src="images/scales.png" width="31%"/> <img src="images/histogram-pca.png" width="31%"/>
 <img src="images/hatched-bars.png" width="31%"/> <img src="images/platonic-solids.png" width="31%"/> <img src="images/projection-3d-gaussian.png" width="31%"/>
 <img src="images/polygon-clipping.png" width="31%"/> <img src="images/multisample.png" width="31%"/> <img src="images/typography-matters.png" width="31%"/>
 <img src="images/scatter-3d.png" width="31%"/> <img src="images/waterfall-3d.png" width="31%"/> <img src="images/bunnies.png" width="31%"/>
 <img src="images/polar-projection.png" width="31%"/> <img src="images/recursive-voronoi.png" width="31%"/> <img src="images/text-polar.png" width="31%"/>
 <img src="images/spiral-pi.png" width="31%"/> <img src="images/escher.png" width="31%"/> <img src="images/radial-maze.png" width="31%"/>
 <img src="images/text-shadow.png" width="95%"/>
-
