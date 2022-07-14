@@ -1,3 +1,14 @@
+## Fork Roadmap
+
+* [X] backup `Makefile` to `Makefile.bak`
+* [x] run `sphinx-quickstart` to add `rst/index.rst`, `rst/conf.py`, `Makefile`
+* [x] run `sphinx-buld` / `make html` to build `/docs`
+* [ ] 
+* [ ] add all (relevant) sections in `/rst` to `rst/index.rst`
+* [ ] merge `Makefile` with original (`Makefile.bak`)
+
+> Below is the original README
+
 ## Scientific Visualization: Python + Matplotlib
 **Nicolas P. Rougier, Bordeaux, November 2021.**  
 
