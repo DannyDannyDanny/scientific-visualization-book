@@ -1,3 +1,13 @@
+## Web Version
+
+This fork of
+[rougier/scientific-visualization-book](https://github.com/rougier/scientific-visualization-book)
+aims to make the material accessible via web.
+
+Preliminary version can be found
+[here](https://dannydannydanny.github.io/scientific-visualization-book/)
+
+
 ## Fork Roadmap
 
 * [X] backup `Makefile` to `Makefile.bak`
@@ -8,12 +18,18 @@
 * [X] build index with working links
 * [X] add all (relevant) sections in `/rst` to `rst/index.rst`
 * [X] revisit toc-content like `rst/00-*`
-* [X] try removing `numpydoc_show_class_members = False` from `conf.py`
-* [ ] correct the order of rst links
+* [X] remove `numpydoc_show_class_members = False` from `conf.py`
+* [X] add forked repo link to web version
+* [X] add original repo link to web version
+* [ ] correct the order of rst links to match book TOC
 * [ ] remove `docs/_build/` or `_build/` from `.gitignore`
 * [ ] merge `Makefile` with original (`Makefile.bak`)
+* [ ] fix [`html_static_path`](https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_static_path) warning
+* [ ] consider sphinx dark mode
+* [ ] add self to supporters (or contributors)
 
 > Original README follows:
+
 
 ## Scientific Visualization: Python + Matplotlib
 **Nicolas P. Rougier, Bordeaux, November 2021.**
