@@ -4,6 +4,8 @@
 * [X] run `sphinx-quickstart` to add `rst/index.rst`, `rst/conf.py`, `Makefile`
 * [X] run `sphinx-buld` / `make html` to build `/docs`
 * [X] set up [github pages](https://dannydannydanny.github.io/scientific-visualization-book/)
+* [ ] build index with working links
+* [ ] remove `docs/_build/` or `_build/` from `.gitignore`
 * [ ] add all (relevant) sections in `/rst` to `rst/index.rst`
 * [ ] merge `Makefile` with original (`Makefile.bak`)
 
