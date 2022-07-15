@@ -4,6 +4,9 @@ This fork of
 [rougier/scientific-visualization-book](https://github.com/rougier/scientific-visualization-book)
 aims to make the material accessible via web.
 
+The [issue](https://github.com/rougier/scientific-visualization-book/issues/13)
+that inspired the fork.
+
 Preliminary web version can be found
 [here](https://dannydannydanny.github.io/scientific-visualization-book/)
 
@@ -21,10 +24,15 @@ Preliminary web version can be found
 * [X] remove `numpydoc_show_class_members = False` from `conf.py`
 * [X] add forked repo link to web version
 * [X] add original repo link to web version
+* [x] fix `WARNING: image file not readable:` warnings
+* [ ] fix `WARNING: toctree contains reference to document` warnings
+* [ ] fix `WARNING: undefined label` warnings
+* [ ] fix `WARNING: duplicate label` warnings
+* [ ] fix `WARNING: Unknown target name` warnings
 * [ ] correct the order of rst links to match book TOC
 * [ ] remove `docs/_build/` or `_build/` from `.gitignore`
 * [ ] merge `Makefile` with original (`Makefile.bak`)
-* [ ] fix [`html_static_path`](https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_static_path) warning
+* [ ] fix [`WARNING: html_static_path entry '_static' does not exist`](https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_static_path) warning
 * [ ] consider sphinx dark mode
 * [ ] add self to supporters (or contributors)
 
