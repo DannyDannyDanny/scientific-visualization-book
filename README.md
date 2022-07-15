@@ -4,7 +4,7 @@ This fork of
 [rougier/scientific-visualization-book](https://github.com/rougier/scientific-visualization-book)
 aims to make the material accessible via web.
 
-Preliminary version can be found
+Preliminary web version can be found
 [here](https://dannydannydanny.github.io/scientific-visualization-book/)
 
 
