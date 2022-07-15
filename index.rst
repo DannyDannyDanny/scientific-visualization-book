@@ -6,6 +6,17 @@
 Scientific Visualization Web
 ====================================================
 
+Follow development or submit issues for the
+web version here:
+https://github.com/dannydannydanny/scientific-visualization-book/
+
+Original source:
+https://github.com/rougier/scientific-visualization-book/
+
+
+Table of Contents
+====================================================
+
 .. toctree::
    :maxdepth: 2
 
