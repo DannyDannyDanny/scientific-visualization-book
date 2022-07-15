@@ -3,16 +3,35 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to scientific-visualization's documentation!
+Scientific Visualization Web
 ====================================================
 
 .. toctree::
    :maxdepth: 2
 
-   rst/anatomy
-   rst/animation
-   rst/beyond
-
+   rst/00-acknowledgments.rst
+   rst/00-dedication.rst
+   rst/00-introduction.rst
+   rst/00-preface.rst
+   rst/anatomy.rst
+   rst/animation.rst
+   rst/beyond.rst
+   rst/cheatsheets.rst
+   rst/colors.rst
+   rst/common.rst
+   rst/conclusion.rst
+   rst/coordinates.rst
+   rst/defaults.rst
+   rst/layout.rst
+   rst/main.rst
+   rst/optimization.rst
+   rst/ornaments.rst
+   rst/projections.rst
+   rst/resources.rst
+   rst/rules.rst
+   rst/showcase.rst
+   rst/threed.rst
+   rst/typography.rst
 
 
 Indices and tables
