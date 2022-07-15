@@ -5,11 +5,12 @@
 * [X] run `sphinx-buld` / `make html` to build `/docs`
 * [X] add make script to build and prepare gh_pages
 * [X] set up [github pages](https://dannydannydanny.github.io/scientific-visualization-book/)
-* [ ] build index with working links
+* [X] build index with working links
+* [X] add all (relevant) sections in `/rst` to `rst/index.rst`
+* [X] revisit toc-content like `rst/00-*`
+* [X] try removing `numpydoc_show_class_members = False` from `conf.py`
+* [ ] correct the order of rst links
 * [ ] remove `docs/_build/` or `_build/` from `.gitignore`
-* [ ] add all (relevant) sections in `/rst` to `rst/index.rst`
-* [ ] revisit toc-content like `rst/00-*`
-* [ ] try removing `numpydoc_show_class_members = False` from `conf.py`
 * [ ] merge `Makefile` with original (`Makefile.bak`)
 
 > Original README follows:
