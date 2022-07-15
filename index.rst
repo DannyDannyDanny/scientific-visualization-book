@@ -9,8 +9,9 @@ Welcome to scientific-visualization's documentation!
 .. toctree::
    :maxdepth: 2
 
-   rst/00-acknowledgements
-   rst/00-dedications
+   rst/anatomy
+   rst/animation
+   rst/beyond
 
 
 
