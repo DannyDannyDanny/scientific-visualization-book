@@ -15,6 +15,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mastering the defaults" href="defaults.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="conclusion.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -60,7 +62,7 @@ coordinate from one system to the other, matplotlib provides a set of
 </pre></div>
 </div>
 <figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="rst/coordinates/coordinates-cartesian.pdf"><img alt="rst/coordinates/coordinates-cartesian.pdf" src="rst/coordinates/coordinates-cartesian.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/coordinates-cartesian.pdf"><img alt="../_images/coordinates-cartesian.pdf" src="../_images/coordinates-cartesian.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">The co-existing coordinate systems within a figure using Cartesian
 projection. <strong>FC</strong>: Figure Coordinates, <strong>NFC</strong> Normalized Figure Coordinates,
@@ -69,7 +71,7 @@ projection. <strong>FC</strong>: Figure Coordinates, <strong>NFC</strong> Normal
 </figcaption>
 </figure>
 <figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="rst/coordinates/coordinates-polar.pdf"><img alt="rst/coordinates/coordinates-polar.pdf" src="rst/coordinates/coordinates-polar.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/coordinates-polar.pdf"><img alt="../_images/coordinates-polar.pdf" src="../_images/coordinates-polar.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">The co-existing coordinate systems within a figure using Polar projection.
 <strong>FC</strong>: Figure Coordinates, <strong>NFC</strong> Normalized Figure Coordinates, <strong>DC</strong>:
@@ -130,7 +132,7 @@ the limit using the <cite>clip_on</cite> arguments.</p>
 </div>
 <p>The result is shown on figure <span class="xref std std-ref">fig-transforms-polar</span>.</p>
 <figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-polar.pdf"><img alt="rst/coordinates/transforms-polar.pdf" src="rst/coordinates/transforms-polar.pdf" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-polar.pdf"><img alt="../_images/transforms-polar.pdf" src="../_images/transforms-polar.pdf" style="width: 75%;" /></a>
 <figcaption>
 <p><span class="caption-text">Axes boundaries in polar projection using a transform from normalized data
 coordinates to data coordinates (<span class="source">coordinates/transform-polar.py</span>).
@@ -183,7 +185,7 @@ the offset:</p>
 The text is now properly positioned and will stay at the right position
 independently of figure aspect ratio or data limits.</p>
 <figure class="align-default" id="id4">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-letter.pdf"><img alt="rst/coordinates/transforms-letter.pdf" src="rst/coordinates/transforms-letter.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-letter.pdf"><img alt="../_images/transforms-letter.pdf" src="../_images/transforms-letter.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Using transforms to position precisely a text over a plot. Top panel uses
 normalized data coordinates (0.1,0.1), bottom panel uses normalized data
@@ -197,7 +199,7 @@ some text below the X tick labels. The X position of the tick labels is
 expressed in data coordinates, but how do we put something under as illustrated
 on figure <span class="xref std std-ref">fig-transforms-blend</span>?</p>
 <figure class="align-default" id="id5">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-blend.pdf"><img alt="rst/coordinates/transforms-blend.pdf" src="rst/coordinates/transforms-blend.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-blend.pdf"><img alt="../_images/transforms-blend.pdf" src="../_images/transforms-blend.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Precise placement (arrows below X axis tick labels) using blended transform (<span class="source">coordinates/transforms-blend.py</span>).
 <span class="label">fig-transforms-blend</span></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
@@ -228,7 +230,7 @@ function 200 times with random values.</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id6">
-<a class="reference internal image-reference" href="rst/coordinates/collage.png"><img alt="rst/coordinates/collage.png" src="rst/coordinates/collage.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/collage.png"><img alt="../_images/collage.png" src="../_images/collage.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Collage
 <span class="label">figure-collage</span>
@@ -253,7 +255,7 @@ size must be given in figure normalized coordinates and orientation in
 degrees. To complicate things, we want to express the elevation of the text
 above the histogram bars in data points. <a href="#id10"><span class="problematic" id="id11">|newline|</span></a></p>
 <figure class="align-default" id="id7">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-hist.pdf"><img alt="rst/coordinates/transforms-hist.pdf" src="rst/coordinates/transforms-hist.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-hist.pdf"><img alt="../_images/transforms-hist.pdf" src="../_images/transforms-hist.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rotated histogram aligned with second main PCA axis
 (<span class="source">coordinates/transforms-hist.py</span>). <span class="label">fig-transforms-hist</span></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
@@ -316,7 +318,7 @@ needs to be defined in terms of the non-rotated bounding box:</p>
 size is expressed in points. Try to make a scatter plot whose size is expressed
 in data points such as to obtain figure <span class="xref std std-ref">fig-transforms-exercise-1</span>.</p>
 <figure class="align-default" id="id8">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-exercise-1.pdf"><img alt="rst/coordinates/transforms-exercise-1.pdf" src="rst/coordinates/transforms-exercise-1.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-exercise-1.pdf"><img alt="../_images/transforms-exercise-1.pdf" src="../_images/transforms-exercise-1.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">A scatter plot whose marker size is expressed in data coordinates instead of points
 (<span class="source">coordinates/transforms-exercise-1.py</span>).
@@ -324,7 +326,7 @@ in data points such as to obtain figure <span class="xref std std-ref">fig-trans
 </figcaption>
 </figure>
 <figure class="align-default" id="id9">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-floating-axis.pdf"><img alt="rst/coordinates/transforms-floating-axis.pdf" src="rst/coordinates/transforms-floating-axis.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-floating-axis.pdf"><img alt="../_images/transforms-floating-axis.pdf" src="../_images/transforms-floating-axis.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">A floating and rotated floating axis with controlled position size and
 rotation (<span class="source">coordinates/transforms-floating-axis.py</span>).
@@ -351,16 +353,43 @@ rotation (<span class="source">coordinates/transforms-floating-axis.py</span>).
 
 
 <h3>Navigation</h3>
-<ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-preface.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anatomy.html">Anatomy of a figure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animation.html">Animation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beyond.html">Graphic library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheatsheets.html">Quick References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">A primer on colors</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Coordinate systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#real-case-usage">Real case usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Mastering the defaults</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout.html">Size, aspect &amp; layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#figure-design">Figure design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#advanced-concepts">Advanced concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#showcase">Showcase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html">Architecture &amp; optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ornaments.html">Ornaments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projections.html">Scales &amp; projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">External resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">Ten simple rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="threed.html">Going 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typography.html">Elements of typography</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="conclusion.html" title="previous chapter">&lt;no title&gt;</a></li>
+      <li>Next: <a href="defaults.html" title="next chapter">Mastering the defaults</a></li>
   </ul></li>
 </ul>
 </div>

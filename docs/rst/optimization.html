@@ -15,6 +15,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ornaments" href="ornaments.html" />
+    <link rel="prev" title="Fundamentals" href="main.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -50,7 +52,7 @@ exactly 0.002 (= 1/500). This means that if you plot 500 black points
 with a transparency of 0.002, you obtain get a quasi black marker as
 shown on figure <span class="xref std std-ref">figure-transparency</span>.</p>
 <figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="rst/optimization/transparency.pdf"><img alt="rst/optimization/transparency.pdf" src="rst/optimization/transparency.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transparency.pdf"><img alt="../_images/transparency.pdf" src="../_images/transparency.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Transparency levels
 <span class="label">figure-transparency</span>
@@ -69,7 +71,7 @@ observe the central are is darker. For one million points, we reached
 the limit of the transparency trick (alpha=0.002) and we now have a
 central dark spot that hide information.</p>
 <figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="rst/optimization/scatters.png"><img alt="rst/optimization/scatters.png" src="rst/optimization/scatters.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/scatters.png"><img alt="../_images/scatters.png" src="../_images/scatters.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Scatter, hist2d and hexbin
 <span class="label">figure-scatters</span>
@@ -109,7 +111,7 @@ The reason is that matplotlib rendering engine takes care of not
 overdrawing an area that belong to the same plot as shown on the figure
 below:</p>
 <figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="rst/optimization/self-cover.pdf"><img alt="rst/optimization/self-cover.pdf" src="rst/optimization/self-cover.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/self-cover.pdf"><img alt="../_images/self-cover.pdf" src="../_images/self-cover.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Self-covering example
 <span class="label">figure-self-cover</span>
@@ -132,7 +134,7 @@ decide of its value. This is of course a slower compared to a regular
 plot but the rendering is more faithful to the signal as shown on the
 third line.</p>
 <figure class="align-default" id="id4">
-<a class="reference internal image-reference" href="rst/optimization/multisample.png"><img alt="rst/optimization/multisample.png" src="rst/optimization/multisample.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/multisample.png"><img alt="../_images/multisample.png" src="../_images/multisample.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">High-frequency signal.
 <span class="label">figure-multisample</span>
@@ -156,7 +158,7 @@ faster (by a factor of two approximately). For any other case, the
 scatter command is the one to use. We can try to measure the time to
 prepare a one million scatter plot using the following code:</p>
 <figure class="align-default" id="id5">
-<a class="reference internal image-reference" href="rst/optimization/scatter-benchmark.png"><img alt="rst/optimization/scatter-benchmark.png" src="rst/optimization/scatter-benchmark.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/scatter-benchmark.png"><img alt="../_images/scatter-benchmark.png" src="../_images/scatter-benchmark.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Scatter benchmark
 <span class="label">figure-scatter-benchmark</span>
@@ -179,7 +181,7 @@ minutes. Note that the fastest rendering (unified plot, middle) is not
 exactly equivalent to the others due to the absence of self-coverage
 as explained previously.</p>
 <figure class="align-default" id="id6">
-<a class="reference internal image-reference" href="rst/optimization/line-benchmark.png"><img alt="rst/optimization/line-benchmark.png" src="rst/optimization/line-benchmark.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/line-benchmark.png"><img alt="../_images/line-benchmark.png" src="../_images/line-benchmark.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Line benchmark
 <span class="label">figure-line-benchmark</span>
@@ -296,7 +298,7 @@ reason is that if you enforce very strict clipping, a marker whose
 center is outside extent will not be drawn while it may overlap because
 of its size.</p>
 <figure class="align-default" id="id7">
-<a class="reference internal image-reference" href="rst/optimization/multithread.png"><img alt="rst/optimization/multithread.png" src="rst/optimization/multithread.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/multithread.png"><img alt="../_images/multithread.png" src="../_images/multithread.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Multithread rendering
 <span class="label">figure-multithread-rendering</span>
@@ -327,16 +329,45 @@ minutes to render, this is an option worth to be explored.</p>
 
 
 <h3>Navigation</h3>
-<ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-preface.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anatomy.html">Anatomy of a figure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animation.html">Animation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beyond.html">Graphic library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheatsheets.html">Quick References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">A primer on colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Mastering the defaults</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout.html">Size, aspect &amp; layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#figure-design">Figure design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#advanced-concepts">Advanced concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#showcase">Showcase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#appendix">Appendix</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Architecture &amp; optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#transparency-levels">Transparency levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#speed-up-rendering">Speed-up rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-sizes">File sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multithread-rendering">Multithread rendering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ornaments.html">Ornaments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projections.html">Scales &amp; projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">External resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">Ten simple rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="threed.html">Going 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typography.html">Elements of typography</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="main.html" title="previous chapter">Fundamentals</a></li>
+      <li>Next: <a href="ornaments.html" title="next chapter">Ornaments</a></li>
   </ul></li>
 </ul>
 </div>

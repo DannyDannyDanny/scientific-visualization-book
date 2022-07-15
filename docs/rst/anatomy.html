@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Animation" href="animation.html" />
-    <link rel="prev" title="Welcome to scientific-visualization’s documentation!" href="../index.html" />
+    <link rel="prev" title="Preface" href="00-preface.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -62,7 +62,7 @@ the axes aspect, you need to be more explicit:</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="rst/anatomy/anatomy.pdf"><img alt="rst/anatomy/anatomy.pdf" src="rst/anatomy/anatomy.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/anatomy.pdf"><img alt="../_images/anatomy.pdf" src="../_images/anatomy.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">A matplotlib figure is composed of a hierarchy of several elements that,
 when put together, forms the actual figure (sources: <span class="source">anatomy/anatomy.py</span>).
@@ -127,7 +127,7 @@ have a range of shapes (circles, rectangles, polygons, etc.). Lines can be very
 small and thin (e.g. ticks) or very thick (e.g. hatches). Text can use any font
 available on your system and can also use a latex engine to render maths.</p>
 <figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="rst/anatomy/bold-ticklabel.pdf"><img alt="rst/anatomy/bold-ticklabel.pdf" src="rst/anatomy/bold-ticklabel.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bold-ticklabel.pdf"><img alt="../_images/bold-ticklabel.pdf" src="../_images/bold-ticklabel.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">All the graphic primitives (i.e. artists) can be accessed and modified. In
 the figure above, we modified the boldness of the X axis tick labels
@@ -159,7 +159,7 @@ possess a default zorder value such that things are rendered properly. For
 example, the spines, the ticks and the tick label are generally <em>behind</em>
 your actual plot.</p>
 <figure class="align-default" id="id4">
-<a class="reference internal image-reference" href="rst/anatomy/zorder.pdf"><img alt="rst/anatomy/zorder.pdf" src="rst/anatomy/zorder.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/zorder.pdf"><img alt="../_images/zorder.pdf" src="../_images/zorder.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Default rendering order of different elements and graphic primitives. The
 rendering order is from bottom to top. Note that some methods will override
@@ -275,7 +275,7 @@ on screen but only saved on disk.</p>
 that even if you choose a raster renderer, you can still save the figure in a
 vector format and vice-versa.</p>
 <figure class="align-default" id="id7">
-<a class="reference internal image-reference" href="rst/anatomy/raster-vector.pdf"><img alt="rst/anatomy/raster-vector.pdf" src="rst/anatomy/raster-vector.pdf" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="../_images/raster-vector.pdf"><img alt="../_images/raster-vector.pdf" src="../_images/raster-vector.pdf" style="width: 75%;" /></a>
 <figcaption>
 <p><span class="caption-text">Zooming effect for raster graphics and vector graphics (sources:
 <span class="source">anatomy/raster-vector.py</span>). <span class="label">fig-raster-vector</span></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
@@ -313,7 +313,7 @@ backend that allows to render a figure directly inside the terminal,
 emulating a kind of jupyter notebook as shown on figure
 <span class="xref std std-ref">figure-imgcat</span></p>
 <figure class="align-default" id="id8">
-<a class="reference internal image-reference" href="rst/anatomy/imgcat.png"><img alt="rst/anatomy/imgcat.png" src="rst/anatomy/imgcat.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/imgcat.png"><img alt="../_images/imgcat.png" src="../_images/imgcat.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Matplotlib imgcat backend
 <span class="label">figure-imgcat</span>
@@ -376,7 +376,7 @@ case. For a scientific article, publishers will generally request figures dpi
 to be between 300 and 600. To get things right, it is thus good to know what
 will be the physical dimension of your figure once inserted into your document.</p>
 <figure class="align-default" id="id9">
-<a class="reference internal image-reference" href="rst/anatomy/figure-dpi.png"><img alt="rst/anatomy/figure-dpi.png" src="rst/anatomy/figure-dpi.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/figure-dpi.png"><img alt="../_images/figure-dpi.png" src="../_images/figure-dpi.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">A text rendered in matplotlib and saved using different dpi (50,100,300 &amp;
 600)  (sources: <span class="source">anatomy/figure-dpi.py</span>). <span class="label">figure-dpi</span></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
@@ -430,7 +430,7 @@ remain the same. Usage is really simple:</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id10">
-<a class="reference internal image-reference" href="rst/anatomy/ruler.pdf"><img alt="rst/anatomy/ruler.pdf" src="rst/anatomy/ruler.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/ruler.pdf"><img alt="../_images/ruler.pdf" src="../_images/ruler.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Interactive ruler <span class="label">figure-ruler</span>
 (<span class="source">anatomy/ruler.py</span>).</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
@@ -444,7 +444,7 @@ we’ve seen so far (including finding the relevant documentation).</p>
 <p><strong>Exercise 1</strong> Try to produce a figure with a given (and exact) pixel size
 (e.g. 512x512 pixels). How would you specify the size and save the figure?</p>
 <figure class="align-default" id="id11">
-<a class="reference internal image-reference" href="rst/anatomy/pixel-font.png"><img alt="rst/anatomy/pixel-font.png" src="rst/anatomy/pixel-font.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/pixel-font.png"><img alt="../_images/pixel-font.png" src="../_images/pixel-font.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Pixel font text using exact image size <span class="label">figure-pixel-font</span>
 (<span class="source">anatomy/pixel-font.py</span>).</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
@@ -458,7 +458,7 @@ some simple computations for finding the right size and some trials and errors
 to make the actual figure. Don’t pay too much attention to all the details, the
 essential part is to get the size right.</p>
 <figure class="align-default" id="id12">
-<a class="reference internal image-reference" href="rst/anatomy/inch-cm.pdf"><img alt="rst/anatomy/inch-cm.pdf" src="rst/anatomy/inch-cm.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/inch-cm.pdf"><img alt="../_images/inch-cm.pdf" src="../_images/inch-cm.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Inches/centimeter conversion <span class="label">figure-inch-cm</span>
 (<strong>solution</strong>: <span class="source">anatomy/inch-cm.py</span>).</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
@@ -484,7 +484,7 @@ the rendering will be independent of drawing order. For the actual curves, you c
 </pre></div>
 </div>
 <figure class="align-default" id="id13">
-<a class="reference internal image-reference" href="rst/anatomy/zorder-plots.pdf"><img alt="rst/anatomy/zorder-plots.pdf" src="rst/anatomy/zorder-plots.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/zorder-plots.pdf"><img alt="../_images/zorder-plots.pdf" src="../_images/zorder-plots.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Multiple plots partially covering each other <span class="label">figure-zorder-plots</span>
 (<strong>solution</strong>: <span class="source">anatomy/zorder-plots.py</span>).</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
@@ -511,6 +511,9 @@ the rendering will be independent of drawing order. For the actual curves, you c
 
 <h3>Navigation</h3>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-preface.html">Preface</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Anatomy of a figure</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#elements">Elements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#graphic-primitives">Graphic primitives</a></li>
@@ -521,13 +524,31 @@ the rendering will be independent of drawing order. For the actual curves, you c
 </li>
 <li class="toctree-l1"><a class="reference internal" href="animation.html">Animation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beyond.html">Graphic library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheatsheets.html">Quick References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">A primer on colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Mastering the defaults</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout.html">Size, aspect &amp; layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#figure-design">Figure design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#advanced-concepts">Advanced concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#showcase">Showcase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html">Architecture &amp; optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ornaments.html">Ornaments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projections.html">Scales &amp; projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">External resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">Ten simple rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="threed.html">Going 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typography.html">Elements of typography</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to scientific-visualization’s documentation!</a></li>
+      <li>Previous: <a href="00-preface.html" title="previous chapter">Preface</a></li>
       <li>Next: <a href="animation.html" title="next chapter">Animation</a></li>
   </ul></li>
 </ul>

@@ -15,6 +15,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Elements of typography" href="typography.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="showcase.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -42,7 +44,7 @@ understood a few concepts. To demonstrate that, we’ll render the bunny
 on figure above with 60 lines of Python and one matplotlib call. That
 is, without using the 3D axis.</p>
 <figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="rst/threed/bunny.pdf"><img alt="rst/threed/bunny.pdf" src="rst/threed/bunny.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny.pdf"><img alt="../_images/bunny.pdf" src="../_images/bunny.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Stanford bunny.
 (sources: <span class="source">threed/bunny.py</span>).
@@ -99,7 +101,7 @@ perfect match. So let’s first extract the triangles and get rid of the
 </div>
 <p>Result is shown on figure <span class="xref std std-ref">figure-bunny-1</span>.</p>
 <figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="rst/threed/bunny-1.pdf"><img alt="rst/threed/bunny-1.pdf" src="rst/threed/bunny-1.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-1.pdf"><img alt="../_images/bunny-1.pdf" src="../_images/bunny-1.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Stanford bunny without any transformation.
 (sources: <span class="source">threed/bunny-1.py</span>).
@@ -112,7 +114,7 @@ perfect match. So let’s first extract the triangles and get rid of the
 <p>The rendering we’ve just made is actually an <a class="reference external" href="https://en.wikipedia.org/wiki/Orthographic_projection">orthographic projection</a> while the
 previous bunny uses a <a class="reference external" href="https://en.wikipedia.org/wiki/3D_projection#Perspective_projection">perspective projection</a>:</p>
 <figure class="align-default" id="id4">
-<a class="reference internal image-reference" href="rst/threed/projection.pdf"><img alt="rst/threed/projection.pdf" src="rst/threed/projection.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/projection.pdf"><img alt="../_images/projection.pdf" src="../_images/projection.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Orthographic and perspective projections.
 <span class="label">figure-projections</span></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
@@ -169,7 +171,7 @@ such as to always have w=1 for each vertices.</p>
 </div>
 <p>Now we can check the result on figure <span class="xref std std-ref">figure-bunny-2</span> that looks totally wrong.</p>
 <figure class="align-default" id="id5">
-<a class="reference internal image-reference" href="rst/threed/bunny-2.pdf"><img alt="rst/threed/bunny-2.pdf" src="rst/threed/bunny-2.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-2.pdf"><img alt="../_images/bunny-2.pdf" src="../_images/bunny-2.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Wrong rendering when camera is inside.
 (sources: <span class="source">threed/bunny-2.py</span>).
@@ -190,7 +192,7 @@ before the perspective transformation.</p>
 </div>
 <p>The corrected output is shown on figure <span class="xref std std-ref">figure-bunny-3</span>.</p>
 <figure class="align-default" id="id6">
-<a class="reference internal image-reference" href="rst/threed/bunny-3.pdf"><img alt="rst/threed/bunny-3.pdf" src="rst/threed/bunny-3.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-3.pdf"><img alt="../_images/bunny-3.pdf" src="../_images/bunny-3.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Corrected rendering with camera away.
 (sources: <span class="source">threed/bunny-3.py</span>).
@@ -243,7 +245,7 @@ we can compute a global MVP matrix that will do everything at once:</p>
 </div>
 <p>You should obtain results shown on figure <span class="xref std std-ref">figure-bunny-4</span>.</p>
 <figure class="align-default" id="id7">
-<a class="reference internal image-reference" href="rst/threed/bunny-4.pdf"><img alt="rst/threed/bunny-4.pdf" src="rst/threed/bunny-4.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-4.pdf"><img alt="../_images/bunny-4.pdf" src="../_images/bunny-4.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rotated and translated bunny.
 (sources: <span class="source">threed/bunny-4.py</span>).
@@ -255,7 +257,7 @@ difference (see figure <span class="xref std std-ref">figure-bunny-5</span>).  N
 to adapt the distance to the camera in order for the bunnies to have
 the same apparent size</p>
 <figure class="align-default" id="id8">
-<a class="reference internal image-reference" href="rst/threed/bunny-5.pdf"><img alt="rst/threed/bunny-5.pdf" src="rst/threed/bunny-5.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-5.pdf"><img alt="../_images/bunny-5.pdf" src="../_images/bunny-5.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Different apertures
 (sources: <span class="source">threed/bunny-5.py</span>).
@@ -268,7 +270,7 @@ the same apparent size</p>
 <p>Let’s try now to fill the triangles and see what happens (figure
 <span class="xref std std-ref">figure-bunny-6</span>).</p>
 <figure class="align-default" id="id9">
-<a class="reference internal image-reference" href="rst/threed/bunny-6.pdf"><img alt="rst/threed/bunny-6.pdf" src="rst/threed/bunny-6.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-6.pdf"><img alt="../_images/bunny-6.pdf" src="../_images/bunny-6.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rendering without depth sorting.
 (sources: <span class="source">threed/bunny-6.py</span>).
@@ -294,7 +296,7 @@ works beautifully:</p>
 <p>And now everything is rendered correctly as shown on figure
 <span class="xref std std-ref">figure-bunny-7</span>.</p>
 <figure class="align-default" id="id10">
-<a class="reference internal image-reference" href="rst/threed/bunny-7.pdf"><img alt="rst/threed/bunny-7.pdf" src="rst/threed/bunny-7.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-7.pdf"><img alt="../_images/bunny-7.pdf" src="../_images/bunny-7.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rendering with depth sorting.
 (sources: <span class="source">threed/bunny-7.py</span>).
@@ -314,7 +316,7 @@ that:</p>
 </div>
 <p>And our final display is show on figure <span class="xref std std-ref">figure-bunny-8</span>.</p>
 <figure class="align-default" id="id11">
-<a class="reference internal image-reference" href="rst/threed/bunny-8.pdf"><img alt="rst/threed/bunny-8.pdf" src="rst/threed/bunny-8.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-8.pdf"><img alt="../_images/bunny-8.pdf" src="../_images/bunny-8.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rendering with depth colors.
 (sources: <span class="source">threed/bunny-8.py</span>).
@@ -331,7 +333,7 @@ easily with matplotlib and a few transformations.</p>
 the figure <span class="xref std std-ref">figure-bunnies</span> that mix perspective (top left) and
 orthographic projections. Each bunny is contained in one axes.</p>
 <figure class="align-default" id="id12">
-<a class="reference internal image-reference" href="rst/threed/bunnies.pdf"><img alt="rst/threed/bunnies.pdf" src="rst/threed/bunnies.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunnies.pdf"><img alt="../_images/bunnies.pdf" src="../_images/bunnies.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Stanford bunnies
 (sources: <span class="source">threed/bunnies.py</span>).
@@ -358,16 +360,46 @@ orthographic projections. Each bunny is contained in one axes.</p>
 
 
 <h3>Navigation</h3>
-<ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-preface.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anatomy.html">Anatomy of a figure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animation.html">Animation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beyond.html">Graphic library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheatsheets.html">Quick References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">A primer on colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Mastering the defaults</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout.html">Size, aspect &amp; layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#figure-design">Figure design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#advanced-concepts">Advanced concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#showcase">Showcase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html">Architecture &amp; optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ornaments.html">Ornaments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projections.html">Scales &amp; projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">External resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">Ten simple rules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Going 3D</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#loading-the-bunny">Loading the bunny</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#perspective-projection">Perspective Projection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-view-projection-mvp">Model, view, projection (MVP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#depth-sorting">Depth sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="typography.html">Elements of typography</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="showcase.html" title="previous chapter">&lt;no title&gt;</a></li>
+      <li>Next: <a href="typography.html" title="next chapter">Elements of typography</a></li>
   </ul></li>
 </ul>
 </div>

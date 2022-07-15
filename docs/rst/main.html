@@ -16,6 +16,8 @@
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Architecture &amp; optimization" href="optimization.html" />
+    <link rel="prev" title="Size, aspect &amp; layout" href="layout.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -63,7 +65,7 @@ the axes aspect, you need to be more explicit:</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id12">
-<a class="reference internal image-reference" href="rst/anatomy/anatomy.pdf"><img alt="rst/anatomy/anatomy.pdf" src="rst/anatomy/anatomy.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/anatomy.pdf"><img alt="../_images/anatomy.pdf" src="../_images/anatomy.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">A matplotlib figure is composed of a hierarchy of several elements that,
 when put together, forms the actual figure (sources: <span class="source">anatomy/anatomy.py</span>).
@@ -128,7 +130,7 @@ have a range of shapes (circles, rectangles, polygons, etc.). Lines can be very
 small and thin (e.g. ticks) or very thick (e.g. hatches). Text can use any font
 available on your system and can also use a latex engine to render maths.</p>
 <figure class="align-default" id="id13">
-<a class="reference internal image-reference" href="rst/anatomy/bold-ticklabel.pdf"><img alt="rst/anatomy/bold-ticklabel.pdf" src="rst/anatomy/bold-ticklabel.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bold-ticklabel.pdf"><img alt="../_images/bold-ticklabel.pdf" src="../_images/bold-ticklabel.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">All the graphic primitives (i.e. artists) can be accessed and modified. In
 the figure above, we modified the boldness of the X axis tick labels
@@ -160,7 +162,7 @@ possess a default zorder value such that things are rendered properly. For
 example, the spines, the ticks and the tick label are generally <em>behind</em>
 your actual plot.</p>
 <figure class="align-default" id="id14">
-<a class="reference internal image-reference" href="rst/anatomy/zorder.pdf"><img alt="rst/anatomy/zorder.pdf" src="rst/anatomy/zorder.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/zorder.pdf"><img alt="../_images/zorder.pdf" src="../_images/zorder.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Default rendering order of different elements and graphic primitives. The
 rendering order is from bottom to top. Note that some methods will override
@@ -276,7 +278,7 @@ on screen but only saved on disk.</p>
 that even if you choose a raster renderer, you can still save the figure in a
 vector format and vice-versa.</p>
 <figure class="align-default" id="id17">
-<a class="reference internal image-reference" href="rst/anatomy/raster-vector.pdf"><img alt="rst/anatomy/raster-vector.pdf" src="rst/anatomy/raster-vector.pdf" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="../_images/raster-vector.pdf"><img alt="../_images/raster-vector.pdf" src="../_images/raster-vector.pdf" style="width: 75%;" /></a>
 <figcaption>
 <p><span class="caption-text">Zooming effect for raster graphics and vector graphics (sources:
 <span class="source">anatomy/raster-vector.py</span>). <span class="label">fig-raster-vector</span></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
@@ -314,7 +316,7 @@ backend that allows to render a figure directly inside the terminal,
 emulating a kind of jupyter notebook as shown on figure
 <span class="xref std std-ref">figure-imgcat</span></p>
 <figure class="align-default" id="id18">
-<a class="reference internal image-reference" href="rst/anatomy/imgcat.png"><img alt="rst/anatomy/imgcat.png" src="rst/anatomy/imgcat.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/imgcat.png"><img alt="../_images/imgcat.png" src="../_images/imgcat.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Matplotlib imgcat backend
 <span class="label">figure-imgcat</span>
@@ -377,7 +379,7 @@ case. For a scientific article, publishers will generally request figures dpi
 to be between 300 and 600. To get things right, it is thus good to know what
 will be the physical dimension of your figure once inserted into your document.</p>
 <figure class="align-default" id="id19">
-<a class="reference internal image-reference" href="rst/anatomy/figure-dpi.png"><img alt="rst/anatomy/figure-dpi.png" src="rst/anatomy/figure-dpi.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/figure-dpi.png"><img alt="../_images/figure-dpi.png" src="../_images/figure-dpi.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">A text rendered in matplotlib and saved using different dpi (50,100,300 &amp;
 600)  (sources: <span class="source">anatomy/figure-dpi.py</span>). <span class="label">figure-dpi</span></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
@@ -431,7 +433,7 @@ remain the same. Usage is really simple:</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id20">
-<a class="reference internal image-reference" href="rst/anatomy/ruler.pdf"><img alt="rst/anatomy/ruler.pdf" src="rst/anatomy/ruler.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/ruler.pdf"><img alt="../_images/ruler.pdf" src="../_images/ruler.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Interactive ruler <span class="label">figure-ruler</span>
 (<span class="source">anatomy/ruler.py</span>).</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
@@ -445,7 +447,7 @@ we’ve seen so far (including finding the relevant documentation).</p>
 <p><strong>Exercise 1</strong> Try to produce a figure with a given (and exact) pixel size
 (e.g. 512x512 pixels). How would you specify the size and save the figure?</p>
 <figure class="align-default" id="id21">
-<a class="reference internal image-reference" href="rst/anatomy/pixel-font.png"><img alt="rst/anatomy/pixel-font.png" src="rst/anatomy/pixel-font.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/pixel-font.png"><img alt="../_images/pixel-font.png" src="../_images/pixel-font.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Pixel font text using exact image size <span class="label">figure-pixel-font</span>
 (<span class="source">anatomy/pixel-font.py</span>).</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
@@ -459,7 +461,7 @@ some simple computations for finding the right size and some trials and errors
 to make the actual figure. Don’t pay too much attention to all the details, the
 essential part is to get the size right.</p>
 <figure class="align-default" id="id22">
-<a class="reference internal image-reference" href="rst/anatomy/inch-cm.pdf"><img alt="rst/anatomy/inch-cm.pdf" src="rst/anatomy/inch-cm.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/inch-cm.pdf"><img alt="../_images/inch-cm.pdf" src="../_images/inch-cm.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Inches/centimeter conversion <span class="label">figure-inch-cm</span>
 (<strong>solution</strong>: <span class="source">anatomy/inch-cm.py</span>).</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
@@ -485,7 +487,7 @@ the rendering will be independent of drawing order. For the actual curves, you c
 </pre></div>
 </div>
 <figure class="align-default" id="id23">
-<a class="reference internal image-reference" href="rst/anatomy/zorder-plots.pdf"><img alt="rst/anatomy/zorder-plots.pdf" src="rst/anatomy/zorder-plots.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/zorder-plots.pdf"><img alt="../_images/zorder-plots.pdf" src="../_images/zorder-plots.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Multiple plots partially covering each other <span class="label">figure-zorder-plots</span>
 (<strong>solution</strong>: <span class="source">anatomy/zorder-plots.py</span>).</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
@@ -523,7 +525,7 @@ coordinate from one system to the other, matplotlib provides a set of
 </pre></div>
 </div>
 <figure class="align-default" id="id24">
-<a class="reference internal image-reference" href="rst/coordinates/coordinates-cartesian.pdf"><img alt="rst/coordinates/coordinates-cartesian.pdf" src="rst/coordinates/coordinates-cartesian.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/coordinates-cartesian.pdf"><img alt="../_images/coordinates-cartesian.pdf" src="../_images/coordinates-cartesian.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">The co-existing coordinate systems within a figure using Cartesian
 projection. <strong>FC</strong>: Figure Coordinates, <strong>NFC</strong> Normalized Figure Coordinates,
@@ -532,7 +534,7 @@ projection. <strong>FC</strong>: Figure Coordinates, <strong>NFC</strong> Normal
 </figcaption>
 </figure>
 <figure class="align-default" id="id25">
-<a class="reference internal image-reference" href="rst/coordinates/coordinates-polar.pdf"><img alt="rst/coordinates/coordinates-polar.pdf" src="rst/coordinates/coordinates-polar.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/coordinates-polar.pdf"><img alt="../_images/coordinates-polar.pdf" src="../_images/coordinates-polar.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">The co-existing coordinate systems within a figure using Polar projection.
 <strong>FC</strong>: Figure Coordinates, <strong>NFC</strong> Normalized Figure Coordinates, <strong>DC</strong>:
@@ -593,7 +595,7 @@ the limit using the <span class="code">clip_on</span> arguments.</p>
 </div>
 <p>The result is shown on figure <span class="xref std std-ref">fig-transforms-polar</span>.</p>
 <figure class="align-default" id="id26">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-polar.pdf"><img alt="rst/coordinates/transforms-polar.pdf" src="rst/coordinates/transforms-polar.pdf" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-polar.pdf"><img alt="../_images/transforms-polar.pdf" src="../_images/transforms-polar.pdf" style="width: 75%;" /></a>
 <figcaption>
 <p><span class="caption-text">Axes boundaries in polar projection using a transform from normalized data
 coordinates to data coordinates (<span class="source">coordinates/transform-polar.py</span>).
@@ -646,7 +648,7 @@ the offset:</p>
 The text is now properly positioned and will stay at the right position
 independently of figure aspect ratio or data limits.</p>
 <figure class="align-default" id="id27">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-letter.pdf"><img alt="rst/coordinates/transforms-letter.pdf" src="rst/coordinates/transforms-letter.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-letter.pdf"><img alt="../_images/transforms-letter.pdf" src="../_images/transforms-letter.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Using transforms to position precisely a text over a plot. Top panel uses
 normalized data coordinates (0.1,0.1), bottom panel uses normalized data
@@ -660,7 +662,7 @@ some text below the X tick labels. The X position of the tick labels is
 expressed in data coordinates, but how do we put something under as illustrated
 on figure <span class="xref std std-ref">fig-transforms-blend</span>?</p>
 <figure class="align-default" id="id28">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-blend.pdf"><img alt="rst/coordinates/transforms-blend.pdf" src="rst/coordinates/transforms-blend.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-blend.pdf"><img alt="../_images/transforms-blend.pdf" src="../_images/transforms-blend.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Precise placement (arrows below X axis tick labels) using blended transform (<span class="source">coordinates/transforms-blend.py</span>).
 <span class="label">fig-transforms-blend</span></span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
@@ -691,7 +693,7 @@ function 200 times with random values.</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id29">
-<a class="reference internal image-reference" href="rst/coordinates/collage.png"><img alt="rst/coordinates/collage.png" src="rst/coordinates/collage.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/collage.png"><img alt="../_images/collage.png" src="../_images/collage.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Collage
 <span class="label">figure-collage</span>
@@ -716,7 +718,7 @@ size must be given in figure normalized coordinates and orientation in
 degrees. To complicate things, we want to express the elevation of the text
 above the histogram bars in data points. </p>
 <figure class="align-default" id="id30">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-hist.pdf"><img alt="rst/coordinates/transforms-hist.pdf" src="rst/coordinates/transforms-hist.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-hist.pdf"><img alt="../_images/transforms-hist.pdf" src="../_images/transforms-hist.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rotated histogram aligned with second main PCA axis
 (<span class="source">coordinates/transforms-hist.py</span>). <span class="label">fig-transforms-hist</span></span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
@@ -779,7 +781,7 @@ needs to be defined in terms of the non-rotated bounding box:</p>
 size is expressed in points. Try to make a scatter plot whose size is expressed
 in data points such as to obtain figure <span class="xref std std-ref">fig-transforms-exercise-1</span>.</p>
 <figure class="align-default" id="id31">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-exercise-1.pdf"><img alt="rst/coordinates/transforms-exercise-1.pdf" src="rst/coordinates/transforms-exercise-1.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-exercise-1.pdf"><img alt="../_images/transforms-exercise-1.pdf" src="../_images/transforms-exercise-1.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">A scatter plot whose marker size is expressed in data coordinates instead of points
 (<span class="source">coordinates/transforms-exercise-1.py</span>).
@@ -787,7 +789,7 @@ in data points such as to obtain figure <span class="xref std std-ref">fig-trans
 </figcaption>
 </figure>
 <figure class="align-default" id="id32">
-<a class="reference internal image-reference" href="rst/coordinates/transforms-floating-axis.pdf"><img alt="rst/coordinates/transforms-floating-axis.pdf" src="rst/coordinates/transforms-floating-axis.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transforms-floating-axis.pdf"><img alt="../_images/transforms-floating-axis.pdf" src="../_images/transforms-floating-axis.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">A floating and rotated floating axis with controlled position size and
 rotation (<span class="source">coordinates/transforms-floating-axis.py</span>).
@@ -816,7 +818,7 @@ modifying the figure such as to adapt the ticks positions and labels (see
 figure <span class="xref std std-ref">figure-scales</span>). Note that a scale can be applied to x axis only
 (<span class="code">set_xscale</span>), y axis only (<span class="code">set_yscale</span>) or both.</p>
 <figure class="align-default" id="id33">
-<a class="reference internal image-reference" href="rst/scales-projections/scales-comparison.pdf"><img alt="rst/scales-projections/scales-comparison.pdf" src="rst/scales-projections/scales-comparison.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/scales-comparison.pdf"><img alt="../_images/scales-comparison.pdf" src="../_images/scales-comparison.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Comparison of the <a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.LinearScale">linear</a>, <a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.LogScale">log</a> and <a class="reference external" href="https://matplotlib.org/api/scale_api.html?#matplotlib.scale.LogitScale">logit</a> scales.
 <span class="label">figure-scales</span> (sources: <span class="source">scales-projections/scales-comparison.py</span>).</span><a class="headerlink" href="#id33" title="Permalink to this image">¶</a></p>
@@ -881,7 +883,7 @@ the option to define your own custom scale:</p>
 allows to transform your data. The inverse function is used when displaying
 coordinates under the mouse pointer.</p>
 <figure class="align-default" id="id34">
-<a class="reference internal image-reference" href="rst/scales-projections/scales-custom.pdf"><img alt="rst/scales-projections/scales-custom.pdf" src="rst/scales-projections/scales-custom.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/scales-custom.pdf"><img alt="../_images/scales-custom.pdf" src="../_images/scales-custom.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Custom (user defined) scales.
 <span class="label">figure-scales-custom</span> (sources: <span class="source">scales-projections/scales-custom.py</span>).</span><a class="headerlink" href="#id34" title="Permalink to this image">¶</a></p>
@@ -921,7 +923,7 @@ as we’ve done previously but we have also some dedicated settings such as
 <span class="code">set_thetamin</span>, <span class="code">set_thetamax</span>, <span class="code">set_rmin</span>, <span class="code">set_rmax</span> and more specifically
 <span class="code">set_rorigin</span>. This allows you to have fine control over what is actually shown as illustrated on the figure <span class="xref std std-ref">figure-projection-polar-config</span>.</p>
 <figure class="align-default" id="id35">
-<a class="reference internal image-reference" href="rst/scales-projections/projection-polar-config.pdf"><img alt="rst/scales-projections/projection-polar-config.pdf" src="rst/scales-projections/projection-polar-config.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/projection-polar-config.pdf"><img alt="../_images/projection-polar-config.pdf" src="../_images/projection-polar-config.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Polar projection
 <span class="label">figure-projection-polar-config</span>
@@ -950,7 +952,7 @@ read the code (<span class="source">projection-polar-histogram.py</span>) to see
 made. Note that the actual role of the inverse transformation is to link mouse
 coordinates (in Cartesian 2D coordinates) back to your data.</p>
 <figure class="align-default" id="id36">
-<a class="reference internal image-reference" href="rst/scales-projections/projection-polar-histogram.pdf"><img alt="rst/scales-projections/projection-polar-histogram.pdf" src="rst/scales-projections/projection-polar-histogram.pdf" style="width: 95%;" /></a>
+<a class="reference internal image-reference" href="../_images/projection-polar-histogram.pdf"><img alt="../_images/projection-polar-histogram.pdf" src="../_images/projection-polar-histogram.pdf" style="width: 95%;" /></a>
 <figcaption>
 <p><span class="caption-text">Polar projection with better defaults.
 <span class="label">figure-projection-polar-histogram</span>
@@ -961,7 +963,7 @@ coordinates (in Cartesian 2D coordinates) back to your data.</p>
 the text and the markers to be transformed as illustrated on figure
 <span class="xref std std-ref">figure-text-polar</span>.</p>
 <figure class="align-default" id="id37">
-<a class="reference internal image-reference" href="rst/scales-projections/text-polar.pdf"><img alt="rst/scales-projections/text-polar.pdf" src="rst/scales-projections/text-polar.pdf" style="width: 90%;" /></a>
+<a class="reference internal image-reference" href="../_images/text-polar.pdf"><img alt="../_images/text-polar.pdf" src="../_images/text-polar.pdf" style="width: 90%;" /></a>
 <figcaption>
 <p><span class="caption-text">Polar projection with transformation of text and markers.
 <span class="label">figure-text-polar</span>
@@ -1003,7 +1005,7 @@ bug (nor a feature) and this results in some glitches between the elements
 composing a figure.</p>
 </div>
 <figure class="align-default" id="id38">
-<a class="reference internal image-reference" href="rst/scales-projections/projection-3d-frame.pdf"><img alt="rst/scales-projections/projection-3d-frame.pdf" src="rst/scales-projections/projection-3d-frame.pdf" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="../_images/projection-3d-frame.pdf"><img alt="../_images/projection-3d-frame.pdf" src="../_images/projection-3d-frame.pdf" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-text">Three dimensional projection
 <span class="label">figure-projection-3d-frame</span>
@@ -1048,7 +1050,7 @@ the matplotlib documentation provides some <a class="reference external" href="h
 <p><strong>Exercise 1</strong> Considering functions <span class="math notranslate nohighlight">\(f(x) = 10^x\)</span>, <span class="math notranslate nohighlight">\(f(x) = x\)</span> and
 <span class="math notranslate nohighlight">\(f(x) = log_{10}(x)\)</span>, try to reproduce figure <span class="xref std std-ref">figure-scales-log-log</span>.</p>
 <figure class="align-default" id="id39">
-<a class="reference internal image-reference" href="rst/scales-projections/scales-log-log.pdf"><img alt="rst/scales-projections/scales-log-log.pdf" src="rst/scales-projections/scales-log-log.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/scales-log-log.pdf"><img alt="../_images/scales-log-log.pdf" src="../_images/scales-log-log.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Combining linear and logarithmic scales.
 <span class="label">figure-scales-log-log</span> (sources: <span class="source">scales-projections/scales-log-log.py</span>).</span><a class="headerlink" href="#id39" title="Permalink to this image">¶</a></p>
@@ -1061,7 +1063,7 @@ and shotgun). The first five patterns are simple functions where
 radius evolves with angle, while the last pattern may require some
 work.</p>
 <figure class="align-default" id="id40">
-<a class="reference internal image-reference" href="rst/scales-projections/polar-patterns.pdf"><img alt="rst/scales-projections/polar-patterns.pdf" src="rst/scales-projections/polar-patterns.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/polar-patterns.pdf"><img alt="../_images/polar-patterns.pdf" src="../_images/polar-patterns.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Microphone polar patterns
 <span class="label">figure-polar-patterns</span>
@@ -1096,7 +1098,7 @@ figure which was made using different font families (Roboto Condensed and Roboto
 Slab), size and weights. The difference might appear subtle but is really an
 important dimension of a scientific figure.</p>
 <figure class="align-default" id="id41">
-<a class="reference internal image-reference" href="rst/typography/typography-matters.png"><img alt="rst/typography/typography-matters.png" src="rst/typography/typography-matters.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/typography-matters.png"><img alt="../_images/typography-matters.png" src="../_images/typography-matters.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Influence of typography on the perception of a figure
 <span class="label">figure-typography-matters</span>
@@ -1141,7 +1143,7 @@ font families. Figure <span class="xref std std-ref">figure-typography-font-stac
 alternative font stacks based on the Roboto and Source Pro Family which both
 have serif, sans and monospace typefaces and comes with several weights.</p>
 <figure class="align-default" id="id42">
-<a class="reference internal image-reference" href="rst/typography/typography-font-stacks.pdf"><img alt="rst/typography/typography-font-stacks.pdf" src="rst/typography/typography-font-stacks.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/typography-font-stacks.pdf"><img alt="../_images/typography-font-stacks.pdf" src="../_images/typography-font-stacks.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Font stack alternatives
 <span class="label">figure-typography-font-stacks</span>
@@ -1162,7 +1164,7 @@ namely <a class="reference external" href="https://en.wikipedia.org/wiki/DejaVu_
 <a class="reference external" href="https://en.wikipedia.org/wiki/STIX_Fonts_project">Styx</a> (sans and serif) and
 <a class="reference external" href="https://en.wikipedia.org/wiki/Computer_Modern">computer modern</a>:</p>
 <figure class="align-default" id="id43">
-<a class="reference internal image-reference" href="rst/typography/typography-math-stacks.pdf"><img alt="rst/typography/typography-math-stacks.pdf" src="rst/typography/typography-math-stacks.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/typography-math-stacks.pdf"><img alt="../_images/typography-math-stacks.pdf" src="../_images/typography-math-stacks.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Mathematics font stacks.
 <span class="label">figure-typography-math-stacks</span>
@@ -1197,7 +1199,7 @@ parameter. You can thus define either a very large or tiny figure, and a font wi
 size 10 will have the same visual aspects on your screen.</p>
 <p><strong>Exercise</strong> Using different fonts, weights and size, try to reproduce the figure <span class="xref std std-ref">figure-tick-labels-variation</span>.</p>
 <figure class="align-default" id="id44">
-<a class="reference internal image-reference" href="rst/typography/tick-labels-variation.pdf"><img alt="rst/typography/tick-labels-variation.pdf" src="rst/typography/tick-labels-variation.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/tick-labels-variation.pdf"><img alt="../_images/tick-labels-variation.pdf" src="../_images/tick-labels-variation.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Tick label variations
 <span class="label">figure-tick-labels-variation</span>
@@ -1212,7 +1214,7 @@ background that maximizes legibility. The case of scientific visualization is a
 bit different because there are some situations where you cannot control the
 background color since it is part of your results.</p>
 <figure class="align-default" id="id45">
-<a class="reference internal image-reference" href="rst/typography/typography-legibility.pdf"><img alt="rst/typography/typography-legibility.pdf" src="rst/typography/typography-legibility.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/typography-legibility.pdf"><img alt="../_images/typography-legibility.pdf" src="../_images/typography-legibility.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Typograpy legibility variations.
 <span class="label">figure-typography-legibility</span>
@@ -1234,7 +1236,7 @@ which uses the <a class="reference external" href="https://fonts.google.com/spec
 family. Colors come from the magma colormap. Make sure to use different outline
 widths to get the thin black line between each color.</p>
 <figure class="align-default" id="id46">
-<a class="reference internal image-reference" href="rst/typography/text-outline.pdf"><img alt="rst/typography/text-outline.pdf" src="rst/typography/text-outline.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/text-outline.pdf"><img alt="../_images/text-outline.pdf" src="../_images/text-outline.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Text with far too many outlines.
 <span class="label">figure-text-outline</span>
@@ -1261,7 +1263,7 @@ type of textual object which is the <a class="reference external" href="https://
 transformed at the level of individual vertices composing a glyph as shown on
 figure <span class="xref std std-ref">figure-typography-text-path</span>.</p>
 <figure class="align-default" id="id47">
-<a class="reference internal image-reference" href="rst/typography/typography-text-path.pdf"><img alt="rst/typography/typography-text-path.pdf" src="rst/typography/typography-text-path.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/typography-text-path.pdf"><img alt="../_images/typography-text-path.pdf" src="../_images/typography-text-path.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Better contour labels using text path.
 <span class="label">figure-typography-text-path</span>
@@ -1292,7 +1294,7 @@ face the camera, ensuring legibility.</p>
 <em>compression</em> on X vertices depending on the Y level should work. Vertices
 of a path can be accessed with <span class="code">path.vertices</span>.</p>
 <figure class="align-default" id="id49">
-<a class="reference internal image-reference" href="rst/typography/text-starwars.pdf"><img alt="rst/typography/text-starwars.pdf" src="rst/typography/text-starwars.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/text-starwars.pdf"><img alt="../_images/text-starwars.pdf" src="../_images/text-starwars.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">In a far distant galaxy.
 <span class="label">figure-text-starwars</span> (sources: <span class="source">typography/text-starwars.py</span>).</span><a class="headerlink" href="#id49" title="Permalink to this image">¶</a></p>
@@ -1341,7 +1343,7 @@ and you’ll need external packages such as <a class="reference external" href="
 conversion between the different models and spaces, but results are
 worth the effort.</p>
 <figure class="align-default" id="id50">
-<a class="reference internal image-reference" href="rst/colors/color-gradients.pdf"><img alt="rst/colors/color-gradients.pdf" src="rst/colors/color-gradients.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/color-gradients.pdf"><img alt="../_images/color-gradients.pdf" src="../_images/color-gradients.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Linear color gradients using different color models
 <span class="label">figure-color-gradients</span> (sources: <span class="source">colors/color-gradients.py</span>).</span><a class="headerlink" href="#id50" title="Permalink to this image">¶</a></p>
@@ -1353,7 +1355,7 @@ provides an alternate color model to access the same color space as
 the sRGB system. Matplotlib provides methods to convert to and
 from the HSV model (see the <a class="reference external" href="https://matplotlib.org/stable/api/colors_api.html">colors</a> module).</p>
 <figure class="align-default" id="id51">
-<a class="reference internal image-reference" href="rst/colors/color-wheel.pdf"><img alt="rst/colors/color-wheel.pdf" src="rst/colors/color-wheel.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/color-wheel.pdf"><img alt="../_images/color-wheel.pdf" src="../_images/color-wheel.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Color wheel (HSV)
 <span class="label">figure-color-wheel</span> (sources: <span class="source">colors/color-wheel.py</span>).</span><a class="headerlink" href="#id51" title="Permalink to this image">¶</a></p>
@@ -1394,7 +1396,7 @@ is the case of the open color palette (see figure
 <span class="xref std std-ref">stacked-plots</span>, I use two color stacks (<span class="code">blue grey</span> and <span class="code">yellow</span>
 from the material palettes) to highlight an area of interest.</p>
 <figure class="align-default" id="id52">
-<a class="reference internal image-reference" href="rst/colors/stacked-plots.pdf"><img alt="rst/colors/stacked-plots.pdf" src="rst/colors/stacked-plots.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/stacked-plots.pdf"><img alt="../_images/stacked-plots.pdf" src="../_images/stacked-plots.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Stacked plots using two different color stacks to better highlight
 an area of interest <span class="label">stacked-plots</span> (sources:
@@ -1402,14 +1404,14 @@ an area of interest <span class="label">stacked-plots</span> (sources:
 </figcaption>
 </figure>
 <figure class="align-default" id="id53">
-<a class="reference internal image-reference" href="rst/colors/open-colors.pdf"><img alt="rst/colors/open-colors.pdf" src="rst/colors/open-colors.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/open-colors.pdf"><img alt="../_images/open-colors.pdf" src="../_images/open-colors.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Open colors
 <span class="label">figure-open-colors</span> (sources: <span class="source">colors/open-colors.py</span>).</span><a class="headerlink" href="#id53" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id54">
-<a class="reference internal image-reference" href="rst/colors/material-colors.pdf"><img alt="rst/colors/material-colors.pdf" src="rst/colors/material-colors.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/material-colors.pdf"><img alt="../_images/material-colors.pdf" src="../_images/material-colors.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Material colors
 <span class="label">figure-material-colors</span> (sources: <span class="source">colors/material-colors.py</span>).</span><a class="headerlink" href="#id54" title="Permalink to this image">¶</a></p>
@@ -1420,7 +1422,7 @@ while allowing variation inside each group. When doing this, you need
 to conserve the same color semantics throughout all your subsequent
 figures.</p>
 <figure class="align-default" id="id55">
-<a class="reference internal image-reference" href="rst/colors/colored-hist.pdf"><img alt="rst/colors/colored-hist.pdf" src="rst/colors/colored-hist.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/colored-hist.pdf"><img alt="../_images/colored-hist.pdf" src="../_images/colored-hist.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Identification of groups with internal variations using color stacks.
 <span class="label">figure-colored-hist</span> (sources: <span class="source">colors/colored-hist.py</span>).</span><a class="headerlink" href="#id55" title="Permalink to this image">¶</a></p>
@@ -1428,7 +1430,7 @@ figures.</p>
 </figure>
 <p>Another popular usage of color is to show some plots associated with their standard deviation (SD) or standard error (SE). To do that, there are two different ways to do it. Either with use palettes as the o,e defined previously or we use transparency using the <span class="code">alpha</span> keyword. Let’s compare the results.</p>
 <figure class="align-default" id="id56">
-<a class="reference internal image-reference" href="rst/colors/alpha-vs-color.pdf"><img alt="rst/colors/alpha-vs-color.pdf" src="rst/colors/alpha-vs-color.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/alpha-vs-color.pdf"><img alt="../_images/alpha-vs-color.pdf" src="../_images/alpha-vs-color.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Showing standard deviation, with or without transparency
 <span class="label">figure-alpha-vs-color</span> (sources: <span class="source">colors/alpha-vs-color.py</span>).</span><a class="headerlink" href="#id56" title="Permalink to this image">¶</a></p>
@@ -1437,7 +1439,7 @@ figures.</p>
 <p>As you can see on the left part of figure <span class="xref std std-ref">figure-alpha-vs-color</span>, using transparency results in the two plots to be somehow mixed together. This might be a useful effect since it allows you to show what is happening in shared  areas. This is not the case when using opaque colors and you thus have to decide which plot is covering the other (using <span class="code">zorder</span>). Note that the choice of one or the other solution is up to you since it very much depends on your data.</p>
 <p>However, it is important to note that the use of transparency is quite specific in the sense that the visual result is not specified explicitly in the script. It depends actually from the actual rendering of the figure and the way matplotlib composes the different elements. Let’s consider for example a scatter plot (normal distribution) where each point is transparent (10%):</p>
 <figure class="align-default" id="id57">
-<a class="reference internal image-reference" href="rst/colors/alpha-scatter.pdf"><img alt="rst/colors/alpha-scatter.pdf" src="rst/colors/alpha-scatter.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/alpha-scatter.pdf"><img alt="../_images/alpha-scatter.pdf" src="../_images/alpha-scatter.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Semi-transparent scatter plots
 <span class="label">figure-alpha-scatter</span> (sources: <span class="source">colors/alpha-scatter.py</span>).</span><a class="headerlink" href="#id57" title="Permalink to this image">¶</a></p>
@@ -1449,7 +1451,7 @@ figures.</p>
 <h3>Choosing colormaps<a class="headerlink" href="#choosing-colormaps" title="Permalink to this headline">¶</a></h3>
 <p>Colormapping corresponds to the mapping of values to colors, using a colormap that defines, for each value, the corresponding color. There are different types of colormaps (sequential, diverging, cyclic, qualitative or none of these) that correspond to different use cases. It is is important to use the right type or colormap that corresponds to your data. To pick a colormap, you can start by answering questions illustrated on figure <span class="xref std std-ref">colormap-tree</span> and then choose the corresponding <a class="reference external" href="https://matplotlib.org/stable/tutorials/colors/colormaps.html">colormap</a> from the matplotlib website.</p>
 <figure class="align-default" id="id58">
-<a class="reference internal image-reference" href="rst/colors/colormap-tree.pdf"><img alt="rst/colors/colormap-tree.pdf" src="rst/colors/colormap-tree.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/colormap-tree.pdf"><img alt="../_images/colormap-tree.pdf" src="../_images/colormap-tree.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">How to choose a colormap?
 <span class="label">colormap-tree</span></span><a class="headerlink" href="#id58" title="Permalink to this image">¶</a></p>
@@ -1457,7 +1459,7 @@ figures.</p>
 </figure>
 <p>Problem is, for each type, there exist several colormaps. But if you pick the right type, the choice is yours and depends mostly on you aesthetic taste. As long as you choose the right type, you cannot be wrong. Figure <span class="xref std std-ref">figure-mona-lisa</span> a few choices associated with sequential colormaps and they all look good. In this case, one selection criterion could be the fact that the image represents a human being and we may prefer a colormap close to skin tones.</p>
 <figure class="align-default" id="id59">
-<a class="reference internal image-reference" href="rst/colors/mona-lisa.pdf"><img alt="rst/colors/mona-lisa.pdf" src="rst/colors/mona-lisa.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/mona-lisa.pdf"><img alt="../_images/mona-lisa.pdf" src="../_images/mona-lisa.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Variations on Mona Lisa (Leonardo da Vinci, 1503).
 <span class="label">figure-mona-lisa</span> (sources: <span class="source">colors/mona-lisa.py</span>).</span><a class="headerlink" href="#id59" title="Permalink to this image">¶</a></p>
@@ -1465,7 +1467,7 @@ figures.</p>
 </figure>
 <p>Diverging colormaps needs special care because they are really composed of two gradients with a special central value. By default, this central value is mapped to 0.5 in the normalized linear mapping and this works pretty well as long as the absolute minimum and maximum value of your data are the same. Now, consider the situation illustrated on figure <span class="xref std std-ref">figure-colormap-transform</span>. Here we have a small domain with negative values and a larger domain with positive values. Ideally, we would like the negative values to be mapped with blueish colors and positive values with yellowish colors. If we use a diverging colormap without any precaution, there’s no guarantee that we’ll obtain the result we want. To fix the problem, we thus need to tell matplotlib what is the central value and to do this, we need to use a <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.colors.TwoSlopeNorm.html#matplotlib.colors.TwoSlopeNorm">Two Slope norm</a> instead of a <a class="reference external" href="https://matplotlib.org/stable/tutorials/colors/colormapnorms.html#">Linear norm</a>.</p>
 <figure class="align-default" id="id60">
-<a class="reference internal image-reference" href="rst/colors/colormap-transform.pdf"><img alt="rst/colors/colormap-transform.pdf" src="rst/colors/colormap-transform.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/colormap-transform.pdf"><img alt="../_images/colormap-transform.pdf" src="../_images/colormap-transform.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Colormap with linear norm vs two slopes norm.
 <span class="label">figure-colormap-transform</span></span><a class="headerlink" href="#id60" title="Permalink to this image">¶</a></p>
@@ -1500,7 +1502,7 @@ figures.</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id61">
-<a class="reference internal image-reference" href="rst/colors/colored-plot.pdf"><img alt="rst/colors/colored-plot.pdf" src="rst/colors/colored-plot.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/colored-plot.pdf"><img alt="../_images/colored-plot.pdf" src="../_images/colored-plot.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">(Too much) colored line plots  (sources <span class="source">colors/colored-plot.py</span>)
 <span class="label">figure-colored-plot</span></span><a class="headerlink" href="#id61" title="Permalink to this image">¶</a></p>
@@ -1508,7 +1510,7 @@ figures.</p>
 </figure>
 <p><strong>Exercise 2</strong> This exercise is a bit tricky and requires the usage of <a class="reference external" href="https://matplotlib.org/stable/api/collections_api.html#matplotlib.collections.PolyCollection">PolyCollection</a>. The tricky part is to define, in a generic way, each polygon depending on the number of branches and sections. It is mostly trigonometry. I advise to start by drawing only the main lines and then create the small patches. The color part should then be easy because it depends only on the angle and you can thus use HSV encoding.</p>
 <figure class="align-default" id="id62">
-<a class="reference internal image-reference" href="rst/colors/flower-polar.pdf"><img alt="rst/colors/flower-polar.pdf" src="rst/colors/flower-polar.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/flower-polar.pdf"><img alt="../_images/flower-polar.pdf" src="../_images/flower-polar.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Flower polar (sources <span class="source">colors/flower-polar.py</span>)
 <span class="label">figure-flower-polar</span></span><a class="headerlink" href="#id62" title="Permalink to this image">¶</a></p>
@@ -1558,7 +1560,7 @@ simple, possibly approximated, figure that reveals only the most salient part
 of your research (Figure <span class="xref std std-ref">fig-rule-1</span>). This has proven to be a difficult
 exercise.</p>
 <figure class="align-default" id="id63">
-<a class="reference internal image-reference" href="rst/rules/rule-1.pdf"><img alt="rst/rules/rule-1.pdf" src="rst/rules/rule-1.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/rule-1.pdf"><img alt="../_images/rule-1.pdf" src="../_images/rule-1.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text"><strong>Know your audience.</strong> This is a remake of a figure that was originally
 published in the New York Times (NYT) in 2007. This new figure was made with
@@ -1596,7 +1598,7 @@ the main points of the text. If your figure is able to convey a striking
 message at first glance, chances are increased that your article will draw more
 attention from the community.</p>
 <figure class="align-default" id="id64">
-<a class="reference internal image-reference" href="rst/rules/rule-2.pdf"><img alt="rst/rules/rule-2.pdf" src="rst/rules/rule-2.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/rule-2.pdf"><img alt="../_images/rule-2.pdf" src="../_images/rule-2.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text"><strong>Identify your message.</strong> The superior colliculus (SC) is a brainstem
 structure at the crossroads of multiple functional pathways. Several
@@ -1638,7 +1640,7 @@ possibility to zoom and drag the figure. Ideally, each type of support medium
 requires a different figure, and you should abandon the practice of extracting
 a figure from your article to be put, as is, in your oral presentation.</p>
 <figure class="align-default" id="id65">
-<a class="reference internal image-reference" href="rst/rules/rule-3.pdf"><img alt="rst/rules/rule-3.pdf" src="rst/rules/rule-3.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/rule-3.pdf"><img alt="../_images/rule-3.pdf" src="../_images/rule-3.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text"><strong>Adapt the figure to the support medium</strong> These two figures represent the
 same simulation of the trajectories of a dual-particle system
@@ -1696,7 +1698,7 @@ to choose the best colormap for the nature of the data. For example, see
 chapter <a class="reference internal" href="#chap-defaults">chap-defaults</a> for how to go from the default settings to a nicer
 visual in the case of the matplotlib library.</p>
 <figure class="align-default" id="id66">
-<a class="reference internal image-reference" href="rst/rules/rule-5.pdf"><img alt="rst/rules/rule-5.pdf" src="rst/rules/rule-5.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/rule-5.pdf"><img alt="../_images/rule-5.pdf" src="../_images/rule-5.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text"><strong>Do not trust the defaults.</strong> The left panel shows the sine and cosine
 functions as rendered by matplotlib using default settings. While this
@@ -1733,7 +1735,7 @@ categorical data.</p></li>
 too many similar colors since color blindness may make it difficult to discern
 some color differences.</p>
 <figure class="align-default" id="id67">
-<a class="reference internal image-reference" href="rst/rules/rule-6.pdf"><img alt="rst/rules/rule-6.pdf" src="rst/rules/rule-6.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/rule-6.pdf"><img alt="../_images/rule-6.pdf" src="../_images/rule-6.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text"><strong>Use color effectively.</strong> This figure represents the same signal, whose
 frequency increases to the right and intensity increases towards the bottom,
@@ -1769,7 +1771,7 @@ sure to use labels, ticks, title, and the full range of values when
 relevant. Lastly, do not hesitate to ask colleagues about their interpretation
 of your figures.</p>
 <figure class="align-default" id="id68">
-<a class="reference internal image-reference" href="rst/rules/rule-7.pdf"><img alt="rst/rules/rule-7.pdf" src="rst/rules/rule-7.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/rule-7.pdf"><img alt="../_images/rule-7.pdf" src="../_images/rule-7.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text"><strong>Do not mislead the reader.</strong> On the left part of the figure, we
 represented a series of four values: 30, 20, 15, 10. On the upper left part,
@@ -1815,7 +1817,7 @@ caption. If you’re in doubt, do not hesitate to consult the excellent blog of
 Kaiser Fung, which explains quite clearly the concept of chartjunk through the
 study of many examples.</p>
 <figure class="align-default" id="id69">
-<a class="reference internal image-reference" href="rst/rules/rule-8.pdf"><img alt="rst/rules/rule-8.pdf" src="rst/rules/rule-8.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/rule-8.pdf"><img alt="../_images/rule-8.pdf" src="../_images/rule-8.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text"><strong>Avoid chartjunk.</strong> We have seven series of samples that are equally
 important, and we would like to show them all in order to visually compare
@@ -1865,7 +1867,7 @@ framework. Remember, in science, message and readability of the figure is the
 most important aspect while beauty is only an option, as dramatically shown in
 Figure <span class="xref std std-ref">fig-rule-9</span>.</p>
 <figure class="align-default" id="id70">
-<a class="reference internal image-reference" href="rst/rules/rule-9.pdf"><img alt="rst/rules/rule-9.pdf" src="rst/rules/rule-9.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/rule-9.pdf"><img alt="../_images/rule-9.pdf" src="../_images/rule-9.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text"><strong>Message trumps beauty.</strong> This figure is an extreme case where the message
 is particularly clear even if the aesthetic of the figure is
@@ -1937,7 +1939,7 @@ describes relationships or multilayered annotations of one or more scales.</p></
 <span id="chap-defaults"></span><h2>Mastering the defaults<a class="headerlink" href="#mastering-the-defaults" title="Permalink to this headline">¶</a></h2>
 <p>We’ve just explained (see rule 5 in chapter <a class="reference internal" href="#chap-rules">chap-rules</a>) that any visualization library or software comes with a set of default settings that identifies it. For example, figure <span class="xref std std-ref">figure-sine-cosine-variants</span> show the sine and cosine functions as rendered by Google calculator, Julia, Gnuplot and Matlab. Even for such simple functions, these displays are quite characteristic.</p>
 <figure class="align-default" id="id71">
-<a class="reference internal image-reference" href="rst/defaults/sine-cosine-variants.png"><img alt="rst/defaults/sine-cosine-variants.png" src="rst/defaults/sine-cosine-variants.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/sine-cosine-variants.png"><img alt="../_images/sine-cosine-variants.png" src="../_images/sine-cosine-variants.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Sine and cosine functions as displayed by (A) Google calculator (B) Julia,
 (C) Gnuplot (D) Matlab. <span class="label">figure-sine-cosine-variants</span></span><a class="headerlink" href="#id71" title="Permalink to this image">¶</a></p>
@@ -1956,7 +1958,7 @@ describes relationships or multilayered annotations of one or more scales.</p></
 </div>
 <p>Figure <span class="xref std std-ref">figure-defaults-step-2</span> shows the result that is quite characteristic of Matplotlib.</p>
 <figure class="align-default" id="id72">
-<a class="reference internal image-reference" href="rst/defaults/defaults-step-1.pdf"><img alt="rst/defaults/defaults-step-1.pdf" src="rst/defaults/defaults-step-1.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/defaults-step-1.pdf"><img alt="../_images/defaults-step-1.pdf" src="../_images/defaults-step-1.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Sine and cosine functions with implicit defaults
 (sources <span class="source">defaults/defaults-step-1.py</span>)
@@ -2000,7 +2002,7 @@ describes relationships or multilayered annotations of one or more scales.</p></
 </pre></div>
 </div>
 <figure class="align-default" id="id73">
-<a class="reference internal image-reference" href="rst/defaults/defaults-step-2.pdf"><img alt="rst/defaults/defaults-step-2.pdf" src="rst/defaults/defaults-step-2.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/defaults-step-2.pdf"><img alt="../_images/defaults-step-2.pdf" src="../_images/defaults-step-2.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Sine and cosine functions using matplotlib explicit defaults
 (sources <span class="source">defaults/defaults-step-2.py</span>)
@@ -2059,7 +2061,7 @@ describes relationships or multilayered annotations of one or more scales.</p></
 </pre></div>
 </div>
 <figure class="align-default" id="id74">
-<a class="reference internal image-reference" href="rst/defaults/defaults-step-3.pdf"><img alt="rst/defaults/defaults-step-3.pdf" src="rst/defaults/defaults-step-3.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/defaults-step-3.pdf"><img alt="../_images/defaults-step-3.pdf" src="../_images/defaults-step-3.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Sine and cosine functions using custom defaults
 (sources <span class="source">defaults/defaults-step-3.py</span>)
@@ -2144,7 +2146,7 @@ lines.markersize: 5
 </div>
 <p>You can see the result on figure <span class="xref std std-ref">figure-defaults-step-5</span>. From this, you can start refining further the figure. But remember that if it’s ok to tweak parameters a bit, you can also lose a lot of time doing that (trust me).</p>
 <figure class="align-default" id="id75">
-<a class="reference internal image-reference" href="rst/defaults/defaults-step-5.pdf"><img alt="rst/defaults/defaults-step-5.pdf" src="rst/defaults/defaults-step-5.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/defaults-step-5.pdf"><img alt="../_images/defaults-step-5.pdf" src="../_images/defaults-step-5.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Sine and cosine functions using custom defaults and fine tuning.
 (sources <span class="source">defaults/defaults-step-5.py</span>)
@@ -2167,7 +2169,7 @@ by modifying only rc settings.</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id76">
-<a class="reference internal image-reference" href="rst/defaults/defaults-exercice-1.pdf"><img alt="rst/defaults/defaults-exercice-1.pdf" src="rst/defaults/defaults-exercice-1.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/defaults-exercice-1.pdf"><img alt="../_images/defaults-exercice-1.pdf" src="../_images/defaults-exercice-1.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Alternative rendering of sine and cosine
 (solution <span class="source">defaults/defaults-exercice-1.py</span>)
@@ -2262,7 +2264,7 @@ understanding of the underlying machinery.</p>
 </div>
 </div></blockquote>
 <figure class="align-default" id="id77">
-<a class="reference internal image-reference" href="rst/layout/aspects.pdf"><img alt="rst/layout/aspects.pdf" src="rst/layout/aspects.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/aspects.pdf"><img alt="../_images/aspects.pdf" src="../_images/aspects.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Combination of figure and axes aspect ratio
 <span class="label">figure-aspects</span></span><a class="headerlink" href="#id77" title="Permalink to this image">¶</a></p>
@@ -2271,7 +2273,7 @@ understanding of the underlying machinery.</p>
 <p>The final layout of a figure results from a set of constraints that makes it  difficult to predict the end result. This is actually even more acute when you combine several axes on the same figure as shown on figures
 <span class="xref std std-ref">figure-layout-aspect-1</span>, <span class="xref std std-ref">figure-layout-aspect-2</span> &amp; <span class="xref std std-ref">figure-layout-aspect-3</span>. Depending on what is important in your figure (aspect, range or size), you’ll privilege one of these layout. In any case, you should now have realized that if you over-constrained your layout, it might be unsolvable and matplotlib will try to find the best compromise.</p>
 <figure class="align-default" id="id78">
-<a class="reference internal image-reference" href="rst/layout/layout-aspect-1.pdf"><img alt="rst/layout/layout-aspect-1.pdf" src="rst/layout/layout-aspect-1.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/layout-aspect-1.pdf"><img alt="../_images/layout-aspect-1.pdf" src="../_images/layout-aspect-1.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Same size, same range, different aspect
 (sources <span class="source">layout/layout-aspect.py</span>)
@@ -2279,7 +2281,7 @@ understanding of the underlying machinery.</p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id79">
-<a class="reference internal image-reference" href="rst/layout/layout-aspect-2.pdf"><img alt="rst/layout/layout-aspect-2.pdf" src="rst/layout/layout-aspect-2.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/layout-aspect-2.pdf"><img alt="../_images/layout-aspect-2.pdf" src="../_images/layout-aspect-2.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Same range, same aspect, different size
 (sources <span class="source">layout/layout-aspect.py</span>)
@@ -2287,7 +2289,7 @@ understanding of the underlying machinery.</p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id80">
-<a class="reference internal image-reference" href="rst/layout/layout-aspect-3.pdf"><img alt="rst/layout/layout-aspect-3.pdf" src="rst/layout/layout-aspect-3.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/layout-aspect-3.pdf"><img alt="../_images/layout-aspect-3.pdf" src="../_images/layout-aspect-3.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Same size, same aspect, different range
 (sources <span class="source">layout/layout-aspect.py</span>)
@@ -2325,7 +2327,7 @@ over the relative aspect of each axes whereas in figure
 <span class="xref std std-ref">figure-layout-gridspec</span>, we can very easily specify different
 sizes for each axes.</p>
 <figure class="align-default" id="id81">
-<a class="reference internal image-reference" href="rst/layout/layout-classical.pdf"><img alt="rst/layout/layout-classical.pdf" src="rst/layout/layout-classical.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/layout-classical.pdf"><img alt="../_images/layout-classical.pdf" src="../_images/layout-classical.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Subplots using classical layout.
 (source <span class="source">layout/layout-classical.py</span>)
@@ -2333,7 +2335,7 @@ sizes for each axes.</p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id82">
-<a class="reference internal image-reference" href="rst/layout/layout-gridspec.pdf"><img alt="rst/layout/layout-gridspec.pdf" src="rst/layout/layout-gridspec.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/layout-gridspec.pdf"><img alt="../_images/layout-gridspec.pdf" src="../_images/layout-gridspec.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Subplots using gridspec layout
 (source <span class="source">layout/layout-gridspec.py</span>)
@@ -2358,7 +2360,7 @@ axes, one axes for the color legend and another for detailed
 explanation. In this case, I use the central axes and write the text
 outside the axes, specifying this does not need to be clipped.</p>
 <figure class="align-default" id="id83">
-<a class="reference internal image-reference" href="rst/layout/complex-layout.pdf"><img alt="rst/layout/complex-layout.pdf" src="rst/layout/complex-layout.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/complex-layout.pdf"><img alt="../_images/complex-layout.pdf" src="../_images/complex-layout.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Complex layout
 (source <span class="source">layout/complex-layout.py</span>)
@@ -2366,7 +2368,7 @@ outside the axes, specifying this does not need to be clipped.</p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id84">
-<a class="reference internal image-reference" href="rst/layout/complex-layout-bare.pdf"><img alt="rst/layout/complex-layout-bare.pdf" src="rst/layout/complex-layout-bare.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/complex-layout-bare.pdf"><img alt="../_images/complex-layout-bare.pdf" src="../_images/complex-layout-bare.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Complex layout structure
 (source <span class="source">layout/complex-layout-bare.py</span>)
@@ -2379,7 +2381,7 @@ outside the axes, specifying this does not need to be clipped.</p>
 <p><strong>Standard layout 1</strong> Using gridspec, the goal is to reproduce figure
 <span class="xref std std-ref">figure-standard-layout-1</span> where the colorbar is the same size as the main axes and its width is one tenth of main axis width.</p>
 <figure class="align-default" id="id85">
-<a class="reference internal image-reference" href="rst/layout/standard-layout-1.pdf"><img alt="rst/layout/standard-layout-1.pdf" src="rst/layout/standard-layout-1.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/standard-layout-1.pdf"><img alt="../_images/standard-layout-1.pdf" src="../_images/standard-layout-1.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Image and colorbar
 (sources <span class="source">layout/standard-layout-1.py</span>)
@@ -2389,7 +2391,7 @@ outside the axes, specifying this does not need to be clipped.</p>
 <p><strong>Standard layout 2</strong> Using gridspec, the goal is to reproduce figure
 <span class="xref std std-ref">figure-standard-layout-2</span> with top and right histograms aligned with the main axes.</p>
 <figure class="align-default" id="id86">
-<a class="reference internal image-reference" href="rst/layout/standard-layout-2.pdf"><img alt="rst/layout/standard-layout-2.pdf" src="rst/layout/standard-layout-2.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/standard-layout-2.pdf"><img alt="../_images/standard-layout-2.pdf" src="../_images/standard-layout-2.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Scatter plot and histograms
 (sources <span class="source">layout/standard-layout-2.py</span>)
@@ -2409,7 +2411,7 @@ your own element specifically for your figure. For example, figure
 (annotation and text) as well as specific elements (roots reported on
 the x axis using vertical markers).</p>
 <figure class="align-default" id="id87">
-<a class="reference internal image-reference" href="rst/ornaments/bessel-functions.pdf"><img alt="rst/ornaments/bessel-functions.pdf" src="rst/ornaments/bessel-functions.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bessel-functions.pdf"><img alt="../_images/bessel-functions.pdf" src="../_images/bessel-functions.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Bessel functions
 <span class="label">figure-bessel-functions</span>
@@ -2441,7 +2443,7 @@ time, a simple <span class="code">legend()</span> call is sufficient as shown be
 </pre></div>
 </div>
 <figure class="align-default" id="id88">
-<a class="reference internal image-reference" href="rst/ornaments/legend-regular.pdf"><img alt="rst/ornaments/legend-regular.pdf" src="rst/ornaments/legend-regular.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/legend-regular.pdf"><img alt="../_images/legend-regular.pdf" src="../_images/legend-regular.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Regular legend
 <span class="label">figure-legend-regular</span>
@@ -2449,7 +2451,7 @@ time, a simple <span class="code">legend()</span> call is sufficient as shown be
 </figcaption>
 </figure>
 <figure class="align-default" id="id89">
-<a class="reference internal image-reference" href="rst/ornaments/legend-alternatives.pdf"><img alt="rst/ornaments/legend-alternatives.pdf" src="rst/ornaments/legend-alternatives.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/legend-alternatives.pdf"><img alt="../_images/legend-alternatives.pdf" src="../_images/legend-alternatives.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Alternative legends
 <span class="label">figure-legend-alternatives</span>
@@ -2484,7 +2486,7 @@ title, I simply moved it to the right and I moved the legend box
 (using two columns) accordingly, that is, under the title. Nothing
 complicated here but I think the result is visually more pleasant.</p>
 <figure class="align-default" id="id90">
-<a class="reference internal image-reference" href="rst/ornaments/title-regular.pdf"><img alt="rst/ornaments/title-regular.pdf" src="rst/ornaments/title-regular.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/title-regular.pdf"><img alt="../_images/title-regular.pdf" src="../_images/title-regular.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Regular title
 <span class="label">figure-title-regular</span>
@@ -2499,7 +2501,7 @@ height for the actual title. In this figure, I also inserted a fully
 justified text using Latex that may be considered as another form or
 (advanced) ornament.</p>
 <figure class="align-default" id="id91">
-<a class="reference internal image-reference" href="rst/ornaments/latex-text-box.png"><img alt="rst/ornaments/latex-text-box.png" src="rst/ornaments/latex-text-box.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/latex-text-box.png"><img alt="../_images/latex-text-box.png" src="../_images/latex-text-box.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Advanced text box
 <span class="label">figure-latex-text-box</span>
@@ -2526,7 +2528,7 @@ independently of the data distribution. However, if you have too many
 points, all the different labels may end up cluttering your figure and
 hide potentially important information.</p>
 <figure class="align-default" id="id92">
-<a class="reference internal image-reference" href="rst/ornaments/annotation-direct.pdf"><img alt="rst/ornaments/annotation-direct.pdf" src="rst/ornaments/annotation-direct.pdf" style="width: 65%;" /></a>
+<a class="reference internal image-reference" href="../_images/annotation-direct.pdf"><img alt="../_images/annotation-direct.pdf" src="../_images/annotation-direct.pdf" style="width: 65%;" /></a>
 <figcaption>
 <p><span class="caption-text">Direct annotations
 <span class="label">figure-annotation-direct</span>
@@ -2565,7 +2567,7 @@ complex connection style:</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id93">
-<a class="reference internal image-reference" href="rst/ornaments/annotation-side.pdf"><img alt="rst/ornaments/annotation-side.pdf" src="rst/ornaments/annotation-side.pdf" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="../_images/annotation-side.pdf"><img alt="../_images/annotation-side.pdf" src="../_images/annotation-side.pdf" style="width: 75%;" /></a>
 <figcaption>
 <p><span class="caption-text">Side annotations
 <span class="label">figure-annotation-side</span>
@@ -2583,7 +2585,7 @@ specify the nature of the object you want to annotate (by providing a
 patch) and matplotlib will take care of having the origin of the
 connection to the border of the patch.</p>
 <figure class="align-default" id="id94">
-<a class="reference internal image-reference" href="rst/ornaments/annotation-zoom.pdf"><img alt="rst/ornaments/annotation-zoom.pdf" src="rst/ornaments/annotation-zoom.pdf" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="../_images/annotation-zoom.pdf"><img alt="../_images/annotation-zoom.pdf" src="../_images/annotation-zoom.pdf" style="width: 75%;" /></a>
 <figcaption>
 <p><span class="caption-text">Zoomed annotations
 <span class="label">figure-annotation-zoom</span>
@@ -2600,7 +2602,7 @@ side. This ornament provides a quick way to show respective
 distributions along weight and height and can be rendered with a
 scatter plot using large vertical and horizontal markers.</p>
 <figure class="align-default" id="id95">
-<a class="reference internal image-reference" href="rst/ornaments/elegant-scatter.pdf"><img alt="rst/ornaments/elegant-scatter.pdf" src="rst/ornaments/elegant-scatter.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/elegant-scatter.pdf"><img alt="../_images/elegant-scatter.pdf" src="../_images/elegant-scatter.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Elegant scatter plot
 <span class="label">figure-elegant-scatter</span>
@@ -2655,7 +2657,7 @@ that each time we set new data, marker is automatically updated and
 moves with the animation. See figure
 <span class="xref std std-ref">figure-animation-sine-cosine</span>.</p>
 <figure class="align-default" id="id96">
-<a class="reference internal image-reference" href="rst/animation/sine-cosine.pdf"><img alt="rst/animation/sine-cosine.pdf" src="rst/animation/sine-cosine.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/sine-cosine.pdf"><img alt="../_images/sine-cosine.pdf" src="../_images/sine-cosine.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Snapshots of the sine cosine animation
 <span class="label">figure-animation-sine-cosine</span>
@@ -2688,10 +2690,10 @@ using the <a class="reference external" href="https://github.com/tqdm/tqdm">tqdm
 </div>
 <p>Creation time remains the same, but at least now, we can check how
 slow or fast it is. Here is some output of the animation:</p>
-<a class="reference internal image-reference" href="rst/animation/sine-cosine-frame-032.pdf"><img alt="rst/animation/sine-cosine-frame-032.pdf" src="rst/animation/sine-cosine-frame-032.pdf" style="width: 100%;" /></a>
-<a class="reference internal image-reference" href="rst/animation/sine-cosine-frame-128.pdf"><img alt="rst/animation/sine-cosine-frame-128.pdf" src="rst/animation/sine-cosine-frame-128.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/sine-cosine-frame-032.pdf"><img alt="../_images/sine-cosine-frame-032.pdf" src="../_images/sine-cosine-frame-032.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/sine-cosine-frame-128.pdf"><img alt="../_images/sine-cosine-frame-128.pdf" src="../_images/sine-cosine-frame-128.pdf" style="width: 100%;" /></a>
 <figure class="align-default" id="id97">
-<a class="reference internal image-reference" href="rst/animation/sine-cosine-frame-255.pdf"><img alt="rst/animation/sine-cosine-frame-255.pdf" src="rst/animation/sine-cosine-frame-255.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/sine-cosine-frame-255.pdf"><img alt="../_images/sine-cosine-frame-255.pdf" src="../_images/sine-cosine-frame-255.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Still from the sine/cosine animation
 (sources <span class="source">animation/sine-cosine.py</span>).</span><a class="headerlink" href="#id97" title="Permalink to this image">¶</a></p>
@@ -2770,7 +2772,7 @@ movie):</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id98">
-<a class="reference internal image-reference" href="rst/animation/rain.pdf"><img alt="rst/animation/rain.pdf" src="rst/animation/rain.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/rain.pdf"><img alt="../_images/rain.pdf" src="../_images/rain.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Still from the rain animation (sources <span class="source">animation/rain.py</span>).</span><a class="headerlink" href="#id98" title="Permalink to this image">¶</a></p>
 </figcaption>
@@ -2844,7 +2846,7 @@ is rather standard for non-specialists like me.</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id99">
-<a class="reference internal image-reference" href="rst/animation/platecarree.pdf"><img alt="rst/animation/platecarree.pdf" src="rst/animation/platecarree.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/platecarree.pdf"><img alt="../_images/platecarree.pdf" src="../_images/platecarree.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Equirectangular projection
 <span class="label">figure-animation-equirectangular</span>
@@ -2858,7 +2860,7 @@ coordinates will be automatically transformed (by cartopy).</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id100">
-<a class="reference internal image-reference" href="rst/animation/earthquakes-frame-50.pdf"><img alt="rst/animation/earthquakes-frame-50.pdf" src="rst/animation/earthquakes-frame-50.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/earthquakes-frame-50.pdf"><img alt="../_images/earthquakes-frame-50.pdf" src="../_images/earthquakes-frame-50.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Earthquakes still (July 23, 2021 at 11am CET)
 <span class="label">figure-animation-earthquakes</span>
@@ -2928,7 +2930,7 @@ synchronizing this animation with some music for example.</p>
 </pre></div>
 </div>
 <figure class="align-default" id="id101">
-<a class="reference internal image-reference" href="rst/animation/fluid-animation.png"><img alt="rst/animation/fluid-animation.png" src="rst/animation/fluid-animation.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/fluid-animation.png"><img alt="../_images/fluid-animation.png" src="../_images/fluid-animation.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Fluid simulation
 <span class="label">figure-fluid-animation</span>
@@ -2943,7 +2945,7 @@ the other. If you don’t do that, you might have some flickering.</p>
 following example which is a <a class="reference external" href="https://github.com/rougier/less-is-more">remake</a> of an animation
 originally designed by dark horse analytics.</p>
 <figure class="align-default" id="id102">
-<a class="reference internal image-reference" href="rst/animation/less-is-more.png"><img alt="rst/animation/less-is-more.png" src="rst/animation/less-is-more.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/less-is-more.png"><img alt="../_images/less-is-more.png" src="../_images/less-is-more.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Less is more <span class="label">figure-less-is-more</span>
 (sources: <span class="source">animation/less-is-more.py</span>).</span><a class="headerlink" href="#id102" title="Permalink to this image">¶</a></p>
@@ -2957,7 +2959,7 @@ originally designed by dark horse analytics.</p>
 are generated. Figure <span class="xref std std-ref">figure-lissajous</span> shows a still from the
 animation. Make sure to try to copy the exact style.</p>
 <figure class="align-default" id="id103">
-<a class="reference internal image-reference" href="rst/animation/lissajous.pdf"><img alt="rst/animation/lissajous.pdf" src="rst/animation/lissajous.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/lissajous.pdf"><img alt="../_images/lissajous.pdf" src="../_images/lissajous.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Lissajous curves <span class="label">figure-lissajous</span>
 (sources: <span class="source">animation/lissajous.py</span>).</span><a class="headerlink" href="#id103" title="Permalink to this image">¶</a></p>
@@ -2977,7 +2979,7 @@ understood a few concepts. To demonstrate that, we’ll render the bunny
 on figure above with 60 lines of Python and one matplotlib call. That
 is, without using the 3D axis.</p>
 <figure class="align-default" id="id104">
-<a class="reference internal image-reference" href="rst/threed/bunny.pdf"><img alt="rst/threed/bunny.pdf" src="rst/threed/bunny.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny.pdf"><img alt="../_images/bunny.pdf" src="../_images/bunny.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Stanford bunny.
 (sources: <span class="source">threed/bunny.py</span>).
@@ -3034,7 +3036,7 @@ perfect match. So let’s first extract the triangles and get rid of the
 </div>
 <p>Result is shown on figure <span class="xref std std-ref">figure-bunny-1</span>.</p>
 <figure class="align-default" id="id105">
-<a class="reference internal image-reference" href="rst/threed/bunny-1.pdf"><img alt="rst/threed/bunny-1.pdf" src="rst/threed/bunny-1.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-1.pdf"><img alt="../_images/bunny-1.pdf" src="../_images/bunny-1.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Stanford bunny without any transformation.
 (sources: <span class="source">threed/bunny-1.py</span>).
@@ -3047,7 +3049,7 @@ perfect match. So let’s first extract the triangles and get rid of the
 <p>The rendering we’ve just made is actually an <a class="reference external" href="https://en.wikipedia.org/wiki/Orthographic_projection">orthographic projection</a> while the
 previous bunny uses a <a class="reference external" href="https://en.wikipedia.org/wiki/3D_projection#Perspective_projection">perspective projection</a>:</p>
 <figure class="align-default" id="id106">
-<a class="reference internal image-reference" href="rst/threed/projection.pdf"><img alt="rst/threed/projection.pdf" src="rst/threed/projection.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/projection.pdf"><img alt="../_images/projection.pdf" src="../_images/projection.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Orthographic and perspective projections.
 <span class="label">figure-projections</span></span><a class="headerlink" href="#id106" title="Permalink to this image">¶</a></p>
@@ -3104,7 +3106,7 @@ such as to always have w=1 for each vertices.</p>
 </div>
 <p>Now we can check the result on figure <span class="xref std std-ref">figure-bunny-2</span> that looks totally wrong.</p>
 <figure class="align-default" id="id107">
-<a class="reference internal image-reference" href="rst/threed/bunny-2.pdf"><img alt="rst/threed/bunny-2.pdf" src="rst/threed/bunny-2.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-2.pdf"><img alt="../_images/bunny-2.pdf" src="../_images/bunny-2.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Wrong rendering when camera is inside.
 (sources: <span class="source">threed/bunny-2.py</span>).
@@ -3125,7 +3127,7 @@ before the perspective transformation.</p>
 </div>
 <p>The corrected output is shown on figure <span class="xref std std-ref">figure-bunny-3</span>.</p>
 <figure class="align-default" id="id108">
-<a class="reference internal image-reference" href="rst/threed/bunny-3.pdf"><img alt="rst/threed/bunny-3.pdf" src="rst/threed/bunny-3.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-3.pdf"><img alt="../_images/bunny-3.pdf" src="../_images/bunny-3.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Corrected rendering with camera away.
 (sources: <span class="source">threed/bunny-3.py</span>).
@@ -3178,7 +3180,7 @@ we can compute a global MVP matrix that will do everything at once:</p>
 </div>
 <p>You should obtain results shown on figure <span class="xref std std-ref">figure-bunny-4</span>.</p>
 <figure class="align-default" id="id109">
-<a class="reference internal image-reference" href="rst/threed/bunny-4.pdf"><img alt="rst/threed/bunny-4.pdf" src="rst/threed/bunny-4.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-4.pdf"><img alt="../_images/bunny-4.pdf" src="../_images/bunny-4.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rotated and translated bunny.
 (sources: <span class="source">threed/bunny-4.py</span>).
@@ -3190,7 +3192,7 @@ difference (see figure <span class="xref std std-ref">figure-bunny-5</span>).  N
 to adapt the distance to the camera in order for the bunnies to have
 the same apparent size</p>
 <figure class="align-default" id="id110">
-<a class="reference internal image-reference" href="rst/threed/bunny-5.pdf"><img alt="rst/threed/bunny-5.pdf" src="rst/threed/bunny-5.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-5.pdf"><img alt="../_images/bunny-5.pdf" src="../_images/bunny-5.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Different apertures
 (sources: <span class="source">threed/bunny-5.py</span>).
@@ -3203,7 +3205,7 @@ the same apparent size</p>
 <p>Let’s try now to fill the triangles and see what happens (figure
 <span class="xref std std-ref">figure-bunny-6</span>).</p>
 <figure class="align-default" id="id111">
-<a class="reference internal image-reference" href="rst/threed/bunny-6.pdf"><img alt="rst/threed/bunny-6.pdf" src="rst/threed/bunny-6.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-6.pdf"><img alt="../_images/bunny-6.pdf" src="../_images/bunny-6.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rendering without depth sorting.
 (sources: <span class="source">threed/bunny-6.py</span>).
@@ -3229,7 +3231,7 @@ works beautifully:</p>
 <p>And now everything is rendered correctly as shown on figure
 <span class="xref std std-ref">figure-bunny-7</span>.</p>
 <figure class="align-default" id="id112">
-<a class="reference internal image-reference" href="rst/threed/bunny-7.pdf"><img alt="rst/threed/bunny-7.pdf" src="rst/threed/bunny-7.pdf" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-7.pdf"><img alt="../_images/bunny-7.pdf" src="../_images/bunny-7.pdf" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rendering with depth sorting.
 (sources: <span class="source">threed/bunny-7.py</span>).
@@ -3249,7 +3251,7 @@ that:</p>
 </div>
 <p>And our final display is show on figure <span class="xref std std-ref">figure-bunny-8</span>.</p>
 <figure class="align-default" id="id113">
-<a class="reference internal image-reference" href="rst/threed/bunny-8.pdf"><img alt="rst/threed/bunny-8.pdf" src="rst/threed/bunny-8.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunny-8.pdf"><img alt="../_images/bunny-8.pdf" src="../_images/bunny-8.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Rendering with depth colors.
 (sources: <span class="source">threed/bunny-8.py</span>).
@@ -3266,7 +3268,7 @@ easily with matplotlib and a few transformations.</p>
 the figure <span class="xref std std-ref">figure-bunnies</span> that mix perspective (top left) and
 orthographic projections. Each bunny is contained in one axes.</p>
 <figure class="align-default" id="id114">
-<a class="reference internal image-reference" href="rst/threed/bunnies.pdf"><img alt="rst/threed/bunnies.pdf" src="rst/threed/bunnies.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bunnies.pdf"><img alt="../_images/bunnies.pdf" src="../_images/bunnies.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Stanford bunnies
 (sources: <span class="source">threed/bunnies.py</span>).
@@ -3295,7 +3297,7 @@ exactly 0.002 (= 1/500). This means that if you plot 500 black points
 with a transparency of 0.002, you obtain get a quasi black marker as
 shown on figure <span class="xref std std-ref">figure-transparency</span>.</p>
 <figure class="align-default" id="id115">
-<a class="reference internal image-reference" href="rst/optimization/transparency.pdf"><img alt="rst/optimization/transparency.pdf" src="rst/optimization/transparency.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/transparency.pdf"><img alt="../_images/transparency.pdf" src="../_images/transparency.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Transparency levels
 <span class="label">figure-transparency</span>
@@ -3314,7 +3316,7 @@ observe the central are is darker. For one million points, we reached
 the limit of the transparency trick (alpha=0.002) and we now have a
 central dark spot that hide information.</p>
 <figure class="align-default" id="id116">
-<a class="reference internal image-reference" href="rst/optimization/scatters.png"><img alt="rst/optimization/scatters.png" src="rst/optimization/scatters.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/scatters.png"><img alt="../_images/scatters.png" src="../_images/scatters.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Scatter, hist2d and hexbin
 <span class="label">figure-scatters</span>
@@ -3354,7 +3356,7 @@ The reason is that matplotlib rendering engine takes care of not
 overdrawing an area that belong to the same plot as shown on the figure
 below:</p>
 <figure class="align-default" id="id117">
-<a class="reference internal image-reference" href="rst/optimization/self-cover.pdf"><img alt="rst/optimization/self-cover.pdf" src="rst/optimization/self-cover.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/self-cover.pdf"><img alt="../_images/self-cover.pdf" src="../_images/self-cover.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Self-covering example
 <span class="label">figure-self-cover</span>
@@ -3377,7 +3379,7 @@ decide of its value. This is of course a slower compared to a regular
 plot but the rendering is more faithful to the signal as shown on the
 third line.</p>
 <figure class="align-default" id="id118">
-<a class="reference internal image-reference" href="rst/optimization/multisample.png"><img alt="rst/optimization/multisample.png" src="rst/optimization/multisample.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/multisample.png"><img alt="../_images/multisample.png" src="../_images/multisample.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">High-frequency signal.
 <span class="label">figure-multisample</span>
@@ -3401,7 +3403,7 @@ faster (by a factor of two approximately). For any other case, the
 scatter command is the one to use. We can try to measure the time to
 prepare a one million scatter plot using the following code:</p>
 <figure class="align-default" id="id119">
-<a class="reference internal image-reference" href="rst/optimization/scatter-benchmark.png"><img alt="rst/optimization/scatter-benchmark.png" src="rst/optimization/scatter-benchmark.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/scatter-benchmark.png"><img alt="../_images/scatter-benchmark.png" src="../_images/scatter-benchmark.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Scatter benchmark
 <span class="label">figure-scatter-benchmark</span>
@@ -3424,7 +3426,7 @@ minutes. Note that the fastest rendering (unified plot, middle) is not
 exactly equivalent to the others due to the absence of self-coverage
 as explained previously.</p>
 <figure class="align-default" id="id120">
-<a class="reference internal image-reference" href="rst/optimization/line-benchmark.png"><img alt="rst/optimization/line-benchmark.png" src="rst/optimization/line-benchmark.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/line-benchmark.png"><img alt="../_images/line-benchmark.png" src="../_images/line-benchmark.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Line benchmark
 <span class="label">figure-line-benchmark</span>
@@ -3541,7 +3543,7 @@ reason is that if you enforce very strict clipping, a marker whose
 center is outside extent will not be drawn while it may overlap because
 of its size.</p>
 <figure class="align-default" id="id121">
-<a class="reference internal image-reference" href="rst/optimization/multithread.png"><img alt="rst/optimization/multithread.png" src="rst/optimization/multithread.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/multithread.png"><img alt="../_images/multithread.png" src="../_images/multithread.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Multithread rendering
 <span class="label">figure-multithread-rendering</span>
@@ -3568,7 +3570,7 @@ that allow to produce virtually any rendering, and supported by a
 number of standard operations as shown on figure
 <span class="xref std std-ref">figure-polygon-clipping</span></p>
 <figure class="align-default" id="id122">
-<a class="reference internal image-reference" href="rst/beyond/polygon-clipping.pdf"><img alt="rst/beyond/polygon-clipping.pdf" src="rst/beyond/polygon-clipping.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/polygon-clipping.pdf"><img alt="../_images/polygon-clipping.pdf" src="../_images/polygon-clipping.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Polygon clipping
 <span class="label">figure-polygon-clipping</span>
@@ -3582,7 +3584,7 @@ combination of two polygons.</p>
 <p>Such clipping can be used as well in a regular figure to make some
 interesting effect as shown on figure <span class="xref std std-ref">figure-interactive-loupe</span>.</p>
 <figure class="align-default" id="id123">
-<a class="reference internal image-reference" href="rst/beyond/interactive-loupe.pdf"><img alt="rst/beyond/interactive-loupe.pdf" src="rst/beyond/interactive-loupe.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/interactive-loupe.pdf"><img alt="../_images/interactive-loupe.pdf" src="../_images/interactive-loupe.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Polygon clipping
 <span class="label">figure-interactive-loupe</span>
@@ -3609,7 +3611,7 @@ figure <span class="xref std std-ref">figure-bluenoise</span>, you can see the a
 difference when compared to either a pure uniform distribution or a
 regular grid with some normal jitters.</p>
 <figure class="align-default" id="id124">
-<a class="reference internal image-reference" href="rst/beyond/bluenoise.pdf"><img alt="rst/beyond/bluenoise.pdf" src="rst/beyond/bluenoise.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/bluenoise.pdf"><img alt="../_images/bluenoise.pdf" src="../_images/bluenoise.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Uniform distribution, jittered grid and blue noise distribution
 <span class="label">figure-bluenoise</span>
@@ -3641,7 +3643,7 @@ compute intersection with generic polygons. You can see the result on
 the right part of figure <span class="xref std std-ref">figure-dyson-hatching</span> and it looks
 much nicer (in my honest opinion).</p>
 <figure class="align-default" id="id125">
-<a class="reference internal image-reference" href="rst/beyond/dyson-hatching.pdf"><img alt="rst/beyond/dyson-hatching.pdf" src="rst/beyond/dyson-hatching.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/dyson-hatching.pdf"><img alt="../_images/dyson-hatching.pdf" src="../_images/dyson-hatching.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Dyson hatching
 <span class="label">figure-dyson-hatching</span>
@@ -3685,7 +3687,7 @@ you’re curious on what could be achieved, make sure to have a look at
 <a class="reference external" href="https://watabou.itch.io/one-page-dungeon">one page dungeon</a> by
 Oleg Dolya or the <a class="reference external" href="https://mewo2.com/notes/terrain/">Fantasy map generator</a> by Martin O’Leary.</p>
 <figure class="align-default" id="id126">
-<a class="reference internal image-reference" href="rst/beyond/dungeon.pdf"><img alt="rst/beyond/dungeon.pdf" src="rst/beyond/dungeon.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/dungeon.pdf"><img alt="../_images/dungeon.pdf" src="../_images/dungeon.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Matplotlib dungeon
 <span class="label">figure-matplotlib-dungeon</span>
@@ -3717,7 +3719,7 @@ direction) and a line collection for the sensors. The overall
 simulation is a matplotlib animation where the update function is
 responsible for updating the bot position and sensors values.</p>
 <figure class="align-default" id="id127">
-<a class="reference internal image-reference" href="rst/beyond/tinybot.pdf"><img alt="rst/beyond/tinybot.pdf" src="rst/beyond/tinybot.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/tinybot.pdf"><img alt="../_images/tinybot.pdf" src="../_images/tinybot.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Tiny bot simulator
 <span class="label">figure-tinybot</span>
@@ -3807,7 +3809,7 @@ work this represents should be balanced with your actual needs. If you
 need the figure only once, it is probably not worth the effort if you
 can do it manually.</p>
 <figure class="align-default" id="id128">
-<a class="reference internal image-reference" href="rst/beyond/basal-ganglia.pdf"><img alt="rst/beyond/basal-ganglia.pdf" src="rst/beyond/basal-ganglia.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/basal-ganglia.pdf"><img alt="../_images/basal-ganglia.pdf" src="../_images/basal-ganglia.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">A schematic view of a slice of the basal
 ganglia. Sources availables from the <a class="reference external" href="https://github.com/rougier/spatial-computation">spatial-computation</a> repository on
@@ -3819,7 +3821,7 @@ GitHub. <span class="label">figure-basal-ganglia</span></span><a class="headerli
 <h3>Exercises<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p><strong>Stamp like effect</strong> <a class="reference external" href="https://matplotlib.org/stable/gallery/shapes_and_collections/fancybox_demo.html">Fancy boxes</a> offer several style that can be used to achieve different effect as shown on figure <span class="xref std std-ref">figure-mona-lisa-stamp</span>. The goal is to achieve the same effect.</p>
 <figure class="align-default" id="id129">
-<a class="reference internal image-reference" href="rst/beyond/stamp.png"><img alt="rst/beyond/stamp.png" src="rst/beyond/stamp.png" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="../_images/stamp.png"><img alt="../_images/stamp.png" src="../_images/stamp.png" style="width: 75%;" /></a>
 <figcaption>
 <p><span class="caption-text">Mona Lisa stamp
 <span class="label">figure-mona-lisa-stamp</span>
@@ -3834,7 +3836,7 @@ exploring the maze (this has been generated by recording the
 occupancy rate, that is, the number of recorded point inside the
 block.</p>
 <figure class="align-default" id="id130">
-<a class="reference internal image-reference" href="rst/beyond/radial-maze.pdf"><img alt="rst/beyond/radial-maze.pdf" src="rst/beyond/radial-maze.pdf" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/radial-maze.pdf"><img alt="../_images/radial-maze.pdf" src="../_images/radial-maze.pdf" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text">Radial maze
 <span class="label">figure-radial-maze</span>
@@ -4106,16 +4108,62 @@ are also available in A4 format at <a class="reference external" href="https://g
 
 
 <h3>Navigation</h3>
-<ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-preface.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anatomy.html">Anatomy of a figure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animation.html">Animation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beyond.html">Graphic library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheatsheets.html">Quick References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colors.html">A primer on colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Coordinate systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Mastering the defaults</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout.html">Size, aspect &amp; layout</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Fundamentals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#anatomy-of-a-figure">Anatomy of a figure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coordinate-systems">Coordinate systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scales-projections">Scales &amp; projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#elements-of-typography">Elements of typography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-primer-on-colors">A primer on colors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#figure-design">Figure design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ten-simple-rules">Ten simple rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mastering-the-defaults">Mastering the defaults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#size-aspect-layout">Size, aspect &amp; layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ornaments">Ornaments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#advanced-concepts">Advanced concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#animation">Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#going-3d">Going 3D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-optimization">Architecture &amp; optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#graphic-library">Graphic library</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#showcase">Showcase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#appendix">Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#external-resources">External resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-references">Quick References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html">Architecture &amp; optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ornaments.html">Ornaments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projections.html">Scales &amp; projections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">External resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">Ten simple rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="threed.html">Going 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typography.html">Elements of typography</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="layout.html" title="previous chapter">Size, aspect &amp; layout</a></li>
+      <li>Next: <a href="optimization.html" title="next chapter">Architecture &amp; optimization</a></li>
   </ul></li>
 </ul>
 </div>
