@@ -22,6 +22,7 @@ help:
 
 gh_pages:
 	@mkdir docs
+	@touch docs/.nojekyll
 	@cp -a "$(BUILDDIR)/html/." "$(DOCSDIR)"
 
 clear:
