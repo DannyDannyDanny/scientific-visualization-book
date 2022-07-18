@@ -11,6 +11,9 @@ Preliminary web version can be found
 [here](https://dannydannydanny.github.io/scientific-visualization-book/)
 
 
+Build command: `make clear html gh_pages`
+
+
 ## Fork Roadmap
 
 * [X] backup `Makefile` to `Makefile.bak`
@@ -24,17 +27,27 @@ Preliminary web version can be found
 * [X] remove `numpydoc_show_class_members = False` from `conf.py`
 * [X] add forked repo link to web version
 * [X] add original repo link to web version
-* [x] fix `WARNING: image file not readable:` warnings
+* [X] fix `WARNING: image file not readable:` warnings
+* [ ] revert moving `figures/*` into `rst/` (e54b56fac04861caa7e460dddd004ad359fef3b7)
+  * use [rougier's method](https://github.com/rougier/scientific-visualization-book/issues/13#issuecomment-1186094677)
+  * use [sphinx include](https://stackoverflow.com/a/17217041)
+* [ ] correct the order of toctree links to match book TOC
+* [ ] correct the order of toctree link aliases to match book TOC
 * [ ] fix `WARNING: toctree contains reference to document` warnings
 * [ ] fix `WARNING: undefined label` warnings
 * [ ] fix `WARNING: duplicate label` warnings
 * [ ] fix `WARNING: Unknown target name` warnings
-* [ ] correct the order of rst links to match book TOC
 * [ ] remove `docs/_build/` or `_build/` from `.gitignore`
 * [ ] merge `Makefile` with original (`Makefile.bak`)
 * [ ] fix [`WARNING: html_static_path entry '_static' does not exist`](https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_static_path) warning
 * [ ] consider sphinx dark mode
 * [ ] add self to supporters (or contributors)
+* [ ] get ispired by other Github repos with sphinx docs:
+  * [psf/requests](https://github.com/psf/requests)
+  * [searx/searx](https://github.com/searx/searx)
+  * [writethedocs/www](https://github.com/writethedocs/www)
+  * [pallets/flask](https://github.com/pallets/flask)
+  * [more...](https://www.sphinx-doc.org/en/master/examples.html#documentation-using-the-alabaster-theme)
 
 > Original README follows:
 
