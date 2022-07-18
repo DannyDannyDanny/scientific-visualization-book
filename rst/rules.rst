@@ -47,7 +47,7 @@ simple, possibly approximated, figure that reveals only the most salient part
 of your research (Figure :ref:`fig-rule-1`). This has proven to be a difficult
 exercise.
 
-.. figure:: rules/rule-1.pdf
+.. figure:: /figures/rules/rule-1.pdf
    :width: 100%
 
    **Know your audience.** This is a remake of a figure that was originally
@@ -86,7 +86,7 @@ the main points of the text. If your figure is able to convey a striking
 message at first glance, chances are increased that your article will draw more
 attention from the community.
 
-.. figure:: rules/rule-2.pdf
+.. figure:: /figures/rules/rule-2.pdf
    :width: 100%
 
    **Identify your message.** The superior colliculus (SC) is a brainstem
@@ -129,7 +129,7 @@ possibility to zoom and drag the figure. Ideally, each type of support medium
 requires a different figure, and you should abandon the practice of extracting
 a figure from your article to be put, as is, in your oral presentation.
 
-.. figure:: rules/rule-3.pdf
+.. figure:: /figures/rules/rule-3.pdf
    :width: 100%
 
    **Adapt the figure to the support medium** These two figures represent the
@@ -190,7 +190,7 @@ to choose the best colormap for the nature of the data. For example, see
 chapter chap-defaults_ for how to go from the default settings to a nicer
 visual in the case of the matplotlib library.
 
-.. figure:: rules/rule-5.pdf
+.. figure:: /figures/rules/rule-5.pdf
    :width: 100%
 
    **Do not trust the defaults.** The left panel shows the sine and cosine
@@ -228,7 +228,7 @@ Use the colormap that is the most relevant to your data. Lastly, avoid using
 too many similar colors since color blindness may make it difficult to discern
 some color differences.
 
-.. figure:: rules/rule-6.pdf
+.. figure:: /figures/rules/rule-6.pdf
    :width: 100%
 
    **Use color effectively.** This figure represents the same signal, whose
@@ -265,7 +265,7 @@ sure to use labels, ticks, title, and the full range of values when
 relevant. Lastly, do not hesitate to ask colleagues about their interpretation
 of your figures.
 
-.. figure:: rules/rule-7.pdf
+.. figure:: /figures/rules/rule-7.pdf
    :width: 100%
 
    **Do not mislead the reader.** On the left part of the figure, we
@@ -313,7 +313,7 @@ Kaiser Fung, which explains quite clearly the concept of chartjunk through the
 study of many examples.
 
 
-.. figure:: rules/rule-8.pdf
+.. figure:: /figures/rules/rule-8.pdf
    :width: 100%
 
    **Avoid chartjunk.** We have seven series of samples that are equally
@@ -364,7 +364,7 @@ framework. Remember, in science, message and readability of the figure is the
 most important aspect while beauty is only an option, as dramatically shown in
 Figure :ref:`fig-rule-9`.
 
-.. figure:: rules/rule-9.pdf
+.. figure:: /figures/rules/rule-9.pdf
    :width: 100%
 
    **Message trumps beauty.** This figure is an extreme case where the message

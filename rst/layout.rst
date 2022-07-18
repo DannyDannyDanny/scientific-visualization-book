@@ -98,7 +98,7 @@ When you create a new figure, this figure comes with a specific size, either imp
      ax.set_xlim(0,1), ax.set_ylim(0,1) 
 
 
-.. figure:: layout/aspects.pdf
+.. figure:: /figures/layout/aspects.pdf
    :width: 100%
            
    Combination of figure and axes aspect ratio
@@ -108,7 +108,7 @@ When you create a new figure, this figure comes with a specific size, either imp
 The final layout of a figure results from a set of constraints that makes it  difficult to predict the end result. This is actually even more acute when you combine several axes on the same figure as shown on figures 
 :ref:`figure-layout-aspect-1`, :ref:`figure-layout-aspect-2` & :ref:`figure-layout-aspect-3`. Depending on what is important in your figure (aspect, range or size), you'll privilege one of these layout. In any case, you should now have realized that if you over-constrained your layout, it might be unsolvable and matplotlib will try to find the best compromise.
 
-.. figure:: layout/layout-aspect-1.pdf
+.. figure:: /figures/layout/layout-aspect-1.pdf
    :width: 100%
 
    Same size, same range, different aspect
@@ -116,7 +116,7 @@ The final layout of a figure results from a set of constraints that makes it  di
    :label:`figure-layout-aspect-1`
 
 
-.. figure:: layout/layout-aspect-2.pdf
+.. figure:: /figures/layout/layout-aspect-2.pdf
    :width: 100%
 
    Same range, same aspect, different size
@@ -124,7 +124,7 @@ The final layout of a figure results from a set of constraints that makes it  di
    :label:`figure-layout-aspect-2`
           
 
-.. figure:: layout/layout-aspect-3.pdf
+.. figure:: /figures/layout/layout-aspect-3.pdf
    :width: 100%
 
    Same size, same aspect, different range
@@ -166,14 +166,14 @@ over the relative aspect of each axes whereas in figure
 :ref:`figure-layout-gridspec`, we can very easily specify different
 sizes for each axes.
            
-.. figure:: layout/layout-classical.pdf
+.. figure:: /figures/layout/layout-classical.pdf
    :width: 100%
 
    Subplots using classical layout.
    (source :source:`layout/layout-classical.py`)
    :label:`figure-layout-classical`
 
-.. figure:: layout/layout-gridspec.pdf
+.. figure:: /figures/layout/layout-gridspec.pdf
    :width: 100%
 
    Subplots using gridspec layout
@@ -198,14 +198,14 @@ axes, one axes for the color legend and another for detailed
 explanation. In this case, I use the central axes and write the text
 outside the axes, specifying this does not need to be clipped.
                            
-.. figure:: layout/complex-layout.pdf
+.. figure:: /figures/layout/complex-layout.pdf
    :width: 100%
 
    Complex layout
    (source :source:`layout/complex-layout.py`)
    :label:`figure-complex-layout`
 
-.. figure:: layout/complex-layout-bare.pdf
+.. figure:: /figures/layout/complex-layout-bare.pdf
    :width: 100%
 
    Complex layout structure
@@ -219,7 +219,7 @@ Exercices
 **Standard layout 1** Using gridspec, the goal is to reproduce figure 
 :ref:`figure-standard-layout-1` where the colorbar is the same size as the main axes and its width is one tenth of main axis width.
        
-.. figure:: layout/standard-layout-1.pdf
+.. figure:: /figures/layout/standard-layout-1.pdf
    :width: 100%
 
    Image and colorbar
@@ -229,7 +229,7 @@ Exercices
 **Standard layout 2** Using gridspec, the goal is to reproduce figure 
 :ref:`figure-standard-layout-2` with top and right histograms aligned with the main axes.
 
-.. figure:: layout/standard-layout-2.pdf
+.. figure:: /figures/layout/standard-layout-2.pdf
    :width: 100%
 
    Scatter plot and histograms

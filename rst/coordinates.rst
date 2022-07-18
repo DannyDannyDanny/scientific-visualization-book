@@ -37,7 +37,7 @@ coordinate from one system to the other, matplotlib provides a set of
    FC_to_NFC = fig.transFigure.inverted().transform
 
 
-.. figure:: coordinates/coordinates-cartesian.pdf
+.. figure:: /figures/coordinates/coordinates-cartesian.pdf
    :width: 100%
 
    The co-existing coordinate systems within a figure using Cartesian
@@ -46,7 +46,7 @@ coordinate from one system to the other, matplotlib provides a set of
    :label:`fig-coordinates-cartesian`
 
 
-.. figure:: coordinates/coordinates-polar.pdf
+.. figure:: /figures/coordinates/coordinates-polar.pdf
    :width: 100%
            
    The co-existing coordinate systems within a figure using Polar projection.
@@ -114,7 +114,7 @@ the limit using the `clip_on` arguments.
 
 The result is shown on figure :ref:`fig-transforms-polar`.
 
-.. figure:: coordinates/transforms-polar.pdf
+.. figure:: /figures/coordinates/transforms-polar.pdf
    :width: 75%
            
    Axes boundaries in polar projection using a transform from normalized data
@@ -171,7 +171,7 @@ The result is illustrated on panel B of figure :ref:`fig-transforms-letter`.
 The text is now properly positioned and will stay at the right position
 independently of figure aspect ratio or data limits.
 
-.. figure:: coordinates/transforms-letter.pdf
+.. figure:: /figures/coordinates/transforms-letter.pdf
    :width: 100%
            
    Using transforms to position precisely a text over a plot. Top panel uses
@@ -186,7 +186,7 @@ some text below the X tick labels. The X position of the tick labels is
 expressed in data coordinates, but how do we put something under as illustrated
 on figure :ref:`fig-transforms-blend`?
 
-.. figure:: coordinates/transforms-blend.pdf
+.. figure:: /figures/coordinates/transforms-blend.pdf
    :width: 100%
            
    Precise placement (arrows below X axis tick labels) using blended transform (:source:`coordinates/transforms-blend.py`).
@@ -223,7 +223,7 @@ function 200 times with random values.
        im.set_transform(t + ax.transData)
 
 
-.. figure:: coordinates/collage.png
+.. figure:: /figures/coordinates/collage.png
    :width: 100%
 
    Collage
@@ -252,7 +252,7 @@ size must be given in figure normalized coordinates and orientation in
 degrees. To complicate things, we want to express the elevation of the text
 above the histogram bars in data points. |newline|
 
-.. figure:: coordinates/transforms-hist.pdf
+.. figure:: /figures/coordinates/transforms-hist.pdf
    :width: 100%
            
    Rotated histogram aligned with second main PCA axis
@@ -327,7 +327,7 @@ Exercise
 size is expressed in points. Try to make a scatter plot whose size is expressed
 in data points such as to obtain figure :ref:`fig-transforms-exercise-1`.
 
-.. figure:: coordinates/transforms-exercise-1.pdf
+.. figure:: /figures/coordinates/transforms-exercise-1.pdf
    :width: 100%
            
    A scatter plot whose marker size is expressed in data coordinates instead of points
@@ -335,7 +335,7 @@ in data points such as to obtain figure :ref:`fig-transforms-exercise-1`.
    :label:`fig-transforms-exercise-1`
           
 
-.. figure:: coordinates/transforms-floating-axis.pdf
+.. figure:: /figures/coordinates/transforms-floating-axis.pdf
    :width: 100%
            
    A floating and rotated floating axis with controlled position size and

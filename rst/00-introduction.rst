@@ -16,9 +16,9 @@ confidential. Some of these tools are community based while others are developed
 by companies. Some are made specifically for the web, others are for the desktop only,
 some deal with 3D and large data, while others target flawless 2D rendering.
 
-.. figure:: introduction/visualization-landscape.pdf
+.. figure:: /figures/introduction/visualization-landscape.pdf
    :width: 100%
-           
+
    Python scientific visualisation landscape in 2018 (not exhaustive). Adapted
    from the original idea of `Jake Vanderplas <http://vanderplas.com/>`_.
    **Sources:** `github.com/rougier/python-visualization-landscape
@@ -37,7 +37,7 @@ few questions:
 * Is there an active community?
 * Are there documentation and tutorials?
 
-.. figure:: introduction/matplotlib-timeline.pdf
+.. figure:: /figures/introduction/matplotlib-timeline.pdf
    :width: 100%
 
    Matplotlib has been originally written by John D. Hunter and the first
@@ -62,7 +62,7 @@ good source of information is the pyviz_ website (Python tools for data
 visualization) that offers a lot of pointers and has an up-to-date list of
 active packages (as opposed to dormant).
 
-.. figure:: introduction/black-hole.jpg
+.. figure:: /figures/introduction/black-hole.jpg
    :width: 100%
 
    The supermassive black hole at the core of supergiant elliptical galaxy
@@ -74,13 +74,13 @@ active packages (as opposed to dormant).
 In this landscape, Matplotlib has a very special place. It was originally
 created by `John D. Hunter <https://en.wikipedia.org/wiki/John_D._Hunter>`_ in
 2003 in order to visualize electrocorticography data. Here is the `official
-announcement <https://mail.python.org/pipermail/python-list/2003-April/193167.html>`__ posted on the Python mailing list on May 23, 2003 [#]_. 
+announcement <https://mail.python.org/pipermail/python-list/2003-April/193167.html>`__ posted on the Python mailing list on May 23, 2003 [#]_.
 
 .. [#] Many thanks to Anthony Lee for pointing me to this archive.
-       
+
 ::
 
-   
+
     Matplotlib
 
       Matplotlib is a pure python plotting package for python and
@@ -168,4 +168,3 @@ part is a collection of showcases and their analysis.
 .. _cartopy: https://scitools.org.uk/cartopy/docs/latest/
 .. _pyviz:   https://pyviz.org/
 .. ----------------------------------------------------------------------------
-

@@ -16,7 +16,7 @@ your own element specifically for your figure. For example, figure
 (annotation and text) as well as specific elements (roots reported on
 the x axis using vertical markers).
 
-.. figure:: ornaments/bessel-functions.pdf
+.. figure:: /figures/ornaments/bessel-functions.pdf
    :width: 100%
 
    Bessel functions
@@ -53,14 +53,14 @@ time, a simple `legend()` call is sufficient as shown below:
    
    plt.show()
 
-.. figure:: ornaments/legend-regular.pdf
+.. figure:: /figures/ornaments/legend-regular.pdf
    :width: 100%
 
    Regular legend
    :label:`figure-legend-regular`
    (sources: :source:`ornaments/legend-regular.py`).
 
-.. figure:: ornaments/legend-alternatives.pdf
+.. figure:: /figures/ornaments/legend-alternatives.pdf
    :width: 100%
 
    Alternative legends 
@@ -97,7 +97,7 @@ title, I simply moved it to the right and I moved the legend box
 (using two columns) accordingly, that is, under the title. Nothing
 complicated here but I think the result is visually more pleasant.
 
-.. figure:: ornaments/title-regular.pdf
+.. figure:: /figures/ornaments/title-regular.pdf
    :width: 100%
 
    Regular title
@@ -112,7 +112,7 @@ height for the actual title. In this figure, I also inserted a fully
 justified text using Latex that may be considered as another form or
 (advanced) ornament.
              
-.. figure:: ornaments/latex-text-box.png
+.. figure:: /figures/ornaments/latex-text-box.png
    :width: 100%
 
    Advanced text box
@@ -141,7 +141,7 @@ independently of the data distribution. However, if you have too many
 points, all the different labels may end up cluttering your figure and
 hide potentially important information.
 
-.. figure:: ornaments/annotation-direct.pdf
+.. figure:: /figures/ornaments/annotation-direct.pdf
    :width: 65%
 
    Direct annotations
@@ -184,7 +184,7 @@ complex connection style:
                                    patchA=None, patchB=None,
                                    connectionstyle=style))
    
-.. figure:: ornaments/annotation-side.pdf
+.. figure:: /figures/ornaments/annotation-side.pdf
    :width: 75%
 
    Side annotations
@@ -205,7 +205,7 @@ patch) and matplotlib will take care of having the origin of the
 connection to the border of the patch.
 
    
-.. figure:: ornaments/annotation-zoom.pdf
+.. figure:: /figures/ornaments/annotation-zoom.pdf
    :width: 75%
 
    Zoomed annotations
@@ -223,7 +223,7 @@ side. This ornament provides a quick way to show respective
 distributions along weight and height and can be rendered with a
 scatter plot using large vertical and horizontal markers.
 
-.. figure:: ornaments/elegant-scatter.pdf
+.. figure:: /figures/ornaments/elegant-scatter.pdf
    :width: 100%
 
    Elegant scatter plot

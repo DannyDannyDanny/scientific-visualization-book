@@ -32,7 +32,7 @@ figure which was made using different font families (Roboto Condensed and Roboto
 Slab), size and weights. The difference might appear subtle but is really an
 important dimension of a scientific figure.
 
-.. figure:: typography/typography-matters.png
+.. figure:: /figures/typography/typography-matters.png
    :width: 100%
 
    Influence of typography on the perception of a figure
@@ -90,7 +90,7 @@ font families. Figure :ref:`figure-typography-font-stacks` shows some
 alternative font stacks based on the Roboto and Source Pro Family which both
 have serif, sans and monospace typefaces and comes with several weights.
        
-.. figure:: typography/typography-font-stacks.pdf
+.. figure:: /figures/typography/typography-font-stacks.pdf
    :width: 100%
 
    Font stack alternatives
@@ -114,7 +114,7 @@ namely `DejaVu <https://en.wikipedia.org/wiki/DejaVu_fonts>`_ (sans and serif),
 `Styx <https://en.wikipedia.org/wiki/STIX_Fonts_project>`_ (sans and serif) and
 `computer modern <https://en.wikipedia.org/wiki/Computer_Modern>`_:
 
-.. figure:: typography/typography-math-stacks.pdf
+.. figure:: /figures/typography/typography-math-stacks.pdf
    :width: 100%
 
    Mathematics font stacks.
@@ -157,7 +157,7 @@ size 10 will have the same visual aspects on your screen.
 
 **Exercise** Using different fonts, weights and size, try to reproduce the figure :ref:`figure-tick-labels-variation`.
 
-.. figure:: typography/tick-labels-variation.pdf
+.. figure:: /figures/typography/tick-labels-variation.pdf
    :width: 100%
 
    Tick label variations
@@ -173,7 +173,7 @@ bit different because there are some situations where you cannot control the
 background color since it is part of your results.
 
 
-.. figure:: typography/typography-legibility.pdf
+.. figure:: /figures/typography/typography-legibility.pdf
    :width: 100%
 
    Typograpy legibility variations.
@@ -196,7 +196,7 @@ which uses the `Pacifico <https://fonts.google.com/specimen/Pacifico>`_ font
 family. Colors come from the magma colormap. Make sure to use different outline
 widths to get the thin black line between each color.
 
-.. figure:: typography/text-outline.pdf
+.. figure:: /figures/typography/text-outline.pdf
    :width: 100%
 
    Text with far too many outlines.
@@ -230,7 +230,7 @@ What is really interesting with such path objects is that it can now be
 transformed at the level of individual vertices composing a glyph as shown on
 figure :ref:`figure-typography-text-path`.
 
-.. figure:: typography/typography-text-path.pdf
+.. figure:: /figures/typography/typography-text-path.pdf
    :width: 100%
 
    Better contour labels using text path.
@@ -243,7 +243,7 @@ actually. The result is aesthetically better to me but it must be used
 wisely. If your contour lines are too small or possess sharp turns, it will
 make the text unreadable.
 
-.. figure:: typography/projection-3D-gaussian.pdf
+.. figure:: /figures/typography/projection-3D-gaussian.pdf
    :width: 70%
 
    Example of 3D text paths.
@@ -264,7 +264,7 @@ face the camera, ensuring legibility.
 *compression* on X vertices depending on the Y level should work. Vertices
 of a path can be accessed with `path.vertices`.
 
-.. figure:: typography/text-starwars.pdf
+.. figure:: /figures/typography/text-starwars.pdf
    :width: 100%
 
    In a far distant galaxy.
@@ -272,7 +272,7 @@ of a path can be accessed with `path.vertices`.
 
 
 ..
-   .. figure:: typography/text-spiral.pdf
+   .. figure:: /figures/typography/text-spiral.pdf
       :width: 50%
 
       Text shaped along a spiral

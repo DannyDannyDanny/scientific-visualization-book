@@ -27,7 +27,7 @@ exactly 0.002 (= 1/500). This means that if you plot 500 black points
 with a transparency of 0.002, you obtain get a quasi black marker as
 shown on figure :ref:`figure-transparency`.
 
-.. figure:: optimization/transparency.pdf
+.. figure:: /figures/optimization/transparency.pdf
    :width: 100%
 
    Transparency levels
@@ -46,7 +46,7 @@ observe the central are is darker. For one million points, we reached
 the limit of the transparency trick (alpha=0.002) and we now have a
 central dark spot that hide information.
              
-.. figure:: optimization/scatters.png
+.. figure:: /figures/optimization/scatters.png
    :width: 100%
 
    Scatter, hist2d and hexbin
@@ -92,7 +92,7 @@ The reason is that matplotlib rendering engine takes care of not
 overdrawing an area that belong to the same plot as shown on the figure
 below:
 
-.. figure:: optimization/self-cover.pdf
+.. figure:: /figures/optimization/self-cover.pdf
    :width: 100%
 
    Self-covering example
@@ -116,7 +116,7 @@ decide of its value. This is of course a slower compared to a regular
 plot but the rendering is more faithful to the signal as shown on the
 third line.
 
-.. figure:: optimization/multisample.png
+.. figure:: /figures/optimization/multisample.png
    :width: 100%
 
    High-frequency signal.
@@ -141,7 +141,7 @@ faster (by a factor of two approximately). For any other case, the
 scatter command is the one to use. We can try to measure the time to
 prepare a one million scatter plot using the following code:
 
-.. figure:: optimization/scatter-benchmark.png
+.. figure:: /figures/optimization/scatter-benchmark.png
    :width: 100%
 
    Scatter benchmark
@@ -166,7 +166,7 @@ minutes. Note that the fastest rendering (unified plot, middle) is not
 exactly equivalent to the others due to the absence of self-coverage
 as explained previously.
        
-.. figure:: optimization/line-benchmark.png
+.. figure:: /figures/optimization/line-benchmark.png
    :width: 100%
 
    Line benchmark
@@ -301,7 +301,7 @@ reason is that if you enforce very strict clipping, a marker whose
 center is outside extent will not be drawn while it may overlap because
 of its size.
              
-.. figure:: optimization/multithread.png
+.. figure:: /figures/optimization/multithread.png
    :width: 100%
 
    Multithread rendering

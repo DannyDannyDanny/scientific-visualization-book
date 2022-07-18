@@ -28,7 +28,7 @@ modifying the figure such as to adapt the ticks positions and labels (see
 figure :ref:`figure-scales`). Note that a scale can be applied to x axis only
 (`set_xscale`), y axis only (`set_yscale`) or both.
 
-.. figure:: scales-projections/scales-comparison.pdf
+.. figure:: /figures/scales-projections/scales-comparison.pdf
    :width: 100%
 
    Comparison of the linear_, log_ and logit_ scales.
@@ -99,7 +99,7 @@ In such case, you have to provide both the forward and inverse function that
 allows to transform your data. The inverse function is used when displaying
 coordinates under the mouse pointer.
 
-.. figure:: scales-projections/scales-custom.pdf
+.. figure:: /figures/scales-projections/scales-custom.pdf
    :width: 100%
 
    Custom (user defined) scales.
@@ -144,7 +144,7 @@ as we've done previously but we have also some dedicated settings such as
 `set_thetamin`, `set_thetamax`, `set_rmin`, `set_rmax` and more specifically
 `set_rorigin`. This allows you to have fine control over what is actually shown as illustrated on the figure :ref:`figure-projection-polar-config`.
 
-.. figure:: scales-projections/projection-polar-config.pdf
+.. figure:: /figures/scales-projections/projection-polar-config.pdf
    :width: 100%
 
    Polar projection
@@ -175,7 +175,7 @@ read the code (:source:`projection-polar-histogram.py`) to see how it is
 made. Note that the actual role of the inverse transformation is to link mouse
 coordinates (in Cartesian 2D coordinates) back to your data.
 
-.. figure:: scales-projections/projection-polar-histogram.pdf
+.. figure:: /figures/scales-projections/projection-polar-histogram.pdf
    :width: 95%
 
    Polar projection with better defaults.
@@ -186,7 +186,7 @@ Conversely, there are some situations were we might be interested in having
 the text and the markers to be transformed as illustrated on figure
 :ref:`figure-text-polar`.
 
-.. figure:: scales-projections/text-polar.pdf
+.. figure:: /figures/scales-projections/text-polar.pdf
    :width: 90%
 
    Polar projection with transformation of text and markers.
@@ -233,7 +233,7 @@ documented on the matplotlib website and I won't explain each and every command.
     bug (nor a feature) and this results in some glitches between the elements
     composing a figure.
 
-.. figure:: scales-projections/projection-3d-frame.pdf
+.. figure:: /figures/scales-projections/projection-3d-frame.pdf
    :width: 80%
 
    Three dimensional projection
@@ -274,7 +274,7 @@ depending on the type of projection you intend to use:
   versatile 3d axis for Matplotlib.
 
   ..
-   .. figure:: scales-projections/geo-projections.pdf
+   .. figure:: /figures/scales-projections/geo-projections.pdf
       :width: 100%
 
       Some of the standard and not so standard geographic projections
@@ -292,7 +292,7 @@ Exercises
 **Exercise 1** Considering functions :math:`f(x) = 10^x`, :math:`f(x) = x` and
 :math:`f(x) = log_{10}(x)`, try to reproduce figure :ref:`figure-scales-log-log`.
 
-.. figure:: scales-projections/scales-log-log.pdf
+.. figure:: /figures/scales-projections/scales-log-log.pdf
    :width: 100%
 
    Combining linear and logarithmic scales.
@@ -307,7 +307,7 @@ and shotgun). The first five patterns are simple functions where
 radius evolves with angle, while the last pattern may require some
 work.
 
-.. figure:: scales-projections/polar-patterns.pdf
+.. figure:: /figures/scales-projections/polar-patterns.pdf
    :width: 100%
 
    Microphone polar patterns

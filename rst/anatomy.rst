@@ -38,7 +38,7 @@ the axes aspect, you need to be more explicit:
    ax.plot(range(10))
    plt.show()
 
-.. figure:: anatomy/anatomy.pdf
+.. figure:: /figures/anatomy/anatomy.pdf
    :width: 100%
          
    A matplotlib figure is composed of a hierarchy of several elements that,
@@ -112,7 +112,7 @@ have a range of shapes (circles, rectangles, polygons, etc.). Lines can be very
 small and thin (e.g. ticks) or very thick (e.g. hatches). Text can use any font
 available on your system and can also use a latex engine to render maths.
 
-.. figure:: anatomy/bold-ticklabel.pdf
+.. figure:: /figures/anatomy/bold-ticklabel.pdf
    :width: 100%
 
    All the graphic primitives (i.e. artists) can be accessed and modified. In
@@ -146,7 +146,7 @@ possess a default zorder value such that things are rendered properly. For
 example, the spines, the ticks and the tick label are generally *behind*
 your actual plot.
 
-.. figure:: anatomy/zorder.pdf
+.. figure:: /figures/anatomy/zorder.pdf
    :width: 50%
 
    Default rendering order of different elements and graphic primitives. The
@@ -217,7 +217,7 @@ The canonical renderer is Agg which uses the `Anti-Grain Geometry C++ library
 that even if you choose a raster renderer, you can still save the figure in a
 vector format and vice-versa.
 
-.. figure:: anatomy/raster-vector.pdf
+.. figure:: /figures/anatomy/raster-vector.pdf
    :width: 75%
 
    Zooming effect for raster graphics and vector graphics (sources:
@@ -263,7 +263,7 @@ backend that allows to render a figure directly inside the terminal,
 emulating a kind of jupyter notebook as shown on figure
 :ref:`figure-imgcat`
 
-.. figure:: anatomy/imgcat.png
+.. figure:: /figures/anatomy/imgcat.png
    :width: 100%
 
    Matplotlib imgcat backend
@@ -333,7 +333,7 @@ case. For a scientific article, publishers will generally request figures dpi
 to be between 300 and 600. To get things right, it is thus good to know what
 will be the physical dimension of your figure once inserted into your document.
 
-.. figure:: anatomy/figure-dpi.png
+.. figure:: /figures/anatomy/figure-dpi.png
    :width: 100%
 
    A text rendered in matplotlib and saved using different dpi (50,100,300 &
@@ -394,7 +394,7 @@ remain the same. Usage is really simple:
 
 
    
-.. figure:: anatomy/ruler.pdf
+.. figure:: /figures/anatomy/ruler.pdf
    :width: 100%
 
    Interactive ruler :label:`figure-ruler`
@@ -410,7 +410,7 @@ we've seen so far (including finding the relevant documentation).
 **Exercise 1** Try to produce a figure with a given (and exact) pixel size
 (e.g. 512x512 pixels). How would you specify the size and save the figure?
 
-.. figure:: anatomy/pixel-font.png
+.. figure:: /figures/anatomy/pixel-font.png
    :width: 100%
 
    Pixel font text using exact image size :label:`figure-pixel-font`
@@ -425,7 +425,7 @@ some simple computations for finding the right size and some trials and errors
 to make the actual figure. Don't pay too much attention to all the details, the
 essential part is to get the size right. 
 
-.. figure:: anatomy/inch-cm.pdf
+.. figure:: /figures/anatomy/inch-cm.pdf
    :width: 100%
 
    Inches/centimeter conversion :label:`figure-inch-cm`
@@ -454,7 +454,7 @@ the rendering will be independent of drawing order. For the actual curves, you c
            X = X + scale*np.exp(- (x-center)*(x-center)*width)
        return X
 
-.. figure:: anatomy/zorder-plots.pdf
+.. figure:: /figures/anatomy/zorder-plots.pdf
    :width: 100%
 
    Multiple plots partially covering each other :label:`figure-zorder-plots`

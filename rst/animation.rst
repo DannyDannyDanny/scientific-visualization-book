@@ -51,7 +51,7 @@ that each time we set new data, marker is automatically updated and
 moves with the animation. See figure
 :ref:`figure-animation-sine-cosine`.
 
-.. figure:: animation/sine-cosine.pdf
+.. figure:: /figures/animation/sine-cosine.pdf
    :width: 100%
 
    Snapshots of the sine cosine animation
@@ -94,7 +94,7 @@ slow or fast it is. Here is some output of the animation:
    :width: 100%
 .. image:: animation/sine-cosine-frame-128.pdf
    :width: 100%
-.. figure:: animation/sine-cosine-frame-255.pdf
+.. figure:: /figures/animation/sine-cosine-frame-255.pdf
    :width: 100%
 
    Still from the sine/cosine animation
@@ -184,7 +184,7 @@ movie):
                                        interval=10, frames=200)
 
                                        
-.. figure:: animation/rain.pdf
+.. figure:: /figures/animation/rain.pdf
    :width: 100%
 
    Still from the rain animation (sources :source:`animation/rain.py`).
@@ -267,7 +267,7 @@ is rather standard for non-specialists like me.
 
    plt.show()
 
-.. figure:: animation/platecarree.pdf
+.. figure:: /figures/animation/platecarree.pdf
    :width: 100%
 
    Equirectangular projection
@@ -284,7 +284,7 @@ coordinates will be automatically transformed (by cartopy).
 
 
 
-.. figure:: animation/earthquakes-frame-50.pdf
+.. figure:: /figures/animation/earthquakes-frame-50.pdf
    :width: 100%
 
    Earthquakes still (July 23, 2021 at 11am CET)
@@ -361,7 +361,7 @@ synchronizing this animation with some music for example.
    plt.show()
 
 
-.. figure:: animation/fluid-animation.png
+.. figure:: /figures/animation/fluid-animation.png
    :width: 100%
 
    Fluid simulation
@@ -379,7 +379,7 @@ following example which is a `remake
 originally designed by dark horse analytics.
 
 
-.. figure:: animation/less-is-more.png
+.. figure:: /figures/animation/less-is-more.png
    :width: 100%
 
    Less is more :label:`figure-less-is-more`
@@ -394,7 +394,7 @@ The goal of this exercise is to create an animation showing how
 are generated. Figure :ref:`figure-lissajous` shows a still from the
 animation. Make sure to try to copy the exact style.
 
-.. figure:: animation/lissajous.pdf
+.. figure:: /figures/animation/lissajous.pdf
    :width: 100%
 
    Lissajous curves :label:`figure-lissajous`

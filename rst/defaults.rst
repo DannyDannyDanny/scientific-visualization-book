@@ -10,7 +10,7 @@ Mastering the defaults
 
 We've just explained (see rule 5 in chapter chap-rules_) that any visualization library or software comes with a set of default settings that identifies it. For example, figure :ref:`figure-sine-cosine-variants` show the sine and cosine functions as rendered by Google calculator, Julia, Gnuplot and Matlab. Even for such simple functions, these displays are quite characteristic.
 
-.. figure:: defaults/sine-cosine-variants.png
+.. figure:: /figures/defaults/sine-cosine-variants.png
    :width: 100%
 
    Sine and cosine functions as displayed by (A) Google calculator (B) Julia,
@@ -32,7 +32,7 @@ Let's draw sine and cosine functions using Matplotlib defaults.
 
 Figure :ref:`figure-defaults-step-2` shows the result that is quite characteristic of Matplotlib.
    
-.. figure:: defaults/defaults-step-1.pdf
+.. figure:: /figures/defaults/defaults-step-1.pdf
    :width: 100%
 
    Sine and cosine functions with implicit defaults
@@ -78,7 +78,7 @@ Let's now redo the figure but with the specification of all the different settin
                   width = p['ytick.major.width'])
    plt.show()
 
-.. figure:: defaults/defaults-step-2.pdf
+.. figure:: /figures/defaults/defaults-step-2.pdf
    :width: 100%
 
    Sine and cosine functions using matplotlib explicit defaults
@@ -140,7 +140,7 @@ Note that we can also do the opposite and change the defaults before creating th
    plt.show()
           
 
-.. figure:: defaults/defaults-step-3.pdf
+.. figure:: /figures/defaults/defaults-step-3.pdf
    :width: 100%
 
    Sine and cosine functions using custom defaults
@@ -238,7 +238,7 @@ And add some arrows at axis ends:
 
 You can see the result on figure :ref:`figure-defaults-step-5`. From this, you can start refining further the figure. But remember that if it's ok to tweak parameters a bit, you can also lose a lot of time doing that (trust me).
 
-.. figure:: defaults/defaults-step-5.pdf
+.. figure:: /figures/defaults/defaults-step-5.pdf
    :width: 100%
 
    Sine and cosine functions using custom defaults and fine tuning.
@@ -263,7 +263,7 @@ by modifying only rc settings.
    ax.spines['bottom'].set_position(('data',0))
 
 
-.. figure:: defaults/defaults-exercice-1.pdf
+.. figure:: /figures/defaults/defaults-exercice-1.pdf
    :width: 100%
 
    Alternative rendering of sine and cosine

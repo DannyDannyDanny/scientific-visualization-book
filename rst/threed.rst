@@ -19,7 +19,7 @@ on figure above with 60 lines of Python and one matplotlib call. That
 is, without using the 3D axis.
 
 
-.. figure:: threed/bunny.pdf
+.. figure:: /figures/threed/bunny.pdf
    :width: 100% 
           
    Stanford bunny.
@@ -90,7 +90,7 @@ We can now render it:
 
 Result is shown on figure :ref:`figure-bunny-1`.
 
-.. figure:: threed/bunny-1.pdf
+.. figure:: /figures/threed/bunny-1.pdf
    :width: 50%
          
    Stanford bunny without any transformation.
@@ -106,7 +106,7 @@ The rendering we've just made is actually an `orthographic projection
 previous bunny uses a `perspective projection
 <https://en.wikipedia.org/wiki/3D_projection#Perspective_projection>`_:
 
-.. figure:: threed/projection.pdf
+.. figure:: /figures/threed/projection.pdf
    :width: 100%
          
    Orthographic and perspective projections.
@@ -175,7 +175,7 @@ such as to always have w=1 for each vertices.
 
 Now we can check the result on figure :ref:`figure-bunny-2` that looks totally wrong.
 
-.. figure:: threed/bunny-2.pdf
+.. figure:: /figures/threed/bunny-2.pdf
    :width: 50%
          
    Wrong rendering when camera is inside.
@@ -200,7 +200,7 @@ before the perspective transformation.
 
 The corrected output is shown on figure :ref:`figure-bunny-3`.
    
-.. figure:: threed/bunny-3.pdf
+.. figure:: /figures/threed/bunny-3.pdf
    :width: 50%
          
    Corrected rendering with camera away.
@@ -260,7 +260,7 @@ and we now write:
 
 You should obtain results shown on figure :ref:`figure-bunny-4`.
 
-.. figure:: threed/bunny-4.pdf
+.. figure:: /figures/threed/bunny-4.pdf
    :width: 50%
          
    Rotated and translated bunny.
@@ -272,7 +272,7 @@ difference (see figure :ref:`figure-bunny-5`).  Note that we also need
 to adapt the distance to the camera in order for the bunnies to have
 the same apparent size
 
-.. figure:: threed/bunny-5.pdf
+.. figure:: /figures/threed/bunny-5.pdf
    :width: 100%
          
    Different apertures
@@ -286,7 +286,7 @@ Depth sorting
 Let's try now to fill the triangles and see what happens (figure
 :ref:`figure-bunny-6`).
 
-.. figure:: threed/bunny-6.pdf
+.. figure:: /figures/threed/bunny-6.pdf
    :width: 50%
          
    Rendering without depth sorting.
@@ -315,7 +315,7 @@ works beautifully:
 And now everything is rendered correctly as shown on figure
 :ref:`figure-bunny-7`.
 
-.. figure:: threed/bunny-7.pdf
+.. figure:: /figures/threed/bunny-7.pdf
    :width: 50%
          
    Rendering with depth sorting.
@@ -338,7 +338,7 @@ that:
 
 And our final display is show on figure :ref:`figure-bunny-8`.
 
-.. figure:: threed/bunny-8.pdf
+.. figure:: /figures/threed/bunny-8.pdf
    :width: 100%
          
    Rendering with depth colors.
@@ -356,7 +356,7 @@ Using the definition of the orthographic projection, try to reproduce
 the figure :ref:`figure-bunnies` that mix perspective (top left) and
 orthographic projections. Each bunny is contained in one axes.
 
-.. figure:: threed/bunnies.pdf
+.. figure:: /figures/threed/bunnies.pdf
    :width: 100%
          
    Stanford bunnies
