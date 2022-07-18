@@ -1,9 +1,4 @@
-.. scientific-visualization documentation master file, created by
-   sphinx-quickstart on Thu Jul 14 18:03:20 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Scientific Visualization Web
+Scientific Visualization Book (Web Version)
 ====================================================
 
 Follow development or submit issues for the
@@ -18,7 +13,7 @@ Table of Contents
 ====================================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    rst/00-acknowledgments.rst
    rst/00-dedication.rst
