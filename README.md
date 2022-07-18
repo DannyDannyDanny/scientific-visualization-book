@@ -28,9 +28,9 @@ Build command: `make clear html gh_pages`
 * [X] add forked repo link to web version
 * [X] add original repo link to web version
 * [X] fix `WARNING: image file not readable:` warnings
-* [ ] revert moving `figures/*` into `rst/` (e54b56fac04861caa7e460dddd004ad359fef3b7)
-  * use [rougier's method](https://github.com/rougier/scientific-visualization-book/issues/13#issuecomment-1186094677)
-  * use [sphinx include](https://stackoverflow.com/a/17217041)
+* [X] revert moving `figures/*` into `rst/` (e54b56fac04861caa7e460dddd004ad359fef3b7)
+* [X] use absolute paths for figure references
+* [ ] make `svg` or `png` versions for all `figures/**/*.pdf`
 * [ ] correct the order of toctree links to match book TOC
 * [ ] correct the order of toctree link aliases to match book TOC
 * [ ] fix `WARNING: toctree contains reference to document` warnings
