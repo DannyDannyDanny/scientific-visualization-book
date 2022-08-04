@@ -100,14 +100,15 @@ the limit using the `clip_on` arguments.
           
    fig = plt.figure(figsize=(5, 5), dpi=100)
    ax = fig.add_subplot(1, 1, 1, projection='polar')
+   ax.set_ylim(-1, 1), ax.set_yticks([-1, -0.5, 0, 0.5, 1])
 
    FC_to_DC = ax.transData.inverted().transform
    NDC_to_FC = ax.transAxes.transform
    NDC_to_DC = lambda x: FC_to_DC(NDC_to_FC(x))
    P = NDC_to_DC([[0,0], [1,0], [1,1], [0,1], [0,0]])
    
-   plt.plot(P[:,0], P[:,1], clip_on=False, zorder=-10
-            color="k", linewidth=1.0, linestyle="--", )
+   plt.plot(P[:,0], P[:,1], clip_on=False, zorder=-10,
+            color="k", linewidth=1.0, linestyle="--")
    plt.scatter(P[:-1,0], P[:-1,1],
               clip_on=False, facecolor="w", edgecolor="k")
    plt.show()
@@ -210,7 +211,7 @@ on figure :ref:`figure-collage`. To obtain such figure, I rewrote the
 `imshow
 <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html>`__
 function to apply translation, scaling and rotation and I call the
-function 200 times with random values.
+function 200 times with random values (check :source:`coordinates/collage.py` for full code, I'm only giving main details below).
 
 .. code:: python
           
