@@ -31,6 +31,7 @@ Build command: `make clear html gh_pages`
 * [X] revert moving `figures/*` into `rst/` (e54b56fac04861caa7e460dddd004ad359fef3b7)
 * [X] use absolute paths for figure references
 * [ ] make `svg` or `png` versions for all `figures/**/*.pdf`
+  * [ ] [svg conversion resources](https://en.wikipedia.org/wiki/Wikipedia:Graphics_Lab/Resources/PDF_conversion_to_SVG#Conversion_with_dvisvgm)
 * [ ] correct the order of toctree links to match book TOC
 * [ ] correct the order of toctree link aliases to match book TOC
 * [ ] fix `WARNING: toctree contains reference to document` warnings
