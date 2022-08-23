@@ -15,8 +15,8 @@ for pdfpath in pdfpaths:
 
         if pdfpathstr in srccode:
             print(f'\treplaced in {srcpath}')
-        # srccode_svg = srccode.replace(pdfpathstr, svgpathstr)
-        # srccodepath.write_text(srccode_svg)
+        srccode_svg = srccode.replace(pdfpathstr, svgpathstr)
+        srccodepath.write_text(srccode_svg)
 
     # iterate all srccode in `rst/**/*.rst`
     rstpaths = Path('rst').rglob('*.rst')
@@ -25,11 +25,5 @@ for pdfpath in pdfpaths:
         
         if pdfpathstr in rstcontent:
             print(f'\treplaced in {rstpath}')
-        # rstcontent_svg = rstcontent.replace(pdfpathstr, svgpathstr)
-        # rstpath.write_text(srccode_svg)
-    break
-            
-
-# print(pdfpaths)
-# print(srccodepaths)
-# find all occurences of pdfpath in `code/**/*.py`
+        rstcontent_svg = rstcontent.replace(pdfpathstr, svgpathstr)
+        rstpath.write_text(srccode_svg)
