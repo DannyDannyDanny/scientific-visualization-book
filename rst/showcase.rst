@@ -10,7 +10,7 @@ Showtime.
 :raw-latex:`\fullpagefigure{showcases/contour-dropshadow.png}`
 :raw-latex:`\phantomsection \addcontentsline{toc}{chapter}{Filled contours with dropshadows}`
            
-**Filled contours with dropshadows** is a nice effet that allows you
+**Filled contours with dropshadows** is a nice effect that allows you
 to use a sequential colormap (here Viridis) while distinguishing
 positive and negative values. If you look closely at the figure, you
 can see that the drop shadow is external for positive values and
@@ -82,8 +82,8 @@ developed with Georgios Detorakis a `randomized self-organizing map
 distribution of neurons. The figure on the left shows the
 self-organisation of the map when fed with random RGB colors. The
 figure itself is made of a polygon collection where each polygon is
-painted with the color of the neuron. No real difficuly but I had to
-take care fo disabling antialias, else, thin lines appear
+painted with the color of the neuron. No real difficulty, but I had to
+take care of disabling antialiasing, else, thin lines appear
 between polygons.
 
 **Sources:** `github.com/rougier/VSOM <https://github.com/rougier/VSOM>`__
