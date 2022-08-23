@@ -30,8 +30,189 @@ Build command: `make clear html gh_pages`
 * [X] fix `WARNING: image file not readable:` warnings
 * [X] revert moving `figures/*` into `rst/` (e54b56fac04861caa7e460dddd004ad359fef3b7)
 * [X] use absolute paths for figure references
-* [ ] make `svg` or `png` versions for all `figures/**/*.pdf`
-  * [ ] list all pdf files without png / svg alternatives
+* [ ] explore `figures/**/*.pdf`
+  * [X] list all pdf files in `figures/`: `scripts/find_orphan_pdfs.py`
+  * [X] identify pdf references and what creates pdfs and how to make it create svgs
+    * example: `/figures/layout/layout-aspect-3.pdf`
+    * created by `code/layout/layout-aspect.py`
+      * line 63: `plt.savefig(".........aspect-3.pdf")`
+    * referenced in: `/rst/layout.rst`
+      * line 127: `.. figure:: /figures/layout/layout-aspect-3.pdf`
+    * replace `/figures/layout/layout-aspect-3.pdf` with `/figures/layout/layout-aspect-3.svg` in...
+      * ...generating file: `code/layout/layout-aspect.py` line 63
+      * ...references: `/rst/layout.rst` line
+    * re-run src files: `scripts/remake_all_figures.py`
+  * [ ] assert that figures can be regenerated
+    * run `/scripts/remake_all_figures.py`
+    * [ ] rename `/figures/` to `/figures2/`
+    * [ ] restore `/figures/`
+    * [ ] compare figures in `/figures/` and `/figures2/`
+    * [ ] see [warnings from above run](#error-log)
+    * [ ] prevent writing files in `/code/(showcases, reference, beyond, unsorted)` (why are they there?)
+  * [ ] convert PDFs in `./figures/` into SVG or PNG:
+    * [ ] `figures/layout/layout-aspect-3.pdf`
+    * [ ] `figures/layout/layout-gridspec.pdf`
+    * [ ] `figures/layout/complex-layout.pdf`
+    * [ ] `figures/layout/standard-layout-1.pdf`
+    * [ ] `figures/layout/layout-aspect-1.pdf`
+    * [ ] `figures/layout/standard-layout-2.pdf`
+    * [ ] `figures/layout/layout-aspect-2.pdf`
+    * [ ] `figures/layout/layout-classical.pdf`
+    * [ ] `figures/layout/complex-layout-bare.pdf`
+    * [ ] `figures/layout/aspects.pdf`
+    * [ ] `figures/animation/sine-cosine.pdf`
+    * [ ] `figures/animation/earthquakes-frame-50.pdf`
+    * [ ] `figures/animation/rain.pdf`
+    * [ ] `figures/animation/sine-cosine-frame-128.pdf`
+    * [ ] `figures/animation/lissajous.pdf`
+    * [ ] `figures/animation/sine-cosine-frame-032.pdf`
+    * [ ] `figures/animation/platecarree.pdf`
+    * [ ] `figures/animation/sine-cosine-frame-001.pdf`
+    * [ ] `figures/animation/sine-cosine-frame-255.pdf`
+    * [ ] `figures/threed/bunny.pdf`
+    * [ ] `figures/threed/bunny-7.pdf`
+    * [ ] `figures/threed/bunny-2.pdf`
+    * [ ] `figures/threed/bunny-8.pdf`
+    * [ ] `figures/threed/bunny-6.pdf`
+    * [ ] `figures/threed/bunny-1.pdf`
+    * [ ] `figures/threed/bunny-4.pdf`
+    * [ ] `figures/threed/bunnies.pdf`
+    * [ ] `figures/threed/bunny-5.pdf`
+    * [ ] `figures/threed/projection.pdf`
+    * [ ] `figures/threed/bunny-3.pdf`
+    * [ ] `figures/showcases/escher.pdf`
+    * [ ] `figures/showcases/windmap.pdf`
+    * [ ] `figures/showcases/text-shadow.pdf`
+    * [ ] `figures/showcases/text-spiral.pdf`
+    * [ ] `figures/showcases/recursive-voronoi.pdf`
+    * [ ] `figures/showcases/mosaic.pdf`
+    * [ ] `figures/showcases/waterfall-3d.pdf`
+    * [ ] `figures/showcases/domain-coloring.pdf`
+    * [ ] `figures/optimization/transparency.pdf`
+    * [ ] `figures/optimization/self-cover.pdf`
+    * [ ] `figures/colors/alpha-vs-color.pdf`
+    * [ ] `figures/colors/flower-polar.pdf`
+    * [ ] `figures/colors/colored-hist.pdf`
+    * [ ] `figures/colors/open-colors.pdf`
+    * [ ] `figures/colors/colormap-tree.pdf`
+    * [ ] `figures/colors/colormap-transform.pdf`
+    * [ ] `figures/colors/alpha-scatter.pdf`
+    * [ ] `figures/colors/colored-plot.pdf`
+    * [ ] `figures/colors/material-colors.pdf`
+    * [ ] `figures/colors/color-wheel.pdf`
+    * [ ] `figures/colors/mona-lisa.pdf`
+    * [ ] `figures/colors/color-gradients.pdf`
+    * [ ] `figures/colors/stacked-plots.pdf`
+    * [ ] `figures/cheatsheets/cheatsheets-3.pdf`
+    * [ ] `figures/cheatsheets/cheatsheets.pdf`
+    * [ ] `figures/cheatsheets/handout-tips.pdf`
+    * [ ] `figures/cheatsheets/handout-intermediate.pdf`
+    * [ ] `figures/cheatsheets/handout-beginner.pdf`
+    * [ ] `figures/cheatsheets/cheatsheets-4.pdf`
+    * [ ] `figures/cheatsheets/cheatsheets-5.pdf`
+    * [ ] `figures/cheatsheets/handout-tips-landscape.pdf`
+    * [ ] `figures/cheatsheets/cheatsheets-1.pdf`
+    * [ ] `figures/cheatsheets/handout-beginner-landscape.pdf`
+    * [ ] `figures/cheatsheets/cheatsheets-2.pdf`
+    * [ ] `figures/cheatsheets/handout-intermediate-landscape.pdf`
+    * [ ] `figures/beyond/polygon-clipping.pdf`
+    * [ ] `figures/beyond/dungeon.pdf`
+    * [ ] `figures/beyond/interactive-loupe.pdf`
+    * [ ] `figures/beyond/bluenoise.pdf`
+    * [ ] `figures/beyond/tikz-dashes.pdf`
+    * [ ] `figures/beyond/radial-maze.pdf`
+    * [ ] `figures/beyond/dyson-hatching.pdf`
+    * [ ] `figures/beyond/basal-ganglia.pdf`
+    * [ ] `figures/beyond/tinybot.pdf`
+    * [ ] `figures/typography/typography-font-stacks.pdf`
+    * [ ] `figures/typography/tick-labels-variation.pdf`
+    * [ ] `figures/typography/typography-math-cm.pdf`
+    * [ ] `figures/typography/typography-math-stixsans.pdf`
+    * [ ] `figures/typography/typography-math-stix.pdf`
+    * [ ] `figures/typography/typography-math-dejavusans.pdf`
+    * [ ] `figures/typography/typography-math-dejavuserif.pdf`
+    * [ ] `figures/typography/text-starwars.pdf`
+    * [ ] `figures/typography/typography-text-path.pdf`
+    * [ ] `figures/typography/typography-matters.pdf`
+    * [ ] `figures/typography/typography-math-custom.pdf`
+    * [ ] `figures/typography/typography-legibility.pdf`
+    * [ ] `figures/typography/projection-3d-gaussian.pdf`
+    * [ ] `figures/typography/text-outline.pdf`
+    * [ ] `figures/typography/typography-math-stacks.pdf`
+    * [ ] `figures/anatomy/figure-dpi.pdf`
+    * [ ] `figures/anatomy/anatomy.pdf`
+    * [ ] `figures/anatomy/inch-cm.pdf`
+    * [ ] `figures/anatomy/raster-vector.pdf`
+    * [ ] `figures/anatomy/zorder-plots.pdf`
+    * [ ] `figures/anatomy/bold-ticklabel.pdf`
+    * [ ] `figures/anatomy/zorder.pdf`
+    * [ ] `figures/anatomy/ruler.pdf`
+    * [ ] `figures/scales-projections/scales-comparison.pdf`
+    * [ ] `figures/scales-projections/polar-patterns.pdf`
+    * [ ] `figures/scales-projections/projection-polar-config.pdf`
+    * [ ] `figures/scales-projections/projection-polar-histogram.pdf`
+    * [ ] `figures/scales-projections/geo-projections.pdf`
+    * [ ] `figures/scales-projections/text-polar.pdf`
+    * [ ] `figures/scales-projections/projection-3d-frame.pdf`
+    * [ ] `figures/scales-projections/scales-custom.pdf`
+    * [ ] `figures/scales-projections/scales-log-log.pdf`
+    * [ ] `figures/introduction/visualization-landscape.pdf`
+    * [ ] `figures/introduction/matplotlib-timeline.pdf`
+    * [ ] `figures/coordinates/transforms-polar.pdf`
+    * [ ] `figures/coordinates/transforms-floating-axis.pdf`
+    * [ ] `figures/coordinates/coordinates-cartesian.pdf`
+    * [ ] `figures/coordinates/transforms-hist.pdf`
+    * [ ] `figures/coordinates/transforms-letter.pdf`
+    * [ ] `figures/coordinates/transforms-exercise-1.pdf`
+    * [ ] `figures/coordinates/coordinates-polar.pdf`
+    * [ ] `figures/coordinates/transforms-blend.pdf`
+    * [ ] `figures/reference/colorspec.pdf`
+    * [ ] `figures/reference/tick-formatter.pdf`
+    * [ ] `figures/reference/collection.pdf`
+    * [ ] `figures/reference/axes-adjustment.pdf`
+    * [ ] `figures/reference/line.pdf`
+    * [ ] `figures/reference/font.pdf`
+    * [ ] `figures/reference/hatch.pdf`
+    * [ ] `figures/reference/colormap-sequential-1.pdf`
+    * [ ] `figures/reference/colormap-uniform.pdf`
+    * [ ] `figures/reference/colormap-qualitative.pdf`
+    * [ ] `figures/reference/marker.pdf`
+    * [ ] `figures/reference/colormap-sequential-2.pdf`
+    * [ ] `figures/reference/colormap-diverging.pdf`
+    * [ ] `figures/reference/text-alignment.pdf`
+    * [ ] `figures/reference/scale.pdf`
+    * [ ] `figures/reference/tick-locator.pdf`
+    * [ ] `figures/unsorted/polar-patterns.pdf`
+    * [ ] `figures/unsorted/polar-better-frame.pdf`
+    * [ ] `figures/unsorted/polygon-clipping.pdf`
+    * [ ] `figures/unsorted/metropolis.pdf`
+    * [ ] `figures/unsorted/coordinates.pdf`
+    * [ ] `figures/unsorted/dyson-hatching.pdf`
+    * [ ] `figures/unsorted/layout-weird.pdf`
+    * [ ] `figures/unsorted/earthquakes.pdf`
+    * [ ] `figures/unsorted/multisample.pdf`
+    * [ ] `figures/ornaments/annotation-side.pdf`
+    * [ ] `figures/ornaments/legend-regular.pdf`
+    * [ ] `figures/ornaments/title-regular.pdf`
+    * [ ] `figures/ornaments/annotation-direct.pdf`
+    * [ ] `figures/ornaments/annotation-zoom.pdf`
+    * [ ] `figures/ornaments/bessel-functions.pdf`
+    * [ ] `figures/ornaments/elegant-scatter.pdf`
+    * [ ] `figures/ornaments/legend-alternatives.pdf`
+    * [ ] `figures/rules/rule-2.pdf`
+    * [ ] `figures/rules/rule-7.pdf`
+    * [ ] `figures/rules/rule-1.pdf`
+    * [ ] `figures/rules/rule-5.pdf`
+    * [ ] `figures/rules/rule-8.pdf`
+    * [ ] `figures/rules/rule-3.pdf`
+    * [ ] `figures/rules/rule-6.pdf`
+    * [ ] `figures/rules/rule-9.pdf`
+    * [ ] `figures/defaults/defaults-step-2.pdf`
+    * [ ] `figures/defaults/defaults-step-4.pdf`
+    * [ ] `figures/defaults/defaults-exercice-1.pdf`
+    * [ ] `figures/defaults/defaults-step-5.pdf`
+    * [ ] `figures/defaults/defaults-step-1.pdf`
+    * [ ] `figures/defaults/defaults-step-3.pdf`
   * [ ] [svg conversion resources](https://en.wikipedia.org/wiki/Wikipedia:Graphics_Lab/Resources/PDF_conversion_to_SVG#Conversion_with_dvisvgm)
 * [ ] correct the order of toctree links to match book TOC
 * [ ] correct the order of toctree link aliases to match book TOC
@@ -50,6 +231,52 @@ Build command: `make clear html gh_pages`
   * [writethedocs/www](https://github.com/writethedocs/www)
   * [pallets/flask](https://github.com/pallets/flask)
   * [more...](https://www.sphinx-doc.org/en/master/examples.html#documentation-using-the-alabaster-theme)
+
+### error-log
+<details>
+
+<summary>
+Output from running `scipts/remake_all_figures.py`
+
+</summary>
+```
+/home/xxx/Documents/scientific-visualization-book/code/defaults/defaults-step-4.py:24: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+  plt.show()
+exec: `cd code/defaults && python3 defaults-step-2.py`
+/home/xxx/Documents/scientific-visualization-book/code/defaults/defaults-step-2.py:59: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+  plt.show()
+exec: `cd code/defaults && python3 defaults-step-1.py`
+/home/xxx/Documents/scientific-visualization-book/code/defaults/defaults-step-1.py:18: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+  plt.show()
+exec: `cd code/defaults && python3 defaults-exercice-1.py`
+findfont: Font family ['sans-serif'] not found. Falling back to DejaVu Sans.
+findfont: Generic family 'sans-serif' not found because none of the following families were found: Fira Sans Condensed
+/home/xxx/Documents/scientific-visualization-book/code/defaults/defaults-exercice-1.py:66: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+  plt.show()
+
+...
+
+/home/xxx/Documents/scientific-visualization-book/code/rules/rule-7.py:71: UserWarning: Matplotlib is currently using agg, w
+hich is a non-GUI backend, so cannot show the figure.
+  plt.show()
+exec: `cd code/rules && python3 rule-1.py`
+/home/xxx/Documents/scientific-visualization-book/code/rules/rule-1.py:300: UserWarning: Matplotlib is currently using agg,
+which is a non-GUI backend, so cannot show the figure.
+  plt.show()
+exec: `cd code/rules && python3 rule-3.py`
+/home/xxx/Documents/scientific-visualization-book/code/rules/rule-3.py:111: UserWarning: Matplotlib is currently using agg,
+which is a non-GUI backend, so cannot show the figure.
+  plt.show()
+exec: `cd code/rules && python3 rule-9.py`
+findfont: Font family ['xkcd', 'xkcd Script', 'Humor Sans', 'Comic Neue', 'Comic Sans MS'] not found. Falling back to DejaVu
+ Sans.
+findfont: Font family ['xkcd', 'xkcd Script', 'Humor Sans', 'Comic Neue', 'Comic Sans MS'] not found. Falling back to DejaVu
+ Sans.
+findfont: Font family ['xkcd', 'xkcd Script', 'Humor Sans', 'Comic Neue', 'Comic Sans MS'] not found. Falling back to DejaVu
+ Sans.
+```
+</details>
+
 
 > Original README follows:
 
