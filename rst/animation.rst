@@ -27,7 +27,7 @@ rest.
    import numpy as np
    import matplotlib.pyplot as plt
    import matplotlib.animation as animation
-   
+
    fig = plt.figure(figsize=(7,2), dpi=100)
    ax = plt.subplot()
 
@@ -134,13 +134,13 @@ facecolor. We also have to take care of initial size and color for
 each ring such that we have all sizes between a minimum and a maximum
 size. In addition, we need to make sure the largest ring is almost
 transparent.
-                         
+
 .. code:: python
 
    n = 50
    R = np.zeros(n, dtype=[ ("position", float, (2,)),
                            ("size",     float, (1,)),
-                           ("color",    float, (4,)) ])                       
+                           ("color",    float, (4,)) ])
    R["position"] = np.random.uniform(0, 1, (n,2))
    R["size"] = np.linspace(0, 1, n).reshape(n,1)
    R["color"][:,3] = np.linspace(0, 1, n)
@@ -173,7 +173,7 @@ size and color. Hence, we keep the number of rings constant.
        scatter.set_edgecolors(R["color"])
        scatter.set_sizes(1000*R["size"].ravel())
        scatter.set_offsets(R["position"])
-   
+
 Last step is to tell matplotlib to use this function as an update
 function for the animation and display the result (or save it as a
 movie):
@@ -183,13 +183,13 @@ movie):
    animation = animation.FuncAnimation(fig, rain_update,
                                        interval=10, frames=200)
 
-                                       
+
 .. figure:: /figures/animation/rain.pdf
    :width: 100%
 
    Still from the rain animation (sources :source:`animation/rain.py`).
 
-   
+
 Visualizing earthquakes on Earth
 --------------------------------
 
@@ -212,7 +212,7 @@ the CSV format whose content is given by the first line::
   2015-08-17T13:49:17.320Z,37.8365,-122.2321667,4.82,4.01,mw,...
   2015-08-15T07:47:06.640Z,-10.9045,163.8766,6.35,6.6,mwp,...
 
-  
+
 We are only interested in latitude, longitude and magnitude and
 consequently, we won't parse the time of event.
 
@@ -367,7 +367,7 @@ synchronizing this animation with some music for example.
    Fluid simulation
    :label:`figure-fluid-animation`
    (sources: :source:`animation/fluid-animation.py`).
-          
+
 Note that in the update function, I took care of updating the limits
 of the colormap. This is necessary because the displayed image is
 dynamic and the minimum and maximum values may vary from one frame to
@@ -399,5 +399,3 @@ animation. Make sure to try to copy the exact style.
 
    Lissajous curves :label:`figure-lissajous`
    (sources: :source:`animation/lissajous.py`).
-
-
