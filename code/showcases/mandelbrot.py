@@ -48,5 +48,5 @@ M = light.shade(
 plt.imshow(M, extent=[xmin, xmax, ymin, ymax], interpolation="bicubic")
 ax.set_xticks([])
 ax.set_yticks([])
-plt.savefig("mandelbrot.png", dpi=600)
+plt.savefig("../../figures/showcases/mandelbrot.png", dpi=600)
 plt.show()

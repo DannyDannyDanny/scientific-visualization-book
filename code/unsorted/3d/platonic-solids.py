@@ -329,6 +329,5 @@ ax.text(
 
 
 plt.tight_layout()
-plt.savefig("platonic-solids.png", dpi=300)
-plt.savefig("platonic-solids.pdf")
+plt.savefig("../../../images/platonic-solids.png", dpi=300)
 plt.show()

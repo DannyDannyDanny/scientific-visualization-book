@@ -30,31 +30,18 @@ Build command: `make clear html gh_pages`
 * [X] fix `WARNING: image file not readable:` warnings
 * [X] revert moving `figures/*` into `rst/` (e54b56fac04861caa7e460dddd004ad359fef3b7)
 * [X] use absolute paths for figure references
-* [o] explore `figures/**/*.pdf`
-  * [O] explore how figures are generated
-    * [O] prevent writing files in `/code/(showcases, reference, beyond, unsorted)` (why are they there?)
+* [o] explore `figures/**/*.pdf` and `code/`
+  * [o] explore how figures are generated
+    * [o] prevent writing files in `/code/(showcases, reference, beyond, unsorted)` (why are they there?)
       * [X] identify scripts in `code` that write images outside of `figures/` (`scripts/fix_relative_path.py`)
       * [X] identify whether the resulting image for each script is actually used
       * [X] sort scripts into delete (:fire:) / fix (:hammer:):
-      * [ ] fix relative paths such that images are written inside `figures/`
-        * `code/showcases/mandelbrot.py` should contain `../../` (`depth = 2`) :hammer:
-          * L50: `plt.savefig("mandelbrot.png", dpi=600)`
-          * Conclusion: change to `plt.savefig("../../figures/showcases/mandelbrot.png",` :hammer:
-        * `code/colors/stacked-plots.py` should contain `../../` (`depth = 2`), observed:
-          * L275: `plt.savefig("../figures/stacked-plots.pdf")`
-          * file exists with `ll ./**/stacked-plots.pdf`:
-            * `/docs/_images/stacked-plots.pdf` `<---` what's with this `_images` dir?
-            * `/figures/colors/stacked-plots.pdf`
-          * file references with `grep -r -E 'stacked-plots.pdf'`:
-            * `./rst/colors.rst:.. figure:: /figures/colors/stacked-plots.pdf`
-          * Conclusion:
-            * change to `plt.savefig("../../figures/colors/stacked-plots.pdf",` :hammer:
-            * change `.pdf` to `.png` in line above and in references :hammer:
-        * `code/unsorted/3d/platonic-solids.py` :hammer:
-          * L331: `plt.savefig("platonic-solids.png", dpi=300)`
-          * conclusion - change to `plt.savefig("../../../images/platonic-solids.png", dpi=300)`
-          * L332: `plt.savefig("platonic-solids.pdf")`
-          * conclusion - remove line :warning:
+      * [X] fix relative paths such that images are written inside `figures/`
+      * [ ] assert all files in `code/` subdirs have extension `.py`
+      * [ ] explore `/docs/_images/stacked-plots.pdf` `<---` what's with this `_images` dir?
+      * [ ] change output formats
+        * `code/colors/stacked-plots.py` with: `plt.savefig("../../figures/colors/stacked-plots.pdf")`
+            * change `.pdf` to `.png` in `savefig` above and in references
       * [X] delete scripts that produce unused figures (and any unused figures)
   * [ ] assert that figures can be regenerated
     * [ ] rename `/figures/` to `/figures_originals/`

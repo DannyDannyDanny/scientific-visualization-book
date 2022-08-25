@@ -273,5 +273,5 @@ ax.set_ylim(1, 3)
 ax.set_yticks([])
 
 plt.tight_layout()
-plt.savefig("../figures/stacked-plots.pdf")
+plt.savefig("../../figures/colors/stacked-plots.pdf")
 plt.show()
