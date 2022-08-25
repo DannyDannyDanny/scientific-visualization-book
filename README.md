@@ -30,9 +30,9 @@ Build command: `make clear html gh_pages`
 * [X] fix `WARNING: image file not readable:` warnings
 * [X] revert moving `figures/*` into `rst/` (e54b56fac04861caa7e460dddd004ad359fef3b7)
 * [X] use absolute paths for figure references
-* [ ] explore `figures/**/*.pdf`
-  * [ ] explore how figures are generated
-    * [ ] prevent writing files in `/code/(showcases, reference, beyond, unsorted)` (why are they there?)
+* [o] explore `figures/**/*.pdf`
+  * [O] explore how figures are generated
+    * [O] prevent writing files in `/code/(showcases, reference, beyond, unsorted)` (why are they there?)
       * [X] identify scripts in `code` that write images outside of `figures/` (`scripts/fix_relative_path.py`)
       * [X] identify whether the resulting image for each script is actually used
       * [X] sort scripts into delete (:fire:) / fix (:hammer:):
@@ -55,33 +55,7 @@ Build command: `make clear html gh_pages`
           * conclusion - change to `plt.savefig("../../../images/platonic-solids.png", dpi=300)`
           * L332: `plt.savefig("platonic-solids.pdf")`
           * conclusion - remove line :warning:
-      * [ ] delete scripts that produce unused figures (and any unused figures)
-        * `code/animation/less-is-more.py` :fire:
-        * `code/showcases/escher-movie.py` :fire:
-        * `code/beyond/tikz-dashes.py` :fire:
-          * delete `figures/beyond/tikz-dashes.pdf` :fire:
-        * `code/anatomy/pixel-font.py` :fire:
-        * `code/reference/axes-adjustment.py` :fire:
-        * `code/reference/tick-locator.py` :fire:
-        * `code/reference/colormap-qualitative.py` :fire:
-        * `code/reference/marker.py` :fire:
-        * `code/reference/tick-formatter.py` :fire:
-        * `code/reference/colormap-sequential-1.py` :fire:
-        * `code/reference/hatch.py` :fire:
-        * `code/reference/colormap-sequential-2.py` :fire:
-        * `code/reference/colormap-uniform.py` :fire:
-        * `code/reference/collection.py` :fire:
-        * `code/reference/font.py` :fire:
-        * `code/reference/text-alignment.py` :fire:
-        * `code/reference/line.py` :fire:
-        * `code/reference/scale.py` :fire:
-        * `code/reference/colormap-diverging.py` :fire:
-        * `code/unsorted/advanced-linestyles.py` :fire:
-        * `code/unsorted/stacked-bars.py` :fire:
-        * `code/unsorted/earthquakes.py` :fire:
-        * `code/unsorted/metropolis.py` :fire:
-        * `code/unsorted/3d/scatter.py` :fire:
-        * `code/unsorted/3d/scatter.py` :fire:
+      * [X] delete scripts that produce unused figures (and any unused figures)
   * [ ] assert that figures can be regenerated
     * [ ] rename `/figures/` to `/figures_originals/`
     * [ ] run `/scripts/remake_all_figures.py`
