@@ -35,18 +35,11 @@ Build command: `make clear html gh_pages`
     * [ ] prevent writing files in `/code/(showcases, reference, beyond, unsorted)` (why are they there?)
       * [X] identify scripts in `code` that write images outside of `figures/` (`scripts/fix_relative_path.py`)
       * [X] identify whether the resulting image for each script is actually used
-      * [ ] sort scripts into delete / fix:
-        * `code/animation/less-is-more.py` should contain `../../` (`depth = 2`), observed:
-          * L368: `plt.savefig("frame-%02d.png" % frame, dpi=dpi)`
-          * No files or references matching `frame-*.png`
-          * Conclusion: delete `code/animation/less-is-more.py` :warning:
-        * `code/showcases/mandelbrot.py` should contain `../../` (`depth = 2`), observed:
+      * [X] sort scripts into delete (:fire:) / fix (:hammer:):
+      * [ ] fix relative paths such that images are written inside `figures/`
+        * `code/showcases/mandelbrot.py` should contain `../../` (`depth = 2`) :hammer:
           * L50: `plt.savefig("mandelbrot.png", dpi=600)`
-          * Conclusion: change to `plt.savefig("../../figures/showcases/mandelbrot.png",` :warning:
-        * `code/showcases/escher-movie.py` should contain `../../` (`depth = 2`), observed:
-          * L66: `plt.savefig("escher-frame-%03d.png" % k, dpi=100)`
-          * No files or references matching `secher-frame-*`
-          * Conclusion: delete `code/showcases/escher-movie.py` :warning:
+          * Conclusion: change to `plt.savefig("../../figures/showcases/mandelbrot.png",` :hammer:
         * `code/colors/stacked-plots.py` should contain `../../` (`depth = 2`), observed:
           * L275: `plt.savefig("../figures/stacked-plots.pdf")`
           * file exists with `ll ./**/stacked-plots.pdf`:
@@ -55,109 +48,40 @@ Build command: `make clear html gh_pages`
           * file references with `grep -r -E 'stacked-plots.pdf'`:
             * `./rst/colors.rst:.. figure:: /figures/colors/stacked-plots.pdf`
           * Conclusion:
-            * change to `plt.savefig("../../figures/colors/stacked-plots.pdf",` :warning:
-            * change `.pdf` to `.png` in line above and in references :warning:
-        * `code/beyond/tikz-dashes.py` should contain `../../` (`depth = 2`), observed:
-          * L62: `plt.savefig("tikz-dashes.pdf")`
-          * File exists but no references matching `secher-frame-*`
-          * Conclusion - delete script :warning:
-          * Conclusion - delete `figures/beyond/tikz-dashes.pdf` :warning:
-        * `code/anatomy/pixel-font.py` should contain `../../` (`depth = 2`), observed:
-          * L127: `plt.savefig(`
-            * is followed by `"../../figures/anatomy/pixel-size.png", dpi=4 * 1200, transparent=True`
-          * No files or references matching `pixel-size`
-          * Conclusion - delete script :warning:
-        * `code/reference/axes-adjustment.py` should contain `../../` (`depth = 2`), observed:
-          * L211: `plt.savefig("reference-axes-adjustment.pdf", dpi=600)`
-          * No files or references matching `reference-axes-adjustment`
-          * Conclusion - delete script :warning:
-        * `code/reference/tick-locator.py` should contain `../../` (`depth = 2`), observed:
-          * L95: `plt.savefig("reference-tick-locator.pdf", dpi=600)`
-          * No files or references
-          * conclusion - delete script :warning:
-        * `code/reference/colormap-qualitative.py` should contain `../../` (`depth = 2`), observed:
-          * L43: `plt.savefig("reference-colormap-qualitative.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/marker.py` should contain `../../` (`depth = 2`), observed:
-          * L286: `plt.savefig("reference-marker.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/tick-formatter.py` should contain `../../` (`depth = 2`), observed:
-          * L107: `plt.savefig("reference-tick-formatter.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/colormap-sequential-1.py` should contain `../../` (`depth = 2`), observed:
-          * L49: `plt.savefig("reference-colormap-sequential-1.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/hatch.py` should contain `../../` (`depth = 2`), observed:
-          * L130: `plt.savefig("reference-hatch.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/colormap-sequential-2.py` should contain `../../` (`depth = 2`), observed:
-          * L44: `plt.savefig("reference-colormap-sequential-2.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/colormap-uniform.py` should contain `../../` (`depth = 2`), observed:
-          * L30: `plt.savefig("reference-colormap-uniform.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/collection.py` should contain `../../` (`depth = 2`), observed:
-          * L335: `plt.savefig("reference-collection.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/font.py` should contain `../../` (`depth = 2`), observed:
-          * L169: `plt.savefig("reference-font.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/text-alignment.py` should contain `../../` (`depth = 2`), observed:
-          * L89: `plt.savefig("reference-text-alignment.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/line.py` should contain `../../` (`depth = 2`), observed:
-          * L222: `plt.savefig("reference-line.pdf", dpi=200)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/scale.py` should contain `../../` (`depth = 2`), observed:
-          * L190: `plt.savefig("reference-scale.pdf")`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/reference/colormap-diverging.py` should contain `../../` (`depth = 2`), observed:
-          * L43: `plt.savefig("reference-colormap-diverging.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/unsorted/advanced-linestyles.py` should contain `../../` (`depth = 2`), observed:
-          * L202: `plt.savefig("advanced-linestyles.pdf")`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/unsorted/stacked-bars.py` should contain `../../` (`depth = 2`), observed:
-          * L69: `plt.savefig("stacked-bars.pdf")`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/unsorted/earthquakes.py` should contain `../../` (`depth = 2`), observed:
-          * L106: `plt.savefig("earthquakes.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/unsorted/metropolis.py` should contain `../../` (`depth = 2`), observed:
-          * L108: `plt.savefig("metropolis.pdf", dpi=600)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/unsorted/3d/scatter.py` should contain `../../../` (`depth = 3`), observed:
-          * L73: `plt.savefig("scatter.png", dpi=300)`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/unsorted/3d/scatter.py` should contain `../../../` (`depth = 3`), observed:
-          * L74: `plt.savefig("scatter.pdf")`
-          * no files or references
-          * conclusion - delete script :warning:
-        * `code/unsorted/3d/platonic-solids.py` should contain `../../../` (`depth = 3`), observed:
+            * change to `plt.savefig("../../figures/colors/stacked-plots.pdf",` :hammer:
+            * change `.pdf` to `.png` in line above and in references :hammer:
+        * `code/unsorted/3d/platonic-solids.py` :hammer:
           * L331: `plt.savefig("platonic-solids.png", dpi=300)`
           * conclusion - change to `plt.savefig("../../../images/platonic-solids.png", dpi=300)`
           * L332: `plt.savefig("platonic-solids.pdf")`
           * conclusion - remove line :warning:
-      * [ ] delete scripts that produce unused figures
-      * [ ] fix relative paths such that images are written inside `figures/`
+      * [ ] delete scripts that produce unused figures (and any unused figures)
+        * `code/animation/less-is-more.py` :fire:
+        * `code/showcases/escher-movie.py` :fire:
+        * `code/beyond/tikz-dashes.py` :fire:
+          * delete `figures/beyond/tikz-dashes.pdf` :fire:
+        * `code/anatomy/pixel-font.py` :fire:
+        * `code/reference/axes-adjustment.py` :fire:
+        * `code/reference/tick-locator.py` :fire:
+        * `code/reference/colormap-qualitative.py` :fire:
+        * `code/reference/marker.py` :fire:
+        * `code/reference/tick-formatter.py` :fire:
+        * `code/reference/colormap-sequential-1.py` :fire:
+        * `code/reference/hatch.py` :fire:
+        * `code/reference/colormap-sequential-2.py` :fire:
+        * `code/reference/colormap-uniform.py` :fire:
+        * `code/reference/collection.py` :fire:
+        * `code/reference/font.py` :fire:
+        * `code/reference/text-alignment.py` :fire:
+        * `code/reference/line.py` :fire:
+        * `code/reference/scale.py` :fire:
+        * `code/reference/colormap-diverging.py` :fire:
+        * `code/unsorted/advanced-linestyles.py` :fire:
+        * `code/unsorted/stacked-bars.py` :fire:
+        * `code/unsorted/earthquakes.py` :fire:
+        * `code/unsorted/metropolis.py` :fire:
+        * `code/unsorted/3d/scatter.py` :fire:
+        * `code/unsorted/3d/scatter.py` :fire:
   * [ ] assert that figures can be regenerated
     * [ ] rename `/figures/` to `/figures_originals/`
     * [ ] run `/scripts/remake_all_figures.py`
