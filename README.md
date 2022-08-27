@@ -37,7 +37,40 @@ Build command: `make clear html gh_pages`
       * [X] identify whether the resulting image for each script is actually used
       * [X] sort scripts into delete (:fire:) / fix (:hammer:):
       * [X] fix relative paths such that images are written inside `figures/`
-      * [ ] assert all files in `code/` subdirs have extension `.py`
+      * [ ] assert all files in `code/` subdirs have extension `.py` (or `.obj`)
+        * [X] ignore and remove all `code/**/.pyc` and `code/**/__pycache__`
+          * deleted: `code/animation/__pycache__/fluid.cpython-38.pyc`
+          * deleted: `code/beyond/__pycache__/bluenoise.cpython-38.pyc`
+          * deleted: `code/unsorted/3d/__pycache__/glm.cpython-37.pyc`
+          * deleted: `code/unsorted/3d/__pycache__/plot.cpython-37.pyc`
+        * [ ] sort out the tree of non-py files
+```
+code
+├── beyond
+│   ├── dungeon.svg
+│   ├── radial-maze-path.npy
+├── data
+│   ├── John-Hunter-comic.png
+│   ├── John-Hunter.png
+│   ├── John-Hunter.pxd
+│   │   ├── QuickLook
+│   │   │   ├── Icon.tiff
+│   │   │   └── Thumbnail.tiff
+│   │   ├── data
+│   │   │   └── 661EDC0D-0CB2-48AB-A474-4F1BCD77C183
+│   │   └── metadata.info
+│   ├── mona-lisa.png
+│   └── poppy.png
+├── defaults
+│   └── mystyle.txt
+├── introduction
+│   └── visualization-landscape.graffle
+├── threed
+│   └── bunny.obj
+└── unsorted
+    └── 3d
+    	└── README.md
+```
       * [ ] explore `/docs/_images/stacked-plots.pdf` `<---` what's with this `_images` dir?
       * [ ] change output formats
         * `code/colors/stacked-plots.py` with: `plt.savefig("../../figures/colors/stacked-plots.pdf")`
