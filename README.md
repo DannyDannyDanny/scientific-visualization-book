@@ -58,21 +58,27 @@ Build command: `make clear html gh_pages`
       * [X] delete scripts that produce unused figures (and any unused figures)
   * [X] list all pdf files in `figures/`: `scripts/find_orphan_pdfs.py`
   * [X] identify pdf references and what creates pdfs and how to make it create svgs
-  * [o] assert that figures can be regenerated
+  * [ ] assert that figures can be regenerated
     * [X] copy `/figures/` to `/figures.bak/`
     * [X] remove files `/figures/**/*.*` (check with `tree figures -a`)
-    * [ ] recreate python virtual environment + requirements
-    * [.] run `/scripts/remake_all_figures.py` (pipe with `... >2 stderr.log > stdout.log`)
+    * [X] recreate environment for all scripts + requirements
+      * [X] install geos: `sudo apt install geos-bin`
+      * [X] install proj: `sudo apt install proj-bin`
+      * [X] `pip install numpy matoplotlib cartopy GitPython imageio mpmath scipy shapely scikit-image tqdm`
+    * [ ] run `/scripts/remake_all_figures.py` (pipe with `... >2 stderr.log > stdout.log`)
       * [X] print which script is running to **stderr** as well
       * error overview:
-        * `ModuleNotFoundError: No module named 'cartopy'`
-        * `ModuleNotFoundError: No module named 'git'`
+        * `ModuleNotFoundError: No module named 'noise'` <--- could not install (no wheel, requires gcc5)
+          * hasn't been updated in a while - can we delete it?
+          * only used in one script: `code/unsorted/dyson-hatching.py`
+            * script output is never used - kill script
+        * `ModuleNotFoundError: No module named 'cartopy'` -- pain in the ass to install (requires proj, geos)
+        * `ModuleNotFoundError: No module named 'git'` -- install as `GitPython` - :thumbsdown:
+        * `ModuleNotFoundError: No module named 'skimage'` -- install as scikit-image -- :thumbsdown:
         * `ModuleNotFoundError: No module named 'imageio'`
         * `ModuleNotFoundError: No module named 'mpmath'`
-        * `ModuleNotFoundError: No module named 'noise'`
         * `ModuleNotFoundError: No module named 'scipy'`
         * `ModuleNotFoundError: No module named 'shapely'`
-        * `ModuleNotFoundError: No module named 'skimage'`
         * `ModuleNotFoundError: No module named 'tqdm'`
         * `RuntimeError: Failed to process string with tex because latex could not be found`
         * Other errors: bad code throwing `TypeError`, `ValueError`
