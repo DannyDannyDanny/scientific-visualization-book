@@ -37,40 +37,20 @@ Build command: `make clear html gh_pages`
       * [X] identify whether the resulting image for each script is actually used
       * [X] sort scripts into delete (:fire:) / fix (:hammer:):
       * [X] fix relative paths such that images are written inside `figures/`
-      * [ ] assert all files in `code/` subdirs have extension `.py` (or `.obj`)
+      * [X] assert all files in `code/` subdirs have extension `.py` (or `.obj`)
         * [X] ignore and remove all `code/**/.pyc` and `code/**/__pycache__`
           * deleted: `code/animation/__pycache__/fluid.cpython-38.pyc`
           * deleted: `code/beyond/__pycache__/bluenoise.cpython-38.pyc`
           * deleted: `code/unsorted/3d/__pycache__/glm.cpython-37.pyc`
           * deleted: `code/unsorted/3d/__pycache__/plot.cpython-37.pyc`
-        * [ ] sort out the tree of non-py files
-```
-code
-├── beyond
-│   ├── dungeon.svg           -- delete
-│   └── radial-maze-path.npy  -- keep, used by scripts
-├── data
-│   ├── John-Hunter-comic.png -- keep, used by scripts
-│   ├── John-Hunter.png       -- delete
-│   ├── John-Hunter.pxd       -- delete
-│   │   ├── QuickLook         -- delete
-│   │   │   ├── Icon.tiff
-│   │   │   └── Thumbnail.tiff
-│   │   ├── data
-│   │   │   └── 661EDC0D-0CB2-48AB-A474-4F1BCD77C183
-│   │   └── metadata.info
-│   ├── mona-lisa.png         -- keep
-│   └── poppy.png             -- keep
-├── defaults
-│   └── mystyle.txt           -- keep
-├── introduction
-│   └── visualization-landscape.graffle  -- keep for now (add TODO)
-├── threed
-│   └── bunny.obj             -- keep
-└── unsorted
-    └── 3d
-    	└── README.md           -- keep for now (add TODO)
-```
+        * [X] remove as much as possible non-code from `code/` (add future work point)
+          * deleted: `code/beyond/dungeon.svg`
+          * deleted: `code/data/John-Hunter.png`
+          * deleted: `code/data/John-Hunter.pxd/QuickLook/Icon.tiff`
+          * deleted: `code/data/John-Hunter.pxd/QuickLook/Thumbnail.tiff`
+          * deleted: `code/data/John-Hunter.pxd/data/661EDC0D-0CB2-48AB-A474-4F1BCD77C183`
+          * deleted: `code/data/John-Hunter.pxd/metadata.info`
+          * deleted: `code/unsorted/3d/platonic-solids.pdf`
       * [ ] explore `/docs/_images/stacked-plots.pdf` `<---` what's with this `_images` dir?
       * [ ] change output formats
         * `code/colors/stacked-plots.py` with: `plt.savefig("../../figures/colors/stacked-plots.pdf")`
@@ -266,7 +246,14 @@ code
 * [ ] remove `docs/_build/` or `_build/` from `.gitignore`
 * [ ] merge `Makefile` with original (`Makefile.bak`)
 * [ ] fix [`WARNING: html_static_path entry '_static' does not exist`](https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_static_path) warning
-* [ ] consider sphinx dark mode
+* [ ] future work section:
+  * whats the issue and what needs to be done with `code/unsorted/3d/README.md`
+  * can we remove `code/introduction/visualization-landscape.graffle`?
+  * move non-py files to `code/data/` dir:
+    * `code/beyond/radial-maze-path.npy`
+    * `code/defaults/mystyle.txt`
+    * `code/threed/bunny.obj`
+  * sphinx dark mode
 * [ ] add self to supporters (or contributors)
 * [ ] get ispired by other Github repos with sphinx docs:
   * [psf/requests](https://github.com/psf/requests)
