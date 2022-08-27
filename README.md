@@ -56,22 +56,68 @@ Build command: `make clear html gh_pages`
         * `code/colors/stacked-plots.py` with: `plt.savefig("../../figures/colors/stacked-plots.pdf")`
             * change `.pdf` to `.png` in `savefig` above and in references
       * [X] delete scripts that produce unused figures (and any unused figures)
-  * [ ] assert that figures can be regenerated
-    * [ ] rename `/figures/` to `/figures_originals/`
-    * [ ] run `/scripts/remake_all_figures.py`
-    * [ ] compare structure and figures in `/figures/` and `/figures_originals/`
-    * [ ] see [warnings from above run](#error-log)
   * [X] list all pdf files in `figures/`: `scripts/find_orphan_pdfs.py`
   * [X] identify pdf references and what creates pdfs and how to make it create svgs
-    * example: `/figures/layout/layout-aspect-3.pdf`
-    * created by `code/layout/layout-aspect.py`
-      * line 63: `plt.savefig(".........aspect-3.pdf")`
-    * referenced in: `/rst/layout.rst`
-      * line 127: `.. figure:: /figures/layout/layout-aspect-3.pdf`
-    * replace `/figures/layout/layout-aspect-3.pdf` with `/figures/layout/layout-aspect-3.svg` in...
-      * ...generating file: `code/layout/layout-aspect.py` line 63
-      * ...references: `/rst/layout.rst` line
-    * re-run src files: `scripts/remake_all_figures.py`
+  * [o] assert that figures can be regenerated
+    * [X] copy `/figures/` to `/figures.bak/`
+    * [X] remove files `/figures/**/*.*` (check with `tree figures -a`)
+    * [ ] recreate python virtual environment + requirements
+    * [.] run `/scripts/remake_all_figures.py` (pipe with `... >2 stderr.log > stdout.log`)
+      * [X] print which script is running to **stderr** as well
+      * error overview:
+        * `ModuleNotFoundError: No module named 'cartopy'`
+        * `ModuleNotFoundError: No module named 'git'`
+        * `ModuleNotFoundError: No module named 'imageio'`
+        * `ModuleNotFoundError: No module named 'mpmath'`
+        * `ModuleNotFoundError: No module named 'noise'`
+        * `ModuleNotFoundError: No module named 'scipy'`
+        * `ModuleNotFoundError: No module named 'shapely'`
+        * `ModuleNotFoundError: No module named 'skimage'`
+        * `ModuleNotFoundError: No module named 'tqdm'`
+        * `RuntimeError: Failed to process string with tex because latex could not be found`
+        * Other errors: bad code throwing `TypeError`, `ValueError`
+      * warnings overview:
+        * `findfont: Font family ['Cursive'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['ITC Zapf Chancery'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Merienda'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Pacifico'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Roboto Condensed'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Roboto Mono'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Roboto Slab'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Roboto'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Source Code Pro'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Source Sans Pro'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Source Serif Pro'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Times New Roman'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['Yanone Kaffeesatz'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['cursive'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['sans-serif'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['serif'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Font family ['xkcd', 'xkcd Script', 'Humor Sans', 'Comic Neue', 'Comic Sans MS'] not found. Falling back to DejaVu Sans.`
+        * `findfont: Generic family 'cursive' not found because none of the following families were found: Apple Chancery, Textile, Zapf Chancery, Sand, Script MT, Felipa, Comic Neue, Comic Sans MS, cursive`
+        * `findfont: Generic family 'sans-serif' not found because none of the following families were found: Fira Sans Condensed`
+        * `findfont: Generic family 'sans-serif' not found because none of the following families were found: Helvetica`
+        * `findfont: Generic family 'sans-serif' not found because none of the following families were found: Roboto Condensed`
+        * `findfont: Generic family 'sans-serif' not found because none of the following families were found: Source Sans Pro`
+        * `findfont: Generic family 'serif' not found because none of the following families were found: Source Serif Pro`
+      * [ ] untracked files that appeared after remake script run
+        * `? code/rules/retina (4096,2048) - colliculus (512,512).npy`
+        * `? code/unsorted/github-rougier-2014.html`
+        * `? figures/anatomy/figure-dpi-050.png`
+        * `? figures/anatomy/figure-dpi-100.png`
+        * `? figures/anatomy/figure-dpi-300.png`
+        * `? figures/anatomy/figure-dpi-600.png`
+        * `? figures/anatomy/zorder-plots.png`
+        * `? figures/colors/material-colors.png`
+        * `? figures/colors/open-colors.png`
+        * `? figures/coordinates/transform-example.pdf`
+        * `? figures/rules/rule-5-left.pdf`
+        * `? figures/rules/rule-5-right.pdf`
+        * `plt.show()` throws `UserWarning: Matplotlib is currently using agg, which is a non-GUI backend...`
+      * [ ] modified in `figures/`
+      * [ ] missing in `figures/`
+    * [ ] compare structure and figures in `/figures/` and `/figures_originals/`
+    * [ ] see [warnings from above run](#error-log)
   * [ ] convert PDFs in `./figures/` into SVG or PNG:
     * [ ] `figures/layout/layout-aspect-3.pdf`
     * [ ] `figures/layout/layout-gridspec.pdf`
