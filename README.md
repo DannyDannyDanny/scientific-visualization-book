@@ -47,29 +47,29 @@ Build command: `make clear html gh_pages`
 ```
 code
 ├── beyond
-│   ├── dungeon.svg
-│   ├── radial-maze-path.npy
+│   ├── dungeon.svg           -- delete
+│   └── radial-maze-path.npy  -- keep, used by scripts
 ├── data
-│   ├── John-Hunter-comic.png
-│   ├── John-Hunter.png
-│   ├── John-Hunter.pxd
-│   │   ├── QuickLook
+│   ├── John-Hunter-comic.png -- keep, used by scripts
+│   ├── John-Hunter.png       -- delete
+│   ├── John-Hunter.pxd       -- delete
+│   │   ├── QuickLook         -- delete
 │   │   │   ├── Icon.tiff
 │   │   │   └── Thumbnail.tiff
 │   │   ├── data
 │   │   │   └── 661EDC0D-0CB2-48AB-A474-4F1BCD77C183
 │   │   └── metadata.info
-│   ├── mona-lisa.png
-│   └── poppy.png
+│   ├── mona-lisa.png         -- keep
+│   └── poppy.png             -- keep
 ├── defaults
-│   └── mystyle.txt
+│   └── mystyle.txt           -- keep
 ├── introduction
-│   └── visualization-landscape.graffle
+│   └── visualization-landscape.graffle  -- keep for now (add TODO)
 ├── threed
-│   └── bunny.obj
+│   └── bunny.obj             -- keep
 └── unsorted
     └── 3d
-    	└── README.md
+    	└── README.md           -- keep for now (add TODO)
 ```
       * [ ] explore `/docs/_images/stacked-plots.pdf` `<---` what's with this `_images` dir?
       * [ ] change output formats
