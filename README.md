@@ -30,7 +30,7 @@ Build command: `make clear html gh_pages`
 * [X] fix `WARNING: image file not readable:` warnings
 * [X] revert moving `figures/*` into `rst/` (e54b56fac04861caa7e460dddd004ad359fef3b7)
 * [X] use absolute paths for figure references
-* [o] explore `figures/**/*.pdf` and `code/`
+* [O] explore `figures/**/*.pdf` and `code/`
   * [o] explore how figures are generated
     * [o] prevent writing files in `/code/(showcases, reference, beyond, unsorted)` (why are they there?)
       * [X] identify scripts in `code` that write images outside of `figures/` (`scripts/fix_relative_path.py`)
@@ -61,14 +61,14 @@ Build command: `make clear html gh_pages`
       * [X] delete scripts that produce unused figures (and any unused figures)
   * [X] list all pdf files in `figures/`: `scripts/find_orphan_pdfs.py`
   * [X] identify pdf references and what creates pdfs and how to make it create svgs
-  * [o] assert that figures can be regenerated
+  * [O] assert that figures can be regenerated
     * [X] copy `/figures/` to `/figures.bak/`
     * [X] remove files `/figures/**/*.*` (check with `tree figures -a`)
     * [X] recreate environment for all scripts + requirements
       * [X] install geos: `sudo apt install geos-bin`
       * [X] install proj: `sudo apt install proj-bin`
       * [X] `pip install numpy matoplotlib cartopy GitPython imageio mpmath scipy shapely scikit-image tqdm`
-    * [o] run `/scripts/remake_all_figures.py` (pipe with `... >2 stderr.log > stdout.log`)
+    * [O] run `/scripts/remake_all_figures.py` (pipe with `... >2 stderr.log > stdout.log`)
       * [X] print which script is being exec'd by master script to **stderr** as well
       * [X] don't split stdout & stderr
       * [X] add separator to log after each script
@@ -84,30 +84,37 @@ Build command: `make clear html gh_pages`
           * [SO answer](https://stackoverflow.com/a/64464889/5684214)
         * [ ] fix `plt.show()` throws `UserWarning: Matplotlib is currently using agg, which is a non-GUI backend...`
         * [ ] fix other errors: bad code throwing `TypeError`, `ValueError`
-      * [ ] fix fintfont warnings:
-        * `findfont: Font family ['Cursive'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['ITC Zapf Chancery'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Merienda'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Pacifico'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Roboto Condensed'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Roboto Mono'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Roboto Slab'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Roboto'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Source Code Pro'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Source Sans Pro'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Source Serif Pro'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Times New Roman'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['Yanone Kaffeesatz'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['cursive'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['sans-serif'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['serif'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Font family ['xkcd', 'xkcd Script', 'Humor Sans', 'Comic Neue', 'Comic Sans MS'] not found. Falling back to DejaVu Sans.`
-        * `findfont: Generic family 'cursive' not found because none of the following families were found: Apple Chancery, Textile, Zapf Chancery, Sand, Script MT, Felipa, Comic Neue, Comic Sans MS, cursive`
-        * `findfont: Generic family 'sans-serif' not found because none of the following families were found: Fira Sans Condensed`
-        * `findfont: Generic family 'sans-serif' not found because none of the following families were found: Helvetica`
-        * `findfont: Generic family 'sans-serif' not found because none of the following families were found: Roboto Condensed`
-        * `findfont: Generic family 'sans-serif' not found because none of the following families were found: Source Sans Pro`
-        * `findfont: Generic family 'serif' not found because none of the following families were found: Source Serif Pro`
+      * [O] fix fintfont warnings:
+        * [O] `findfont: Font family ['X'] not found. Falling back to DejaVu Sans.` where `X` is:
+          * [X] Cursive
+          * [X] ITC Zapf Chancery
+          * [X] Merienda
+          * [X] Pacifico
+          * [ ] Roboto Condensed
+          * [X] Roboto Mono
+          * [X] Roboto Slab
+          * [ ] Roboto
+          * [X] Source Code Pro
+          * [X] Source Sans Pro
+          * [X] Source Serif Pro
+          * [X] Times New Roman
+          * [X] Yanone Kaffeesatz
+          * [X] cursive
+          * [ ] sans-serif
+          * [ ] serif
+          * [X] xkcd
+          * [X] xkcd Script
+          * [X] Humor Sans
+          * [X] Comic Neue
+          * [X] Comic Sans MS
+      * `findfont: Generic family 'X' not found because none of the followingfamilies were found: Y`:
+        * cursive: Apple Chancery, Textile, Zapf Chancery
+          * ...Sand, Script MT, Felipa, Comic Neue, Comic Sans MS, cursive
+        * sans-serif : Fira Sans Condensed
+        * sans-serif : Helvetica
+        * sans-serif : Roboto Condensed
+        * sans-serif : Source Sans Pro
+        * serif: Source Serif Pro
       * [ ] untracked files that appeared after remake script run
         * `? code/rules/retina (4096,2048) - colliculus (512,512).npy`
         * `? code/unsorted/github-rougier-2014.html`
