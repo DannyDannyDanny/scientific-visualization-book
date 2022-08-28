@@ -68,21 +68,23 @@ Build command: `make clear html gh_pages`
       * [X] install geos: `sudo apt install geos-bin`
       * [X] install proj: `sudo apt install proj-bin`
       * [X] `pip install numpy matoplotlib cartopy GitPython imageio mpmath scipy shapely scikit-image tqdm`
-    * [.] run `/scripts/remake_all_figures.py` (pipe with `... >2 stderr.log > stdout.log`)
+    * [o] run `/scripts/remake_all_figures.py` (pipe with `... >2 stderr.log > stdout.log`)
       * [X] print which script is being exec'd by master script to **stderr** as well
-      * [ ] reset directories and run script again
-      * [.] fix errors:
+      * [X] don't split stdout & stderr
+      * [X] add separator to log after each script
+        * `python3 scripts/remake_all_figures.py 2>&1 | tee out.log`
+      * [X] reset directories and run script again (2 times)
+      * [o] fix errors:
+        * [X] delete files being generated in `code/` and the culprit scripts (if otherwise unused):
+          * `deleted:    code/rules/projections.py` - generates `code/rules/retina....npy`
+          * `deleted:    code/unsorted/github-activity.py` - generates: `code...github-rougier-2014.html`
         * [X] `ModuleNotFoundError:` - make a requirements.txt file
         * [ ] Latex `RuntimeError: Failed to process string with tex because latex could not be found`
           * [X] install texlive: `sudo apt install texlive`
           * [SO answer](https://stackoverflow.com/a/64464889/5684214)
-        * Other errors: bad code throwing `TypeError`, `ValueError`
-      * Delete files being generated in `code/` and the culprit scripts (if otherwise unused):
-        * `deleted:    code/rules/projections.py`
-          * generated: `code/rules/retina (4096,2048) - colliculus (512,512).npy`
-        * `deleted:    code/unsorted/github-activity.py`
-          * generated: `code/unsorted/github-rougier-2014.html`
-      * warnings overview:
+        * [ ] fix `plt.show()` throws `UserWarning: Matplotlib is currently using agg, which is a non-GUI backend...`
+        * [ ] fix other errors: bad code throwing `TypeError`, `ValueError`
+      * [ ] fix fintfont warnings:
         * `findfont: Font family ['Cursive'] not found. Falling back to DejaVu Sans.`
         * `findfont: Font family ['ITC Zapf Chancery'] not found. Falling back to DejaVu Sans.`
         * `findfont: Font family ['Merienda'] not found. Falling back to DejaVu Sans.`
@@ -119,7 +121,6 @@ Build command: `make clear html gh_pages`
         * `? figures/coordinates/transform-example.pdf`
         * `? figures/rules/rule-5-left.pdf`
         * `? figures/rules/rule-5-right.pdf`
-        * `plt.show()` throws `UserWarning: Matplotlib is currently using agg, which is a non-GUI backend...`
       * [ ] modified in `figures/`
       * [ ] missing in `figures/`
       * [ ] delete dead scripts
